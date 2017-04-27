@@ -1,0 +1,75 @@
+
+1.DCmotorCTRL函数（Motor2-高空输送线、Motor1_FZ-倾倒输送线）：
+	CANcomand:
+		0XD6:Motor2=0（启动高空输送线）
+		0XD7:Motor2=1（停止高空输送线）
+		0XD8:Motor1_FZ=0（启动倾倒输送线）
+		0XD9:Motor1_FZ=1（停止倾倒输送线）
+		
+		
+2.SteppermotorCTRL函数（滚筒电机）：
+	CANcomand:
+		0XD5:设置步进电机参数
+			根据CANINDEX设置Run_mode
+			使能T2输出（启动步进电机）
+			
+		0X22:复位相关数据
+			失能T2输出（停止步进电机）
+	
+3.非手动模式
+  a.AUTOTaskassignment1函数（自动运行任务安排）：		
+    通过system_crtl.AUTOsystem_command值的递增来实现连续的单步控制，并返回一个
+	执行命令给AUTORUNMODE1函数。
+  b.AUTORUNMODE1函数（自动运行模式1）；
+    通过AUTOTaskassignment1返回的控制命令，执行相应动作。
+ 
+  c.AUTOTaskassignment0函数（伺服回原点）：		
+    通过system_crtl.AUTOsystem_command值的递增来实现连续的单步控制，并返回一个
+	执行命令给AUTORUNMODE0函数。
+  d.AUTORUNMODE0函数（自动运行模式0）；
+    通过AUTOTaskassignment0返回的控制命令，执行相应动作。
+		
+备注：
+1.伺服驱动器的一个modbus寄存器由两个字（4byte）组成！
+2.非手动模式下（自动运行任务安排、原点复归），
+  
+		
+3.为一些在中断中被改变的标志位数据类型添加了volatile修饰符。
+		
+		
+4.修改说明：
+    在CAN中断接受函数中，新增了0XB0指令，设置自动运行步骤为9
+	在AUTOTaskassignment1函数中，新增了0X09指令，用于翻转输送线反转
+	在AUTORUNMODE1函数中，新增了0XF6指令，用于启动翻转输送线反转
+	在AUTORUNMODE1函数中，新增了0XF7指令，用于启动翻转输送线停止（正常不用）
+	
+5.提升机构伺服定位数据：
+原点位置
+		
+		
+6.由于测试环境中没有高空输送线，所以把高空电机控制暂时注释了。
+		
+	
+
+正式版应该调整的参数：	
+		
+4.26晚重大修改：
+修改了ServomotorINP函数，修复该函数中判断到定位运行结束后就不再进来，导致需要查询归位信号的地方总是等不到归零结束信号（定位比归位先结束），现在通过形参mode来修复：
+mode=0——只查询定位结束信号、mode=1——需要查询定位结束和归位结束信号
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
