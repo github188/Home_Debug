@@ -3,6 +3,8 @@
 //------------------------------------------------------------------------------
 #include <c8051f040.h>                          // SFR declarations
 #include "Susongxian.h"
+#include "can1.h"
+
 // CAN Protocol Register Index for CAN0ADR, from TABLE 18.1 of the C8051F040
 // datasheet
 ////////////////////////////////////////////////////////////////////////////////
@@ -111,16 +113,16 @@ extern xdata unsigned char  AUTOCMD_STATE;
 extern xdata unsigned char AUTOCMD_CHECK;
 extern void delay_ms(unsigned int ms);
 extern void write_to_flash(void);
-//-----------------------------------------------------------------------------
-// 函数原型
-//-----------------------------------------------------------------------------
-void clear_msg_objects (void);
-void init_msg_object_TX (char MsgNum, unsigned int id);
-void init_msg_object_RX (char MsgNum, unsigned int id);
-void start_CAN (void);
-void can1_transmit(char MsgNum, unsigned char *buf);
-void can1_receive (char MsgNum, unsigned char *buf);
-void init_can1_1 (void);
+////-----------------------------------------------------------------------------
+//// 函数原型
+////-----------------------------------------------------------------------------
+//void clear_msg_objects (void);
+//void init_msg_object_TX (char MsgNum, unsigned int id);
+//void init_msg_object_RX (char MsgNum, unsigned int id);
+//void start_CAN (void);
+//void can1_transmit(char MsgNum, unsigned char *buf);
+//void can1_receive (char MsgNum, unsigned char *buf);
+//void init_can1_1 (void);
 //外部函数
 ////////////////////////////////////////////////////////////////////////////////
 void init_can1_1 (void)

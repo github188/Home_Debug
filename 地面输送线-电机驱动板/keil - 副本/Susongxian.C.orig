@@ -22,7 +22,7 @@ xdata unsigned int  T0Counter7 = 0; //故障计时器
 xdata unsigned char  T0Counter8 = 0;
 //unsigned int  T0Counter9=0;  //补药数据发送，计时用
 //unsigned int  T0Counter10=0; //在补药计数时使用，计数每次补药的间隔时间
-xdata unsigned char  timer0_cn = 0;  //modbus 通讯计时用
+xdata volatile unsigned char  timer0_cn = 0;  //modbus 通讯计时用
 xdata unsigned char  CANcomand = 0;  //CAN命令字
 xdata unsigned char  nCANcomand = 0;   //防止CAN中断修改运行中的命令
 xdata unsigned char  AUTOnCANcomand = 0;
@@ -38,8 +38,8 @@ xdata unsigned long Shaft1_aim_pulse = 0;
 xdata unsigned char Sampleperiod = 0;
 xdata unsigned char INDEX_COMAND = 0;
 xdata unsigned char Alarm_cout = 0; //报警次数
-bit RecFlag1 = NO;
-bit Receive_command_finished = NO;
+bit volatile RecFlag1 = NO;
+bit volatile Receive_command_finished = NO;
 bit Receive485_command_finished = YES;
 bit Time_FLAG = YES;
 bit Time_FLAG1 = YES;
@@ -52,9 +52,9 @@ bit SAMPLE_FLAG = NO;
 //xdata FLASH Flash;            //定义Flash 缓冲区
 xdata CANTRANSDATBUF CANTXBUF_ZKB;
 xdata unsigned char buf[30];
-xdata unsigned char Rec1[30];
-xdata unsigned  char RecPointer1 = 0;
-xdata  RECBUF1 RxBuf1;
+xdata volatile unsigned char Rec1[30];
+xdata volatile unsigned  char RecPointer1 = 0;
+xdata volatile RECBUF1 RxBuf1;
 xdata unsigned  int   cmd_chk_cnt = 0;
 xdata unsigned  char Servoparastation = 0;
 xdata unsigned  long Servoparadisplace = 0;
@@ -63,7 +63,7 @@ xdata unsigned  long Servoparaaddtime = 0;
 xdata unsigned  long Servoparasubtime = 0;
 xdata unsigned  int ShowTime = 0;
 xdata unsigned  char Servopara[107];
-xdata unsigned  char CANTRASTEMINFOR[17];
+xdata volatile unsigned  char CANTRASTEMINFOR[17];
 xdata unsigned  char repair_flag = 0;
 xdata systemcrtl system_crtl;
 xdata Servomotordisplace  Servomotor_displace;
@@ -316,8 +316,8 @@ void Timer0_ISR (void) interrupt 1
     SFRPAGE = 0x0F;
     if(MONITOR_INPUT4 == 0) //右闸门到达上限位
     {
-        //DC_motor3=1;
-        DC_motor4 = 1;;
+				DC_motor4 = 1;
+//          DC_motor3=1;
         //ShowTime=T0Counter6*10;
         //Step_FLAG=YES;
         CANTRASTEMINFOR[13] = CANTRASTEMINFOR[13] | 0x08;
@@ -546,15 +546,16 @@ void Serial_Port_Interrupt(void) interrupt 4
 {
     char SFRPAGE_SAVE = SFRPAGE;        // Save Current SFR page
     unsigned char ndate;
+	
     SFRPAGE = UART0_PAGE;              // Set SFR page
-//    if((CANcomand == 0) && (AUTO_FLAG == NO)) return;
+    if((CANcomand == 0) && (AUTO_FLAG == NO)) return;
     if(RI0 == 1 )
     {
         RI0 = 0;
-//        ndate = SBUF0;
-//        RecFlag1 = YES;
-//        Rec1[RecPointer1++] = ndate;
-//        timer0_cn = 0;
+        ndate = SBUF0;
+        RecFlag1 = YES;
+        Rec1[RecPointer1++] = ndate;
+        timer0_cn = 0;
     }
     SFRPAGE = SFRPAGE_SAVE;             // Restore SFRPAGE
     return;
@@ -1120,25 +1121,30 @@ void AUTORUNMODE2(unsigned char comand)
     {
     case 0xF2:	//输送线向左推0.5米
         Receive485_command_finished = NO;
-        Servomotor_displace.buf[0] = Servopara[0];
-        Servomotor_displace.buf[1] = Servopara[1];
-        Servomotor_displace.buf[2] = Servopara[2];
-        Servomotor_displace.buf[3] = Servopara[3];
+//        Servomotor_displace.buf[0] = Servopara[0];
+//        Servomotor_displace.buf[1] = Servopara[1];
+//        Servomotor_displace.buf[2] = Servopara[2];
+//        Servomotor_displace.buf[3] = Servopara[3];
 
-        Servomotor_speed.buf[0] = Servopara[4];
-        Servomotor_speed.buf[1] = Servopara[5];
-        Servomotor_speed.buf[2] = Servopara[6];
-        Servomotor_speed.buf[3] = Servopara[7];
+//        Servomotor_speed.buf[0] = Servopara[4];
+//        Servomotor_speed.buf[1] = Servopara[5];
+//        Servomotor_speed.buf[2] = Servopara[6];
+//        Servomotor_speed.buf[3] = Servopara[7];
 
-        Servomotor_addtime.buf[0] = Servopara[8];
-        Servomotor_addtime.buf[1] = Servopara[9];
-        Servomotor_addtime.buf[2] = Servopara[10];
-        Servomotor_addtime.buf[3] = Servopara[11];
+//        Servomotor_addtime.buf[0] = Servopara[8];
+//        Servomotor_addtime.buf[1] = Servopara[9];
+//        Servomotor_addtime.buf[2] = Servopara[10];
+//        Servomotor_addtime.buf[3] = Servopara[11];
 
-        Servomotor_subtime.buf[0] = Servopara[12];
-        Servomotor_subtime.buf[1] = Servopara[13];
-        Servomotor_subtime.buf[2] = Servopara[14];
-        Servomotor_subtime.buf[3] = Servopara[15];
+//        Servomotor_subtime.buf[0] = Servopara[12];
+//        Servomotor_subtime.buf[1] = Servopara[13];
+//        Servomotor_subtime.buf[2] = Servopara[14];
+//        Servomotor_subtime.buf[3] = Servopara[15];
+		
+//		 Servomotor_displace.displace = 5000;
+//        Servomotor_speed.speed = 50000;
+//        Servomotor_addtime.addtime = 200;
+//        Servomotor_subtime.subtime = 200;
 
         CANTRASTEMINFOR[14] = 0;
         CANTRASTEMINFOR[15] = 0;
@@ -1174,8 +1180,8 @@ void AUTORUNMODE2(unsigned char comand)
 //        Servomotor_subtime.buf[2] = Servopara[46];
 //        Servomotor_subtime.buf[3] = Servopara[47];
 
-        Servomotor_displace.displace = 1000; ;
-        Servomotor_speed.speed = 2000;
+        Servomotor_displace.displace = 1000;
+        Servomotor_speed.speed = 50000;
         Servomotor_addtime.addtime = 200;
         Servomotor_subtime.subtime = 200;
 
@@ -1232,25 +1238,30 @@ void AUTORUNMODE2(unsigned char comand)
 
     case 0xF6:	//前进1米
         Receive485_command_finished = NO;
-        Servomotor_displace.buf[0] = Servopara[16];
-        Servomotor_displace.buf[1] = Servopara[17];
-        Servomotor_displace.buf[2] = Servopara[18];
-        Servomotor_displace.buf[3] = Servopara[19];
+//        Servomotor_displace.buf[0] = Servopara[16];
+//        Servomotor_displace.buf[1] = Servopara[17];
+//        Servomotor_displace.buf[2] = Servopara[18];
+//        Servomotor_displace.buf[3] = Servopara[19];
 
-        Servomotor_speed.buf[0] = Servopara[20];
-        Servomotor_speed.buf[1] = Servopara[21];
-        Servomotor_speed.buf[2] = Servopara[22];
-        Servomotor_speed.buf[3] = Servopara[23];
+//        Servomotor_speed.buf[0] = Servopara[20];
+//        Servomotor_speed.buf[1] = Servopara[21];
+//        Servomotor_speed.buf[2] = Servopara[22];
+//        Servomotor_speed.buf[3] = Servopara[23];
 
-        Servomotor_addtime.buf[0] = Servopara[24];
-        Servomotor_addtime.buf[1] = Servopara[25];
-        Servomotor_addtime.buf[2] = Servopara[26];
-        Servomotor_addtime.buf[3] = Servopara[27];
+//        Servomotor_addtime.buf[0] = Servopara[24];
+//        Servomotor_addtime.buf[1] = Servopara[25];
+//        Servomotor_addtime.buf[2] = Servopara[26];
+//        Servomotor_addtime.buf[3] = Servopara[27];
 
-        Servomotor_subtime.buf[0] = Servopara[28];
-        Servomotor_subtime.buf[1] = Servopara[29];
-        Servomotor_subtime.buf[2] = Servopara[30];
-        Servomotor_subtime.buf[3] = Servopara[31];
+//        Servomotor_subtime.buf[0] = Servopara[28];
+//        Servomotor_subtime.buf[1] = Servopara[29];
+//        Servomotor_subtime.buf[2] = Servopara[30];
+//        Servomotor_subtime.buf[3] = Servopara[31];
+		
+//		 Servomotor_displace.displace = 2000;
+//        Servomotor_speed.speed = 50000;
+//        Servomotor_addtime.addtime = 200;
+//        Servomotor_subtime.subtime = 200;
 
         CANTRASTEMINFOR[14] = 0;
         CANTRASTEMINFOR[15] = 0;
@@ -1286,9 +1297,9 @@ void AUTORUNMODE2(unsigned char comand)
 //        Servomotor_subtime.buf[1] = Servopara[61];
 //        Servomotor_subtime.buf[2] = Servopara[62];
 //        Servomotor_subtime.buf[3] = Servopara[63];
-		
-		        Servomotor_displace.displace = 3000; ;
-        Servomotor_speed.speed = 2000;
+
+        Servomotor_displace.displace = 2000;
+        Servomotor_speed.speed = 50000;
         Servomotor_addtime.addtime = 200;
         Servomotor_subtime.subtime = 200;
 
@@ -1783,7 +1794,7 @@ unsigned char AUTOTaskassignment1(void)
 unsigned char AUTOTaskassignment2(void)
 {
     unsigned char returnvalue = 0;
-
+	
     switch(system_crtl.AUTOsystem_command)//做到每步运行检查判断给出命令
     {
     case 1:	//地面输送线向左/右推0.5m
@@ -1821,17 +1832,32 @@ unsigned char AUTOTaskassignment2(void)
             returnvalue = 0xF4;
             system_crtl.AUTOsystem_command = 4;
             T0Counter7 = 0; //故障计时清零
+								//added begin
+
+						init_msg_object_TX(2, 4);	//向提升机构发送数据
+				FZSSXLeftFZ( 0x01);
+								//added end
+
             break;
 
         case 2:
             returnvalue = 0xF5;
             system_crtl.AUTOsystem_command = 4;
             T0Counter7 = 0; //故障计时清零
+								//added begin
+
+					init_msg_object_TX(4, 4);	//向提升机构发送数据
+				FZSSXRightFZ( 0x01);
+								//added end
+
             break;
 
         default:
             break;
         }
+				//added begin
+				init_msg_object_TX(TX_MSGNUM_ZKB, (IDSET + 64));	//向主板发送数据
+				//added end
         break;
 
     case 4:
@@ -1872,17 +1898,19 @@ unsigned char AUTOTaskassignment2(void)
         break;
 
     case 6:	//以后加传感器检测传送带上检测药品一直转 直到没有药品为止
-        ServomotorINP(1);
+		SAMPCBDataacquisition(1);//暂时添加测试用
+		ServomotorINP(1);
         if(((CANTRASTEMINFOR[12] & 0X01) == 0x00)) //伺服运行结束
         {
             SAMPLE_FLAG = YES;
-            CANTRASTEMINFOR[8] = 0;
-            CANTRASTEMINFOR[9] = 0;
-            SAMPCBDataacquisition(1);
+					//暂时屏蔽
+//            CANTRASTEMINFOR[8] = 0;
+//            CANTRASTEMINFOR[9] = 0;
+//            SAMPCBDataacquisition(1);
             SAMPLE_FLAG = NO;
             if(CANINDEX == 0x01)
             {
-                if(((CANTRASTEMINFOR[8] & 0x01) == 0x00) && (Alarm_cout < 3))
+                if(((CANTRASTEMINFOR[8] & 0x01) == 0x01) && (Alarm_cout < 3))//
                 {
                     Alarm_cout = Alarm_cout + 1;
                     system_crtl.AUTOsystem_command = 5;
@@ -1897,7 +1925,7 @@ unsigned char AUTOTaskassignment2(void)
             }
             if(CANINDEX == 0x02)
             {
-                if(((CANTRASTEMINFOR[8] & 0x02) == 0x00) && (Alarm_cout < 3))
+                if(((CANTRASTEMINFOR[8] & 0x02) == 0x02) && (Alarm_cout < 3))//
                 {
                     Alarm_cout = Alarm_cout + 1;
                     system_crtl.AUTOsystem_command = 5;
@@ -2049,9 +2077,9 @@ unsigned char AUTOTaskassignment3(void)
     switch(system_crtl.AUTOsystem_command)
     {
     case 1:
-        T0Counter7 = 0; //故障计时清零
         returnvalue = 0xE1; //复位左右翻板
         system_crtl.AUTOsystem_command = 2;
+				T0Counter7 = 0; //故障计时清零
         break;
 
     case 2:
@@ -2060,8 +2088,10 @@ unsigned char AUTOTaskassignment3(void)
             system_crtl.AUTOsystem_alarm1 = 1;
             system_crtl.AUTOsystem_command = 3;
         }
-        if(((CANTRASTEMINFOR[13] & 0x01) == 0x01) && ((CANTRASTEMINFOR[13] & 0x04) == 0x04))
-        {
+				//暂时屏蔽了左闸门信号
+//        if(((CANTRASTEMINFOR[13] & 0x01) == 0x01) && ((CANTRASTEMINFOR[13] & 0x04) == 0x04))
+        if(((CANTRASTEMINFOR[13] & 0x04) == 0x04))
+				{
             system_crtl.AUTOsystem_command = 4;
         }
         break;
@@ -2335,7 +2365,6 @@ void ActiveCANtransfer(void)//CAN参数主动上传
             AUTOCMD_TIME = 0;
             AUTOCMD_TIME = 0;
             //}
-
         }
         /*if((AUTOCMD_STATE==0Xc2)||(AUTOCMD_STATE==0Xc3)||(AUTOCMD_STATE==0Xc4)) {AUTOCMD_TIME=AUTOCMD_TIME+1; if(AUTOCMD_TIME>=4){AUTOCMD_STATE=0;AUTOCMD_TIME=0;}}else{AUTOCMD_TIME=0;}
         switch(AUTOCMD_STATE)
@@ -2927,25 +2956,81 @@ void SAMPCBDataacquisition(unsigned char addressID)
         CANTRASTEMINFOR[9] = CANTRASTEMINFOR[1] | RxBuf1.buf[6];
         LED3 = !LED3;
     }
-    AUTO_FLAG = NO;;
+    AUTO_FLAG = NO;
 }
 
-//unsigned char tempbuf[] = {0x01, 0x10, 0, 0, 0, 2, 4, 0, 0, 0, 1}, aaa = 1;
+unsigned char tempbuf[] = {0x01, 0x10, 0, 0, 0, 2, 4, 0, 0, 0, 1}, aaa = 1;
 //unsigned int ttt=180;
+
+//左侧翻转输送线反转
+//发送对象：2
+//signal:1-start、2-stop
+void FZSSXLeftFZ(unsigned char signal)
+{
+    unsigned char i, sum;
+
+    //----------------向底层驱动板发送准备好指令---------------------------------
+		CANTXBUF_ZKB.normal_buf.address1 = 0X01;
+		CANTXBUF_ZKB.normal_buf.command = 0xB0;
+		CANTXBUF_ZKB.normal_buf.index = signal;
+		CANTXBUF_ZKB.normal_buf.data1 = 0X00;
+		CANTXBUF_ZKB.normal_buf.data2 = 0X00;
+		CANTXBUF_ZKB.normal_buf.data3 = 0X00;
+		CANTXBUF_ZKB.normal_buf.data4 = 0X00;
+    sum = 0;
+    i = 0;
+    do
+    {
+        sum += CANTXBUF_ZKB.buf[i];
+        i++;
+    } while(i < 7);
+    CANTXBUF_ZKB.normal_buf.checkout = sum;
+    can1_transmit(2, CANTXBUF_ZKB.buf);
+}
+
+//右侧翻转输送线反转
+//发送对象：4
+//signal:1-start、2-stop
+void FZSSXRightFZ(unsigned char signal)
+{
+    unsigned char i, sum;
+
+    //----------------向底层驱动板发送准备好指令---------------------------------
+		CANTXBUF_ZKB.normal_buf.address1 = 0X01;
+		CANTXBUF_ZKB.normal_buf.command = 0xB0;
+		CANTXBUF_ZKB.normal_buf.index = signal;
+		CANTXBUF_ZKB.normal_buf.data1 = 0X00;
+		CANTXBUF_ZKB.normal_buf.data2 = 0X00;
+		CANTXBUF_ZKB.normal_buf.data3 = 0X00;
+		CANTXBUF_ZKB.normal_buf.data4 = 0X00;
+    sum = 0;
+    i = 0;
+    do
+    {
+        sum += CANTXBUF_ZKB.buf[i];
+        i++;
+    } while(i < 7);
+    CANTXBUF_ZKB.normal_buf.checkout = sum;
+    can1_transmit(3, CANTXBUF_ZKB.buf);
+}
+
+
 //////////////////////////
 //         主程序
 //////////////////////////
+unsigned char i=0,sum=0;
 void main (void)
 {
     SFRPAGE = CONFIG_PAGE;
     Initial();
     init_machine();
-
+	
     while(1)
     {
         SystemControl();              //系统控制（控制信息来源，can\RS485\中断信号）
-//        UnactiveCANtransfer();        //CAN参数应答上传
-//        ActiveCANtransfer();          //CAN参数主动上传
+        UnactiveCANtransfer();        //CAN参数应答上传
+        ActiveCANtransfer();          //CAN参数主动上传
+			
         //Dataacquisition();            //数据采集
         /*if((CANINFOR_FLAG==NO)&&(Runmode==0x00))//CAN主动连续上传
         {

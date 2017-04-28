@@ -20,8 +20,8 @@
 
 
 //左右定位长度最大值，作为无限运行值，需要区分左右
-#define		UNLIMITED_DISTANCE_LEFT			2000000000
-#define		UNLIMITED_DISTANCE_RIGHT		-2000000000
+#define		UNLIMITED_DISTANCE_LEFT			-2000000000
+#define		UNLIMITED_DISTANCE_RIGHT		2000000000
 //
 #define		UNLIMITED_SPEED			10000
 #define		UNLIMITED_ADDTIME		2000
@@ -435,7 +435,10 @@ extern xdata unsigned  char Servopara[107];
 
 
 
-
+//added begin
+void FZSSXLeftFZ(unsigned char signal);
+void FZSSXRightFZ(unsigned char signal);
+//added end
 
 
 

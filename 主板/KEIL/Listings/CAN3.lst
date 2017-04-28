@@ -1,0 +1,333 @@
+C51 COMPILER V9.56.0.0   CAN3                                                              04/28/2017 11:44:54 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE CAN3
+OBJECT MODULE PLACED IN .\Objects\CAN3.obj
+COMPILER INVOKED BY: C:\Keil_C51\C51\BIN\C51.EXE CAN3.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\KEIL) DEBUG OBJECTEXTEND PRIN
+                    -T(.\Listings\CAN3.lst) TABS(2) OBJECT(.\Objects\CAN3.obj)
+
+line level    source
+
+   1          #include <zk.h>
+   2          
+   3          //-----------------------------------------------------------------------------
+   4          // C8051F040的SFR定义
+   5          //-----------------------------------------------------------------------------
+   6          
+   7          //定义SJA1000T寄存器地址
+   8          xdata unsigned char CAN3_MODE _at_ 0xFD00 ;
+   9          xdata unsigned char CAN3_CMR _at_ 0xFD01 ;
+  10          xdata unsigned char CAN3_SR _at_ 0xFD02 ;
+  11          xdata unsigned char CAN3_IR _at_ 0xFD03 ;
+  12          xdata unsigned char CAN3_IREN _at_ 0xFD04;
+  13          xdata unsigned char CAN3_AMR _at_ 0xFD05 ;
+  14          xdata unsigned char CAN3_BTR0 _at_ 0xFD06 ;
+  15          xdata unsigned char CAN3_BTR1 _at_ 0xFD07 ;
+  16          xdata unsigned char CAN3_OCR _at_ 0xFD08 ;
+  17          xdata unsigned char CAN3_CDR _at_ 0xFD1F;
+  18          
+  19          
+  20          xdata unsigned char CAN3_FIFO16 _at_ 0xFD10 ;        //CAN3_FIFO窗口 ， 采用标准帧
+  21          xdata unsigned char CAN3_FIFO17 _at_ 0xFD11 ;
+  22          xdata unsigned char CAN3_FIFO18 _at_ 0xFD12 ;
+  23          xdata unsigned char CAN3_FIFO19 _at_ 0xFD13 ;
+  24          xdata unsigned char CAN3_FIFO20 _at_ 0xFD14 ;
+  25          xdata unsigned char CAN3_FIFO21 _at_ 0xFD15 ;
+  26          xdata unsigned char CAN3_FIFO22 _at_ 0xFD16 ;
+  27          xdata unsigned char CAN3_FIFO23 _at_ 0xFD17 ;
+  28          xdata unsigned char CAN3_FIFO24 _at_ 0xFD18 ;
+  29          xdata unsigned char CAN3_FIFO25 _at_ 0xFD19 ;
+  30          xdata unsigned char CAN3_FIFO26 _at_ 0xFD1A ;
+  31          
+  32          xdata unsigned char CAN3_RBSA _at_ 0xFD1E ;
+  33          xdata unsigned char CAN3_ERRLIMIT _at_ 0xFD0D;
+  34          xdata unsigned char CAN3_RXERR _at_ 0xFD0E;
+  35          xdata unsigned char CAN3_TXERR _at_ 0xFD0F ;
+  36          xdata unsigned char CAN3_ALC _at_ 0xFD0B;
+  37          xdata unsigned char CAN3_ECC _at_ 0xFD0C;
+  38          
+  39          
+  40          //-----------------------------------------------------------------------------
+  41          // 全局变量
+  42          //-----------------------------------------------------------------------------
+  43          xdata CAN3RECBUF1 CAN3RXbuffer1;
+  44          xdata CAN3RECBUF1 CAN3TXbuffer1;
+  45          
+  46          bit Can3NewData1 = NO;
+  47          unsigned char CAN3FaultCounter = 0;
+  48          
+  49          
+  50          void init_can3 (void)
+  51          {
+  52   1      
+  53   1          SFRPAGE  = CONFIG_PAGE;        //Port SFR's on Configuration page
+  54   1          XBR1  |= 0x10;     //配置INT0管脚
+C51 COMPILER V9.56.0.0   CAN3                                                              04/28/2017 11:44:54 PAGE 2   
+
+  55   1          SFRPAGE  = LEGACY_PAGE;
+  56   1          EA = 0;
+  57   1          EX1 = 1; //使能INT1
+  58   1          PX1 = 0;//低优先级
+  59   1          IT1 = 0; //低电平触发中断
+  60   1      
+  61   1          CAN3_MODE = 0x01;   //0X09; 复位模式
+  62   1          CAN3_CDR = 0X88 ;  //选择PeliCAN 模式   ，时钟输出禁止(0x80 时钟输出)
+  63   1          CAN3_IREN = 0x0D;  //数据溢出中断、接收中断、错误报警中断使能
+  64   1      
+  65   1          //配置验收滤波，用于过虑无关ID，只对通过滤波的ID产生接收中断
+  66   1          //定义AMR
+  67   1          CAN3_FIFO20 = 0xFF;   //高8位地址参与验收滤波 , 如果为1则对ACR为无关,
+  68   1          CAN3_FIFO21 = 0xEF;   //RTR参与验收滤波,其余位无关
+  69   1          CAN3_FIFO22 = 0xFF;   //无关
+  70   1          CAN3_FIFO23 = 0xFF;   //无关
+  71   1          //定义ACR
+  72   1          CAN3_FIFO16 = 0x00;
+  73   1          CAN3_FIFO17 = 0x00;
+  74   1          CAN3_FIFO18 = 0x00;
+  75   1          CAN3_FIFO19 = 0x00;
+  76   1      
+  77   1          //接收地址：0000,000*,***   //当FIFO20=0x01; FIFO16=0x01或0x00 时
+  78   1          //接收地址：****,****,***   //当FIFO20=0xFF; FIFO16=**时
+  79   1          //接收地址：0000,0001,***   //当FIFO20=0x00; FIFO16=0x01时
+  80   1      
+  81   1      // TSEG1 = (Prop_Seg + Phase_Seg1 - 1) = 6 , 7
+  82   1      //  TSEG2 = (Phase_Seg2 - 1)           = 2
+  83   1      // SJW_p = (SJW - 1)                   = 1
+  84   1          //CAN3_BTR0=0x40;    //  波特率=502693Hz
+  85   1      // CAN3_BTR0=0x41;    //  波特率=502693Hz/2
+  86   1      //  CAN3_BTR0=0x43;    //  波特率=502693Hz/4
+  87   1      // CAN3_BTR0=0x44;    //  波特率=502693Hz/5
+  88   1      
+  89   1      // CAN3_BTR0=0x40;    //  波特率=500000Hz
+  90   1      // CAN3_BTR0=0x41;    //  波特率=500000Hz/2
+  91   1          CAN3_BTR0 = 0x43;    //  波特率=500000Hz/4
+  92   1      // CAN3_BTR0=0x44;    //  波特率=500000Hz/5
+  93   1      
+  94   1          CAN3_BTR1 = 0xA7;  //通讯低速率时用0xA7,通讯高速率时用0x27
+  95   1          //0x26(11.0592MHz),  0x27(12MHz)
+  96   1          CAN3_OCR = 0xda;
+  97   1          CAN3_RBSA = 0;
+  98   1          CAN3_ECC = 0 ;
+  99   1          CAN3_MODE = 0x08; //设置单滤波接收方式，返回工作状态
+ 100   1          EA = 1;
+ 101   1      }
+ 102          
+ 103          void can3_transmit(unsigned int id, unsigned char *buf)
+ 104          {
+ 105   1          UINTUNION  temp;
+ 106   1          unsigned char r;
+ 107   1          T0Counter2 = 0;
+ 108   1          do {
+ 109   2              r = CAN3_SR ;
+ 110   2              if(T0Counter2 >= 2)
+ 111   2              {
+ 112   3                  CAN3FaultCounter++;
+ 113   3                  return; //延时20ms  超时退出
+ 114   3              }
+ 115   2          } while(((r & 0x10) == 0x10) || ((r & 0x04) == 0x00)); //||((r&0x08)==0x00));
+ 116   1          // 不要加入发送完毕状态判断，否则出现故障时，不能自恢复
+C51 COMPILER V9.56.0.0   CAN3                                                              04/28/2017 11:44:54 PAGE 3   
+
+ 117   1          EA = 0;
+ 118   1          CAN3_FIFO16 = 0x08; //帧信息： 标准帧，8位数据
+ 119   1      
+ 120   1          temp.value = id << 5;
+ 121   1      
+ 122   1          CAN3_FIFO17 = temp.buf[0];   //ID1
+ 123   1          CAN3_FIFO18 = (temp.buf[1] & 0xE0) | 0x08 ; //ID2
+ 124   1      
+ 125   1          CAN3_FIFO19 = buf[0];
+ 126   1          CAN3_FIFO20 = buf[1];
+ 127   1          CAN3_FIFO21 = buf[2];
+ 128   1          CAN3_FIFO22 = buf[3];
+ 129   1          CAN3_FIFO23 = buf[4];
+ 130   1          CAN3_FIFO24 = buf[5];
+ 131   1          CAN3_FIFO25 = buf[6];
+ 132   1          CAN3_FIFO26 = buf[7];
+ 133   1      
+ 134   1      //     LedBlink(7, 1,1 );          //数据指示灯
+ 135   1          CAN3_CMR = 0x01;
+ 136   1          EA = 1;
+ 137   1          CAN3FaultCounter = 0;
+ 138   1      }
+ 139          
+ 140          void can3_receive (unsigned char *buf)
+ 141          {
+ 142   1          buf[0] = CAN3_FIFO19;
+ 143   1          buf[1] = CAN3_FIFO20;
+ 144   1          buf[2] = CAN3_FIFO21;
+ 145   1          buf[3] = CAN3_FIFO22;
+ 146   1          buf[4] = CAN3_FIFO23;
+ 147   1          buf[5] = CAN3_FIFO24;
+ 148   1          buf[6] = CAN3_FIFO25;
+ 149   1          buf[7] = CAN3_FIFO26;
+ 150   1      }
+ 151          
+ 152          //CAN3控制器SJA1000T产生的外部中断INT1 ，高优先级
+ 153          void INT1_ISR (void) interrupt 2
+ 154          {
+ 155   1          unsigned char temp;
+ 156   1          unsigned char ir_state;
+ 157   1          UINTUNION   address;
+ 158   1          ir_state = CAN3_IR;
+ 159   1          if( (ir_state & 0x01) == 0x01 ) //接收中断
+ 160   1          {
+ 161   2              address.buf[0] = CAN3_FIFO17 ;
+ 162   2              address.buf[1] = CAN3_FIFO18 ;
+ 163   2              address.value = ( (address.value) >> 5) & 0x07FF;
+ 164   2              if( (address.value == 68) && ((CAN3_FIFO16 & 0x40) != 0x40)) //相同ID号 ,非远程帧
+ 165   2              {
+ 166   3                  can3_receive (CAN3RXbuffer1.buf);  //
+ 167   3                  if(CAN3RXbuffer1.buf[1] == 0xc2)
+ 168   3                  {
+ 169   4                      Runbiaoji4 = 1;
+ 170   4                  }
+ 171   3                  Mode_adress4 = 1;
+ 172   3                  // can3buf1_process();
+ 173   3                  Can3NewData1 = YES;
+ 174   3              }
+ 175   2              if( (address.value == 67) && ((CAN3_FIFO16 & 0x40) != 0x40)) //相同ID号 ,非远程帧
+ 176   2              {
+ 177   3                  can3_receive (CAN3RXbuffer1.buf);  //
+ 178   3                  if(CAN3RXbuffer1.buf[1] == 0xc2)
+C51 COMPILER V9.56.0.0   CAN3                                                              04/28/2017 11:44:54 PAGE 4   
+
+ 179   3                  {
+ 180   4                      //Backinfor_flag=3;
+ 181   4                      //Tansflag=true;
+ 182   4                      switch(CAN3RXbuffer1.buf[2])
+ 183   4                      {
+ 184   5                      case 1:
+ 185   5                          /*Runbiaoji2=1;
+ 186   5                          /if((Runbiaoji1==1)&&(Runbiaoji2==1))
+ 187   5                          {
+ 188   5                          //SNSORSTATUS1=SNSORSTATUS1|0x20;
+ 189   5                          Runbiaoji1=0;
+ 190   5                          Runbiaoji2=0;
+ 191   5                          RUNSTATUS1=RUNSTATUS1&0xFB;
+ 192   5                          }*/
+ 193   5                          SNSORSTATUS1 = SNSORSTATUS1 | 0x10; //定位运行结束
+ 194   5                          break;
+ 195   5                      case 2:
+ 196   5                          SNSORSTATUS2 = SNSORSTATUS2 | 0x10; //定位运行结束
+ 197   5                          break;
+ 198   5                      default:
+ 199   5                          break;
+ 200   5                      }
+ 201   4                  }
+ 202   3                  if(CAN3RXbuffer1.buf[1] == 0xc3) //推药结束
+ 203   3                  {
+ 204   4                      switch(CAN3RXbuffer1.buf[2])
+ 205   4                      {
+ 206   5                      case 1:
+ 207   5                          //SNSORSTATUS1=SNSORSTATUS1|0x40;
+ 208   5                          //RUNSTATUS1=RUNSTATUS1&0xF7;
+ 209   5                          SNSORSTATUS1 = SNSORSTATUS1 | 0x20;
+ 210   5                          break;
+ 211   5                      case 2:
+ 212   5                          SNSORSTATUS2 = SNSORSTATUS2 | 0x20;
+ 213   5                          break;
+ 214   5                      default:
+ 215   5                          break;
+ 216   5                      }
+ 217   4                  }
+ 218   3                  Mode_adress3 = 1;
+ 219   3                  Can3NewData1 = YES;
+ 220   3              }
+ 221   2      
+ 222   2              if( (address.value == 66) && ((CAN3_FIFO16 & 0x40) != 0x40)) //相同ID号 ,非远程帧
+ 223   2              {
+ 224   3                  can3_receive (CAN3RXbuffer1.buf);  //
+ 225   3                  if(CAN3RXbuffer1.buf[1] == 0xc2)
+ 226   3                  {
+ 227   4                      Runbiaoji3 = 1;
+ 228   4                  }
+ 229   3                  Mode_adress2 = 1;
+ 230   3                  // can3buf1_process();
+ 231   3                  Can3NewData1 = YES;
+ 232   3              }
+ 233   2              //药蓝管理和药蓝提升
+ 234   2              /*if( (address.value==66)&&((CAN3_FIFO16&0x40)!=0x40))   //相同ID号 ,非远程帧
+ 235   2              {
+ 236   2                 can3_receive (CAN3RXbuffer1.buf);  //
+ 237   2                 switch(CAN3RXbuffer1.buf[1])
+ 238   2                 {
+ 239   2                case 0xc2:
+ 240   2                //Backinfor_flag=5;
+C51 COMPILER V9.56.0.0   CAN3                                                              04/28/2017 11:44:54 PAGE 5   
+
+ 241   2                Runbiaoji3=1;
+ 242   2                //Tansflag=true;
+ 243   2                break;
+ 244   2                case 0xc3:
+ 245   2                //Backinfor_flag=6;
+ 246   2                //Tansflag=true;
+ 247   2                break;
+ 248   2                case 0xc4:
+ 249   2                //Backinfor_flag=7;
+ 250   2                //Tansflag=true;
+ 251   2                Runbiaoji1=1;
+ 252   2                if((Runbiaoji1==1)&&(Runbiaoji2==1))
+ 253   2                {
+ 254   2                //SNSORSTATUS1=SNSORSTATUS1|0x20;
+ 255   2                Runbiaoji1=0;
+ 256   2                Runbiaoji2=0;
+ 257   2                RUNSTATUS1=RUNSTATUS1&0xFB;
+ 258   2                }
+ 259   2                break;
+ 260   2                      default:
+ 261   2                break;
+ 262   2      
+ 263   2                }
+ 264   2              }
+ 265   2                   if( (address.value==65)&&((CAN3_FIFO16&0x40)!=0x40))   //相同ID号 ,非远程帧
+ 266   2                {
+ 267   2                      can3_receive (CAN3RXbuffer1.buf);  //
+ 268   2                      if(CAN3RXbuffer1.buf[1]==0xc2)
+ 269   2                      {
+ 270   2                      RUNSTATUS1=RUNSTATUS1&0xFE;
+ 271   2                     }
+ 272   2                     // can3buf1_process();
+ 273   2                     Mode_adress2=1;
+ 274   2                      Can3NewData1=YES;
+ 275   2                   }*/
+ 276   2              CAN3_CMR = 0x04;            //释放接收缓冲器
+ 277   2              LedBlink(7, 1, 1 );         //数据指示灯
+ 278   2              LedBlink(8, 0, 0 );         //故障指示灭
+ 279   2              CAN3FaultCounter = 0;
+ 280   2          }
+ 281   1      
+ 282   1          if((ir_state & 0x08) != 0x0) //数据溢出中断
+ 283   1          {
+ 284   2              CAN3_CMR = 0x0C; //清除数据溢出；释放接收缓冲器
+ 285   2          }
+ 286   1          if((ir_state & 0x04) != 0x0) //错误报警中断
+ 287   1          {
+ 288   2      
+ 289   2              if((CAN3_SR & 0x80) != 0x0)
+ 290   2              {
+ 291   3                  CAN3_MODE = 0x08 ;
+ 292   3              }
+ 293   2              LedBlink(8, 1, 0 );         //故障指示
+ 294   2          }
+ 295   1          temp = CAN3_ALC; //释放仲裁丢失捕捉寄存器
+ 296   1          temp = CAN3_ECC; //释放错误代码捕捉寄存器
+ 297   1          IE1 = 0; //INT0中断复位
+ 298   1      }
+ 299          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+C51 COMPILER V9.56.0.0   CAN3                                                              04/28/2017 11:44:54 PAGE 6   
+
+   CODE SIZE        =    651    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     16    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -2628,13 +2628,40 @@ void init_machine(void)
 //         主程序
 //////////////////////////
 unsigned char buffer[8];
+
+//右侧翻转输送线反转
+//发送对象：2
+//signal:1-start、2-stop
+void FZSSXRightFZ(unsigned char signal)
+{
+    unsigned char i, sum;
+
+    //----------------向底层驱动板发送准备好指令---------------------------------
+		CANTXBUF_ZKB.normal_buf.address1 = 0X01;
+		CANTXBUF_ZKB.normal_buf.command = 0xB0;
+		CANTXBUF_ZKB.normal_buf.index = signal;
+		CANTXBUF_ZKB.normal_buf.data1 = 0X00;
+		CANTXBUF_ZKB.normal_buf.data2 = 0X00;
+		CANTXBUF_ZKB.normal_buf.data3 = 0X00;
+		CANTXBUF_ZKB.normal_buf.data4 = 0X00;
+    sum = 0;
+    i = 0;
+    do
+    {
+        sum += CANTXBUF_ZKB.buf[i];
+        i++;
+    } while(i < 7);
+    CANTXBUF_ZKB.normal_buf.checkout = sum;
+    can1_transmit(TX_MSGNUM_ZKB, CANTXBUF_ZKB.buf);
+}
+
 void main (void)
 {
     SFRPAGE = CONFIG_PAGE;
     Initial();
     delay_ms(1000);
     init_machine();//上电系统复位
-//	Send_to_Motordriver_CTL(0x00);
+	
     while(1)
     {
 

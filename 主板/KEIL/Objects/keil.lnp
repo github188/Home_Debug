@@ -1,0 +1,8 @@
+".\Objects\STARTUP.obj",
+".\Objects\CAN2.obj",
+".\Objects\CAN3.obj",
+".\Objects\myconfig.obj",
+".\Objects\zk.obj",
+".\Objects\UART1.obj" 
+TO ".\Objects\keil" 
+PRINT(".\Listings\keil.m51") RAMSIZE(256) 

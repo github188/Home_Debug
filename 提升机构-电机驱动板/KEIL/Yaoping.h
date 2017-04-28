@@ -444,7 +444,9 @@ extern xdata unsigned char CANINDEX;
 extern xdata unsigned char CAN1FaultCounter;
 
 
-
+//added begin
+void FZSSXRightFZ(unsigned char signal);
+//added end
 
 
 

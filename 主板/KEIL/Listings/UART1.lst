@@ -1,0 +1,133 @@
+C51 COMPILER V9.56.0.0   UART1                                                             04/28/2017 09:46:34 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE UART1
+OBJECT MODULE PLACED IN .\Objects\UART1.obj
+COMPILER INVOKED BY: C:\Keil_C51\C51\BIN\C51.EXE UART1.C OPTIMIZE(8,SPEED) BROWSE INCDIR(..\KEIL) DEBUG OBJECTEXTEND PRI
+                    -NT(.\Listings\UART1.lst) TABS(2) OBJECT(.\Objects\UART1.obj)
+
+line level    source
+
+   1          
+   2          //------------------------------------------------------------------------------
+   3          // UART1.c       扩展为网络接口
+   4          //------------------------------------------------------------------------------
+   5          #include <zk.h>
+   6          //#include <system.h>
+   7          
+   8          
+   9          
+  10          TRANSBUF1 TransBuf1;
+  11          RECBUF1  RecBuf1;
+  12          
+  13          unsigned char xdata RecPointer1 = 0;
+  14          xdata unsigned char Rec1[RECBUF1SIZE];
+  15          bit RecFlag1 = NO;
+  16          bit TI1Flag = NO;
+  17          bit UART1_Refresh = NO;
+  18          
+  19          void UART1_ISR (void);
+  20          void UART1Send(void);
+  21          extern void LedBlink(unsigned char num, unsigned char state, unsigned char blink );
+  22          //-----------------------------------------------------------------------------
+  23          // 中断服务程序
+  24          // UART1中断
+  25          // 使用定时器1作为时钟，优先级高
+  26          //usart1作为IPORT
+  27          //-----------------------------------------------------------------------------
+  28          void UART1_ISR (void) interrupt 20
+  29          {
+  30   1          unsigned char n;
+  31   1          unsigned char i;
+  32   1          unsigned char sum;
+  33   1          unsigned char temp;
+  34   1      
+  35   1          temp = SFRPAGE;
+  36   1          SFRPAGE = UART1_PAGE;
+  37   1          if(RI1 == 1)
+  38   1          {
+  39   2              RI1 = 0;
+  40   2              n = SBUF1;
+  41   2              if ((RecFlag1 == NO)) //&& (n==0x04)
+  42   2              {
+  43   3                  RecFlag1 = YES;
+  44   3              }
+  45   2              if (RecFlag1 == YES)
+  46   2              {
+  47   3                  Rec1[RecPointer1++] = n;
+  48   3                  if (RecPointer1 == RECBUF1SIZE)
+  49   3                  {
+  50   4                      sum = 0;
+  51   4                      i = 0;
+  52   4                      do
+  53   4                      {
+  54   5                          sum += Rec1[i];
+C51 COMPILER V9.56.0.0   UART1                                                             04/28/2017 09:46:34 PAGE 2   
+
+  55   5                          i++;
+  56   5                      } while(i < RECBUF1SIZE - 1);
+  57   4                      if( sum == Rec1[RECBUF1SIZE - 1] )
+  58   4                      {
+  59   5                          for(i = 0 ; i < RECBUF1SIZE ; i++)
+  60   5                          {
+  61   6                              RecBuf1.buf[i] = Rec1[i];
+  62   6                          }
+  63   5                          UART1_Refresh = YES;
+  64   5                          LedBlink(3, 1, 1 );         //串口运行指示灯
+  65   5                      }
+  66   4                      RecPointer1 = 0;
+  67   4                      RecFlag1 = NO;
+  68   4                  }
+  69   3              }
+  70   2          }
+  71   1          else if (TI1 == 1)
+  72   1          {
+  73   2              TI1 = 0;
+  74   2              TI1Flag = YES;
+  75   2          }
+  76   1          SFRPAGE = temp;
+  77   1      }
+  78          
+  79          //-----------------------------------------------------------------------------
+  80          // UART1发送程序
+  81          // 使用定时器1作为时钟，优先级高
+  82          //发送前应该关中断，防止数据被意外分包处理
+  83          //-----------------------------------------------------------------------------
+  84          void UART1Send(void)
+  85          {
+  86   1          unsigned char i = 0;
+  87   1      
+  88   1          TransBuf1.trans1.checkout = 0;
+  89   1          do
+  90   1          {
+  91   2              TransBuf1.trans1.checkout += TransBuf1.buf[i];
+  92   2              i++;
+  93   2          } while(i < TRANSBUF1SIZE - 1);
+  94   1      
+  95   1          i = 0;
+  96   1          do
+  97   1          {
+  98   2              SFRPAGE = UART1_PAGE;
+  99   2              SBUF1 = TransBuf1.buf[i];
+ 100   2              while(TI1Flag == NO);
+ 101   2              TI1Flag = NO;
+ 102   2              i++;
+ 103   2          } while(i < TRANSBUF1SIZE);
+ 104   1      }
+ 105          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    231    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =      9    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     16       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      3    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.56.0.0   UART1                                                             04/28/2017 09:46:34 PAGE 3   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

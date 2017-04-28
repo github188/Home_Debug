@@ -1,0 +1,2170 @@
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE ZK
+OBJECT MODULE PLACED IN .\Objects\zk.obj
+COMPILER INVOKED BY: C:\Keil_C51\C51\BIN\C51.EXE zk.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\KEIL) DEBUG OBJECTEXTEND PRINT(
+                    -.\Listings\zk.lst) TABS(2) OBJECT(.\Objects\zk.obj)
+
+line level    source
+
+   1          /*
+   2                                 ´óÒ©·¿·¢Ò©¼°ÊäËÍÏµÍ³Ö÷¿Ø°å³ÌĞò
+   3          
+   4            2016.02.14 ½«ÍøÂçÖ÷°åÉı¼¶Îª×°»úÓÃ³ÌĞò£¬³ıÈ¥²»±ØÒªµÄ³ÌĞò¶Î
+   5            ÔÚÒÔÇ°Ö÷¿Ø°å³ÌĞòµÄ»ù´¡ÉÏ½øĞĞÉı¼¶
+   6            2016.02.15 Ôö¼ÓÒ©Æ·ÊäËÍ¼°ÆäËû¸¨Öú¿ØÖÆ³ÌĞò¶Î
+   7            ÍøÂçÍ¨Ñ¶Ò²ÒÑ¾­ÖØĞÂ²âÊÔÍê±Ï
+   8            2016.02.24 CAN2£¬CAN3³öÏÖ¹ÊÕÏ£¬µ«Ô­ÏÈµÄÀÏ°æ±¾³ÌĞò£¬ÄÜÔËĞĞ¡£ÏÖÒÑ¸ü»»³ÉÀÏ°æ±¾¡£
+   9            2016.06.11 ÔÚºî¹¤µ÷ÊÔµÄ»ù´¡ÉÏ£¬½øĞĞÕûºÏ´óÒ©·¿·¢Ò©ÏµÍ³µÄ³ÌĞò
+  10                       ËÅ·şÆô¶¯±êÖ¾ Servo_Begin_Sign £¬µç´ÅÌú¶¯×÷Íê±Ïºó£¬ÑÓÊ±5Ãë£¨Ä¬ÈÏ£©´Ë±êÖ¾ÖÃ¸ß¡£
+  11            2016.06.18 ÓëĞ¡Áº½øĞĞÍ¨Ñ¶¶Ô½Ó,·¢Ò©ÒÑÕı³£¡£
+  12            2016.06.19 ¶Ô³ÌĞòµÄµÄ²ãÊı½øĞĞÁËÕûÀí£¬²¢ÍêÉÆÁËµ×²ã°åBITE²¿·Ö
+  13            2016.06.21 ·¢Ò©ÈôµØÖ·²»¶Ô£¬²»¶Ôµ×²ã°å·¢ËÍÊı¾İ¡£
+  14                       ·¢Ò©¶¯×÷Íê±Ïºó£¬ÑÓÊ±1ÃëÊ±¼ä£¬´¥·¢ËÅ·ş¶¯×÷¡£
+  15          
+  16            2016.06.22 ÒÑÓëĞ¡Áº½øĞĞÁËÊı¾İÍ¨Ñ¶£¬0XC0½öÓÉÉÏÎ»»úÇëÇóÊ±ÔÙ·¢£¬·ñÔò²»ÉÏ·¢¡£
+  17                       µç´ÅÌú¶¯×÷ºó£¬ÑÓÊ±1Ãë£¬´«ËÍ´ø¿ªÊ¼¶¯×÷ÒÑÊµÏÖ¡£
+  18          
+  19            2016.06.25 ¸ù¾İÏÖ³¡ĞèÇó£¬µç´ÅÌú¶¯×÷Íê±Ïºó£¬ÑÓÊ±µÄÊ±¼äÈ¥³ı¡£
+  20            2016.07.19  ÎªÁËµ×²ã»ú¹¹Ë³Àû³õÊ¼»¯£¬ÔÚmain()º¯Êı¿ªÊ¼µÄÎ»ÖÃ£¬½«delay_ms(4000);ÑÓÊ±¸ÄÎªdelay_ms(15000);
+  21          
+  22            2017.03.02  µ±µ×²ãÄ³¸ö·¢Ò©Çı¶¯°å³öÏÖÍ¨Ñ¶¹ÊÕÏÊ±£¬»áµ¼ÖÂÏµÍ³ÔİÍ£¡£ÏÖÄâ²ÉÓÃ¶¨³¤Ç¿ÖÆÖĞ¶Ï
+  23                        ¶¨Ê±µÄÊ±³¤Ä¬ÈÏÎª5000ms£¬ µã¿ªZK.hÎÄ¼şÖĞĞŞ¸ÄÕâ¸öºê¶¨ÒåµÄÖµ¼´¿É£¨ Bite_Delay_Time  500  £©
+  24                  Í¬Ê±·¢ËÍµÄ½á¹ûÊı¾İÓÉÒÔÇ°µÄ0XAA£¬¸ÄÎª0X55
+  25          
+  26          */
+  27          //-----------------------------------------------------------------------------
+  28          // °üº¬ÎÄ¼ş
+  29          //-----------------------------------------------------------------------------
+  30          #include <zk.h>
+  31          #include <math.h>
+  32          
+  33          //-----------------------------------------------------------------------------
+  34          // C8051F040µÄSFR¶¨Òå
+  35          //-----------------------------------------------------------------------------
+  36          sfr16 ADC0 = 0xbe;  // ADC0 data
+  37          
+  38          //-----------------------------------zk.c--------------------------------------
+  39          // È«¾Ö±äÁ¿
+  40          //-----------------------------------------------------------------------------
+  41          //¶¨Òå¶¨Ê±Æ÷µÄÈí¼ş¼ÆÊıÆ÷
+  42          unsigned char  T0Counter1 = 0; //ÔËĞĞÖ¸Ê¾µÆ
+  43          unsigned char  T0Counter2 = 0; //CAN ·¢ËÍ³¬Ê±¼ÆÊıÆ÷
+  44          unsigned int   T0Counter3 = 0; //BITE·´À¡¸øÉÏÎ»»ú
+  45          unsigned char  T0Counter4 = 0; //¶ÔOKĞÅÏ¢µÄ´¦ÀíºÍÉÏ±¨
+  46          
+  47          xdata unsigned char  T0Counter12 = 0; //´®¿Ú¿ØÖÆÆ÷Ê¹ÓÃ1
+  48          xdata unsigned char  T0Counter13 = 0; //´®¿Ú¿ØÖÆÆ÷Ê¹ÓÃ2
+  49          xdata unsigned int   T0Counter14 = 0; //µç´ÅÌú·¢Ò©½áÊøºó£¬ÑÓÊ±ÓÃ
+  50          xdata unsigned int   T0Counter15 = 0; //µç´ÅÌú·¢Ò©½áÊøºó£¬ÑÓÊ±ÓÃ
+  51          
+  52          unsigned char Group_index_DCT = 0;    //µç´ÅÌú¶¯×÷Åú´ÎºÅÒ²¼´Êı¾İĞòÁĞ
+  53          unsigned char Board_Address_Number = 0; //×Ô¼ìÓÃ
+  54          
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 2   
+
+  55          unsigned char ALL_Action_OK_Sign = 0;
+  56          unsigned char ALL_Action_OK_Sign_last = 0;
+  57          unsigned char ALL_Result_OK_Sign = 0;
+  58          
+  59          unsigned char OK_Sign_TX_Amount = 0; //0kĞÅºÅµÄ·¢ËÍ´ÎÊı
+  60          unsigned char temppage = 0;
+  61          
+  62          unsigned char Zijian_Sign = 0xaa;     //×Ô¼ì±êÖ¾£¬0xaaÍË³ö×Ô¼ìÄ£Ê½£¬0X55½øÈë×Ô¼ìÄ£Ê½
+  63          
+  64          xdata SYSDAT  SysData;
+  65          xdata  unsigned char  databuf[8];
+  66          
+  67          xdata unsigned char LED_Address _at_ 0xFB00 ;
+  68          xdata unsigned char LED_BUF = 0;
+  69          
+  70          bit Command_Finish_Sign = NO;   //Ö¸Áî½áÊøºÍ¿ªÊ¼±êÖ¾
+  71          bit Command_Begin_Sign = NO;    //´«ËÍ´øÆô¶¯Ö¸Áî
+  72          bit Servo_Begin_Sign = NO;      //ËÅ·ş´¥·¢±êÖ¾
+  73          bit  Answer_ok = NO;
+  74          unsigned char Board_ID = 0x00;
+  75          
+  76          unsigned int  Proce_Count = 0x00;          //×Ô¶¯²Ù×÷£¬¶¯×÷µ½Î»ºóµÄµÈ´ıÊ±¼ä
+  77          unsigned char Procession1 = 0x00;          //×Ô¶¯²Ù×÷²½Öè´úÂë
+  78          unsigned char Run_modeFayaoL = 0;
+  79          unsigned char Run_modeFayaoR = 0;
+  80          unsigned char Run_mode = 0;
+  81          unsigned char SNSORSTATUS1 = 0;
+  82          unsigned char SNSORSTATUS2 = 0;
+  83          unsigned char RUNSTATUS1 = 0;
+  84          unsigned char RUNSTATUS2 = 0;
+  85          
+  86          unsigned char MAINRUNSTATUSL = 0;
+  87          unsigned char MAINRUNSTATUSL1 = 0;
+  88          
+  89          unsigned char Runbiaoji1 = 0;
+  90          unsigned char Runbiaoji2 = 0;
+  91          bit Tansflag = 0;
+  92          
+  93          unsigned char Runbiaoji3 = 0;
+  94          unsigned char Runbiaoji4 = 0;
+  95          unsigned char FAYAOinput_pra[4];
+  96          unsigned char communication_step = 0;
+  97          bit  ONCEFLAG = NO;
+  98          bit  Alarm_stepflagL = NO; //¹ÊÕÏµã±êÖ¾Î»
+  99          bit  Alarm_stepflagR = NO; //¹ÊÕÏµã±êÖ¾Î»
+ 100          bit  ALARM_ONCEFLAGL = NO;
+ 101          bit  ALARM_ONCEFLAGR = NO;
+ 102          bit  Servo_left_Begin_Sign = NO;
+ 103          bit  Servo_right_Begin_Sign = NO;
+ 104          bit  FaYao_Prosetion_Sign = NO;
+ 105          bit  Active_Data_Begin_Sign_last = NO;
+ 106          bit  Active_Data_Begin_Sign = NO;
+ 107          
+ 108          xdata Servomotordisplace Servodisplace;
+ 109          xdata  float m_floatServodisplace = 0.0;
+ 110          xdata  unsigned int m_intServodisplace = 0;
+ 111          xdata  unsigned char Run_REAFY1 = 0;
+ 112          xdata  unsigned char Run_REAFY2 = 0;
+ 113          xdata  unsigned char Run_ALARM1 = 1;
+ 114          xdata  unsigned char Run_ALARM2 = 1;
+ 115          xdata  unsigned char Mode_ALARM1 = 0;
+ 116          xdata  unsigned char Mode_ALARM2 = 0;
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 3   
+
+ 117          xdata  unsigned char Mode_ALARM3 = 0;
+ 118          xdata  unsigned char Mode_ALARM4 = 0;
+ 119          xdata  unsigned char Mode_adress1 = 0;
+ 120          xdata  unsigned char Mode_adress2 = 0;
+ 121          xdata  unsigned char Mode_adress3 = 0;
+ 122          xdata  unsigned char Mode_adress4 = 0;
+ 123          xdata  unsigned char Basket_stat = 0;
+ 124          xdata  unsigned char strat_flag = 0;
+ 125          xdata  unsigned char CAN_index = 0;
+ 126          xdata  unsigned int  AUTO_countimerL = 0;
+ 127          xdata  unsigned int  AUTO_countimerR = 0;
+ 128          
+ 129          //xdata unsigned char TEST_ADDRESS1=0;
+ 130          //xdata unsigned char TEST_ADDRESS2=0;
+ 131          //xdata unsigned char TEST_COMMAND=0;
+ 132          //////////////////////////////////////////////////////////////////////////////////
+ 133          // ¶ÁÈ¡µ×²ãÇı¶¯°åÊäÈëĞÅºÅµÄ×´Ì¬
+ 134          // µç´ÅÌúÇı¶¯°å±àºÅ number £º0¡«Driver_Board_Amount-1
+ 135          //////////////////////////////////////////////////////////////////////////////////
+ 136          bit Get_DCT_Input_State(unsigned char  number)
+ 137          {
+ 138   1          return (bit)( SysData.DCT_Input_Command[number / 8] & (0x01 << (number % 8)) ) ;
+ 139   1      }
+ 140          //-----------------------------------------------------------------------------
+ 141          //////////////////////////////////////////////////////////////////////////////////
+ 142          // ÉèÖÃµç´ÅÌúÇı¶¯°åÊäÈëµÄ×´Ì¬£¬Ò²¼´ÊäÈëÖ¸ÁîµÄ×´Ì¬±êÖ¾£¬Îª1Ê±£¬±íÊ¾´ËÃüÁîÓĞĞ§£¬Îª0Ê±£¬±íÊ¾´ËÃüÁîÎŞĞ§
+ 143          // µç´ÅÌúÇı¶¯°å±àºÅ¶Ë¿ÚºÅ number £º0¡«Driver_Board_Amount-1 ;
+ 144          // ×´Ì¬   ÉèÖÃÎª1£» ÉèÖÃÎª0£»
+ 145          //////////////////////////////////////////////////////////////////////////////////
+ 146          void Set_DCT_Input_State(unsigned char  number, bit state)
+ 147          {
+ 148   1          if(state == 1)
+ 149   1              SysData.DCT_Input_Command[number / 8] |= (0x01 << (number % 8));
+ 150   1          else
+ 151   1              SysData.DCT_Input_Command[number / 8] &= ~(0x01 << (number % 8));
+ 152   1      }
+ 153          
+ 154          //-----------------------------------------------------------------------------
+ 155          //////////////////////////////////////////////////////////////////////////////////
+ 156          // ÉèÖÃµç´ÅÌúÇı¶¯°å¶¯×÷´ÎÊıOKµÄ×´Ì¬£¬Îª1±íÊ¾´Ë²ÛÎ»¸ÃÅú´Î¶¯×÷´ÎÊıOK.
+ 157          // µç´ÅÌúÇı¶¯°å±àºÅ¶Ë¿ÚºÅ number £º0¡«Driver_Board_Amount-1 ;
+ 158          // ×´Ì¬   ÉèÖÃÎª1£» ÉèÖÃÎª0£»
+ 159          //////////////////////////////////////////////////////////////////////////////////
+ 160          void Set_DCT_OK_Result(unsigned char  number, bit state)
+ 161          {
+ 162   1          if(state == 1)
+ 163   1              SysData.DCT_OK_Result[number / 8] |= (0x01 << (number % 8));
+ 164   1          else
+ 165   1              SysData.DCT_OK_Result[number / 8] &= ~(0x01 << (number % 8));
+ 166   1      }
+ 167          
+ 168          //-----------------------------------------------------------------------------
+ 169          //////////////////////////////////////////////////////////////////////////////////
+ 170          // ÉèÖÃµç´ÅÌú¶¯×÷½áÊøµÄ×´Ì¬£¬Îª1±íÊ¾´Ë²ÛÎ»¸ÃÅú´Î¶¯×÷½áÊø
+ 171          // ¶Ë¿ÚºÅ number £º0¡«Driver_Board_Amount-1 ;
+ 172          // ×´Ì¬   ÉèÖÃÎª1£» ÉèÖÃÎª0£»
+ 173          //////////////////////////////////////////////////////////////////////////////////
+ 174          void Set_DCT_OK_Action(unsigned char  number, bit state)
+ 175          {
+ 176   1          if(state == 1)
+ 177   1              SysData.DCT_OK_Action[number / 8] |= (0x01 << (number % 8));
+ 178   1          else
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 4   
+
+ 179   1              SysData.DCT_OK_Action[number / 8] &= ~(0x01 << (number % 8));
+ 180   1      }
+ 181          
+ 182          //////////////////////////////
+ 183          //¶¨Ê±0ÖĞ¶Ï,Ä£Ê½1,16Î»¶¨Ê±¼ÆÊıÆ÷, Ê±ÖÓ12·ÖÆµ ,¸ßÓÅÏÈ¼¶
+ 184          //T0=65536-1000us*11.0592/4=0xF533
+ 185          //////////////////////////////
+ 186          void TIME0_ISR (void) interrupt 1
+ 187          {
+ 188   1          unsigned char i ;
+ 189   1          unsigned char tempsfr ;
+ 190   1          tempsfr = SFRPAGE ;
+ 191   1          SFRPAGE = TIMER01_PAGE;
+ 192   1          // TH0=0x94;    //Reset 10ms interrupt  //Ê±ÖÓ²ÉÓÃ4·ÖÆµ
+ 193   1          // TL0=0x00 ;
+ 194   1          // TH0=0xF5;    //Reset 1ms interrupt //Ê±ÖÓ²ÉÓÃ4·ÖÆµ
+ 195   1          // TL0=0x33 ;
+ 196   1          TH0 = 0xDC;  //Reset 10ms interrupt  //Ê±ÖÓ²ÉÓÃ12·ÖÆµ
+ 197   1          TL0 = 0x00 ;
+ 198   1      
+ 199   1          WDTCN = 0xA5;  //¿´ÃÅ¹·¸´Î»
+ 200   1      
+ 201   1          T0Counter1++;
+ 202   1          T0Counter2++;
+ 203   1          T0Counter3++;
+ 204   1          T0Counter4++;
+ 205   1          T0Counter12++;
+ 206   1          T0Counter13++;
+ 207   1          T0Counter14++;    //µç´ÅÌú·¢Ò©½áÊøºó£¬¿ªÊ¼¼ÆÊ±
+ 208   1          T0Counter15++;    //µç´ÅÌú·¢Ò©½áÊøºó£¬¿ªÊ¼¼ÆÊ±
+ 209   1      
+ 210   1          for(i = 0; i < Driver_Board_Amount; i++)
+ 211   1          {
+ 212   2              if( SysData.DCT_Bite[i] < 200 ) SysData.DCT_Bite[i]++;
+ 213   2          }
+ 214   1      
+ 215   1          if( ALL_Action_OK_Sign != ALL_Action_OK_Sign_last )
+ 216   1          {
+ 217   2              if(ALL_Action_OK_Sign == 0xBB)  T0Counter14 = 0;
+ 218   2          }
+ 219   1          ALL_Action_OK_Sign_last = ALL_Action_OK_Sign;
+ 220   1      
+ 221   1          if( Active_Data_Begin_Sign != Active_Data_Begin_Sign_last )
+ 222   1          {
+ 223   2              if(Active_Data_Begin_Sign == YES)
+ 224   2              {
+ 225   3                  T0Counter15 = 0;
+ 226   3                  FaYao_Prosetion_Sign = YES;
+ 227   3              }
+ 228   2          }
+ 229   1          Active_Data_Begin_Sign_last = Active_Data_Begin_Sign;
+ 230   1      
+ 231   1          LED_Address = LED_BUF;     //LEDÊä³ö¿ØÖÆ
+ 232   1          SFRPAGE = tempsfr ;
+ 233   1      }
+ 234          
+ 235          //--------------------------------------------------------------
+ 236          void CAN_AUTO_RESET()
+ 237          {
+ 238   1      //    if(CAN1FaultCounter > 10)
+ 239   1      //    {
+ 240   1      //        init_can1() ;
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 5   
+
+ 241   1      //        CAN1FaultCounter = 0 ;
+ 242   1      //    }
+ 243   1      
+ 244   1          if(CAN2FaultCounter > 10)
+ 245   1          {
+ 246   2              init_can2() ;
+ 247   2              CAN2FaultCounter = 0;
+ 248   2          }
+ 249   1      
+ 250   1          if(CAN3FaultCounter > 10)
+ 251   1          {
+ 252   2              init_can3() ;
+ 253   2              CAN3FaultCounter = 0;
+ 254   2          }
+ 255   1      }
+ 256          
+ 257          //-------------------------------------------
+ 258          //µ±µ×²ãÇı¶¯°å·¢Ò©µÄ´ÎÊı²»Ïà·ûÊ±£¬Ö÷¿Ø°å¾ÍÄÜ½ÓÊÕµ½µ×²ãÇı¶¯°å·¢µÄ¸Ã²ÛÎ»µÄ·´À¡Êı¾İ£¬
+ 259          //ÇÒ¼°Ê±½«´ËĞÅÏ¢·´À¡¸øÉÏÎ»»ú
+ 260          //ÆäÖĞµÚ5¸ö×Ö½Ú¾ÍÊÇ¸Ã²ÛÎ»µÄ¹ÊÕÏ´úÂë
+ 261          //-------------------------------------------
+ 262          void can_rx_from_DCT_amount_feedback(unsigned char *buf)
+ 263          {
+ 264   1          // unsigned char i,sum;
+ 265   1          TransBuf1.amount_buf.command = buf[0];
+ 266   1          TransBuf1.amount_buf.index1 =  buf[1];
+ 267   1          TransBuf1.amount_buf.address1 = buf[2];
+ 268   1          TransBuf1.amount_buf.address2 = buf[3];
+ 269   1          TransBuf1.amount_buf.bite =  buf[4];
+ 270   1          TransBuf1.amount_buf.blank1 =  buf[5];
+ 271   1          TransBuf1.amount_buf.amount =  buf[6];
+ 272   1          Uart1Send();
+ 273   1      }
+ 274          //----------------------------------------------------------------------------
+ 275          //½ÓÊÜµ×²ãÇı¶¯°åËÍ¹ıÀ´µÄBITEĞÅÏ¢¼°¶¯×÷OKĞÅÏ¢
+ 276          //----------------------------------------------------------------------------
+ 277          //¶¼°´ÕÕ±ê×¼µÄÒ»¸ö»ú¼Ü16ÅÅ¼ÆËã£¬ÈôÓĞµÄ»ú¼Ü£¬²»¹»16ÅÅ£¬Í¨¹ıÉÏÎ»»úÔÚ½çÃæÉÏµ÷Õû¡£
+ 278          //-----------------------------------------------------------------------------
+ 279          void can_rx_from_DCT_bite_feedback(unsigned char *buf)
+ 280          {
+ 281   1          unsigned char Number_amout_1;
+ 282   1      
+ 283   1          //½ÓÊÕµ½¶¯×÷OKÖ¸Áî
+ 284   1          Number_amout_1 = (buf[2] & 0x0F)
+ 285   1                           + ((((buf[2] & 0xE0) >> 5) & 0x07) - 1) * Floor_Number;
+ 286   1      
+ 287   1          if( Command_Finish_Sign == YES )                 //Ö»ÓĞÔÚÖ¸Áî½áÊøºó£¬²ÅÅĞ¶Ï
+ 288   1          {
+ 289   2              if( ( buf[5] == 0xAA ) && ( Get_DCT_Input_State(Number_amout_1) == YES ) ) //´ËÇı¶¯°åµÄÈ·½ÓÊÜµ½¹ı¿
+             -ØÖÆÊäÈëÖ¸Áî
+ 290   2              {
+ 291   3                  Set_DCT_OK_Result(Number_amout_1, OK);       //±íÊ¾´ËÅÅ¶¼ÒÑ¾­¶¯×÷½áÊø²¢´ÎÊıOK
+ 292   3              }
+ 293   2      
+ 294   2              if( (buf[6] == 0xBB) && ( Get_DCT_Input_State(Number_amout_1) == YES ) )  //´ËÇı¶¯°åµÄÈ·½ÓÊÜµ½¹ı¿Ø
+             -ÖÆÊäÈëÖ¸Áî
+ 295   2              {
+ 296   3                  Set_DCT_OK_Action(Number_amout_1, OK);        //±íÊ¾´ËÅÅ¶¼ÒÑ¾­¶¯×÷½áÊø
+ 297   3              }
+ 298   2          }
+ 299   1          SysData.DCT_Bite[Number_amout_1] = 0;
+ 300   1      }
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 6   
+
+ 301          
+ 302          //---------------------- ´¦Àí´ÓÉÏÎ»»ú·¢¹ıÀ´µÄÊı¾İÖ¸Áî--------------------
+ 303          void can_rx_from_SWJ_Zijian_Command(void)    //×Ô¼ìÖ¸Áî
+ 304          {
+ 305   1          unsigned char i, sum;
+ 306   1      
+ 307   1          //------------------ÏòÉÏÎ»»ú»ØÀ¡-------------------------
+ 308   1          TransBuf1.amount_buf.command = 0x14;
+ 309   1          TransBuf1.amount_buf.address1 = 0xbf;
+ 310   1          TransBuf1.amount_buf.address2 = RecBuf1.act_buf.address2;
+ 311   1          TransBuf1.amount_buf.bite = 0x00;
+ 312   1          TransBuf1.amount_buf.blank1 = 0x00;
+ 313   1          TransBuf1.amount_buf.amount = 0x00;
+ 314   1          Uart1Send();                                 //ÃüÁî»ØÀ¡
+ 315   1      
+ 316   1          if(   (RecBuf1.act_buf.address1 == 0xbf)     //½ÓÊÜµ½×Ô¼ìÖ¸Áî
+ 317   1                  && (RecBuf1.act_buf.address2 == 0x55)
+ 318   1            )
+ 319   1          {
+ 320   2              Zijian_Sign = 0x55;
+ 321   2          }
+ 322   1          else if(   (RecBuf1.act_buf.address1 == 0xbf) //½ÓÊÜ½áÊø×Ô¼ìÖ¸Áî
+ 323   1                     && (RecBuf1.act_buf.address2 == 0xaa)
+ 324   1                 )
+ 325   1          {
+ 326   2              Zijian_Sign = 0xaa;
+ 327   2          }
+ 328   1          else
+ 329   1              Zijian_Sign = 0xaa;
+ 330   1      
+ 331   1          //----------------Ïòµ×²ãÇı¶¯°å·¢ËÍ×Ô¼ìÖ¸Áî---------------------------------
+ 332   1          CAN2TXbuffer1.act_buf.command = RecBuf1.act_buf.command;
+ 333   1          CAN2TXbuffer1.act_buf.index1 = RecBuf1.act_buf.index1;
+ 334   1          CAN2TXbuffer1.act_buf.address1 = RecBuf1.act_buf.address1;
+ 335   1          CAN2TXbuffer1.act_buf.address2 = RecBuf1.act_buf.address2;
+ 336   1          CAN2TXbuffer1.act_buf.off_time = 0x00;
+ 337   1          CAN2TXbuffer1.act_buf.on_time = 0x00;
+ 338   1          CAN2TXbuffer1.act_buf.aim_amount = 0x00;
+ 339   1      
+ 340   1          sum = 0;
+ 341   1          i = 0;
+ 342   1          do
+ 343   1          {
+ 344   2              sum += CAN2TXbuffer1.buf[i];
+ 345   2              i++;
+ 346   2          } while(i < 7);
+ 347   1          CAN2TXbuffer1.act_buf.checkout = sum;
+ 348   1          can2_transmit(CAN2TXID_Uion, CAN2TXbuffer1.buf);
+ 349   1      }
+ 350          
+ 351          //---------------------- ´¦Àí´ÓÉÏÎ»»ú·¢¹ıÀ´µÄÊı¾İÖ¸Áî--------------------
+ 352          void can_rx_from_SWJ_Action_Command(void)
+ 353          {
+ 354   1          unsigned char i, sum, Number_amout_2;
+ 355   1      
+ 356   1          if( (RecBuf1.act_buf.address1 == 0xbe)
+ 357   1                  && (RecBuf1.act_buf.address2 == 0x66)
+ 358   1            )                         //ÏòÉÏÎ»»ú·¢ËÍÊ¼·¢°ü»ØÀ¡ĞÅºÅ
+ 359   1          {
+ 360   2              init_index_para();        //Ïà¹Ø²ÎÊı³õÊ¼»¯
+ 361   2              Command_Begin_Sign = YES;
+ 362   2              Command_Finish_Sign = NO;
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 7   
+
+ 363   2      
+ 364   2              //------------------ÏòÉÏÎ»»ú»ØÀ¡-------------------------
+ 365   2              Group_index_DCT = RecBuf1.act_buf.index1;
+ 366   2              TransBuf1.amount_buf.command = 0x80;
+ 367   2              TransBuf1.amount_buf.index1 = RecBuf1.act_buf.index1;
+ 368   2              TransBuf1.amount_buf.address1 = 0xaf;
+ 369   2              TransBuf1.amount_buf.address2 = 0x55;
+ 370   2              TransBuf1.amount_buf.bite = 0x00;
+ 371   2              TransBuf1.amount_buf.blank1 = 0x00;
+ 372   2              TransBuf1.amount_buf.amount = 0x00;
+ 373   2              Uart1Send();
+ 374   2              //----------------Ïò·¢Ò©µ×²ãÇı¶¯°å·¢ËÍ×¼±¸ºÃÖ¸Áî---------------------------------
+ 375   2              CAN2TXbuffer1.act_buf.command = RecBuf1.act_buf.command;
+ 376   2              CAN2TXbuffer1.act_buf.index1 = RecBuf1.act_buf.index1;
+ 377   2              CAN2TXbuffer1.act_buf.address1 = 0xbe;
+ 378   2              CAN2TXbuffer1.act_buf.address2 = 0x66;
+ 379   2              CAN2TXbuffer1.act_buf.off_time = 0x00;
+ 380   2              CAN2TXbuffer1.act_buf.on_time = 0x00;
+ 381   2              CAN2TXbuffer1.act_buf.aim_amount = 0x00;
+ 382   2      
+ 383   2              sum = 0;
+ 384   2              i = 0;
+ 385   2              do
+ 386   2              {
+ 387   3                  sum += CAN2TXbuffer1.buf[i];
+ 388   3                  i++;
+ 389   3              } while(i < 7);
+ 390   2              CAN2TXbuffer1.act_buf.checkout = sum;
+ 391   2              can2_transmit(CAN2TXID_Uion, CAN2TXbuffer1.buf);
+ 392   2              //------------------Ê¼·¢°üÖĞ»úĞµ¿ØÖÆÓÃ----------------------
+ 393   2              //  Lan_backinfor(0x01,0x55);
+ 394   2              //  communication_step=1;
+ 395   2      
+ 396   2              //added begin
+ 397   2              //ÔÚÊÕµ½·¢Ò©ÆğÊ¼°üÊ±Æô¶¯µØÃæÊäËÍÏßÎŞÏŞ³¤¾àÀë¡¢ÂıËÙÔËĞĞ
+ 398   2              ConveyingLongSlow_Start(0x01);//left run
+ 399   2              //added end
+ 400   2      
+ 401   2          }
+ 402   1          else if( (RecBuf1.act_buf.address1 == 0xbe) && (RecBuf1.act_buf.address2 == 0x88) )
+ 403   1          {
+ 404   2              Command_Finish_Sign = YES;        //ÉèÁ¢Ö¸Áî½áÊø±êÖ¾
+ 405   2              // ----------------ÏòÉÏÎ»»ú½áÊø°ü·¢ËÍ»ØÀ¡ĞÅºÅ----------------------
+ 406   2              Group_index_DCT = RecBuf1.act_buf.index1;
+ 407   2              TransBuf1.amount_buf.command = 0x80;
+ 408   2              TransBuf1.amount_buf.index1 = RecBuf1.act_buf.index1;
+ 409   2              TransBuf1.amount_buf.address1 = 0xaf;
+ 410   2              TransBuf1.amount_buf.address2 = 0x44;
+ 411   2              TransBuf1.amount_buf.bite = 0x00;
+ 412   2              TransBuf1.amount_buf.blank1 = 0x00;
+ 413   2              TransBuf1.amount_buf.amount = 0x00;
+ 414   2              Uart1Send();
+ 415   2              //---------------Ïòµ×²ãÇı¶¯°å·¢ËÍÖ¸Áî½áÊøÃüÁî----------------------
+ 416   2              CAN2TXbuffer1.act_buf.command = RecBuf1.act_buf.command;
+ 417   2              CAN2TXbuffer1.act_buf.index1 = RecBuf1.act_buf.index1;
+ 418   2              CAN2TXbuffer1.act_buf.address1 = 0xbe;
+ 419   2              CAN2TXbuffer1.act_buf.address2 = 0x88;
+ 420   2              CAN2TXbuffer1.act_buf.off_time = 0x00;
+ 421   2              CAN2TXbuffer1.act_buf.on_time = 0x00;
+ 422   2              CAN2TXbuffer1.act_buf.aim_amount = 0x00;
+ 423   2      
+ 424   2              sum = 0;
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 8   
+
+ 425   2              i = 0;
+ 426   2              do
+ 427   2              {
+ 428   3                  sum += CAN2TXbuffer1.buf[i];
+ 429   3                  i++;
+ 430   3              } while(i < 7);
+ 431   2              CAN2TXbuffer1.act_buf.checkout = sum;
+ 432   2              can2_transmit(CAN2TXID_Uion, CAN2TXbuffer1.buf);
+ 433   2      
+ 434   2              //added begin
+ 435   2              //ÔÚÊÕµ½·¢Ò©½áÊø°üÊ±Í£Ö¹µØÃæÊäËÍÏßÎŞÏŞ³¤¾àÀë¡¢ÂıËÙÔËĞĞ
+ 436   2              ConveyingLongSlow_Stop();//µØÃæÊäËÍÏßÂıËÙÄ£Ê½½áÊø
+ 437   2              //added end
+ 438   2      
+ 439   2              //---------½áÊø°üÖĞ»úĞµ¶¯×÷²¿·Ö-----------------------------------------
+ 440   2              switch(Run_mode)
+ 441   2              {
+ 442   3              case 1:
+ 443   3                  Run_modeFayaoL = 1; //×ó·¢Ò©
+ 444   3                  break;
+ 445   3              case 2:
+ 446   3                  Run_modeFayaoR = 2; //ÓÒ·¢Ò©
+ 447   3                  break;
+ 448   3              default:
+ 449   3                  //Run_modeFayaoL=0;
+ 450   3                  //Run_modeFayaoR=0;
+ 451   3                  ;
+ 452   3                  break;
+ 453   3              }
+ 454   2              Run_mode = 0;
+ 455   2          }
+ 456   1      
+ 457   1          else if( (RecBuf1.act_buf.address1 >= 0x20 ) && (RecBuf1.act_buf.address1 <= 0x69) ) //Ïòµ×²ãÇı¶¯°å·¢Ë
+             -Í¶¯×÷Ö¸Áî(ºÏºõµØÖ·Ìõ¼şµÄ£©
+ 458   1          {
+ 459   2              Number_amout_2 = (RecBuf1.act_buf.address1 & 0x0F)
+ 460   2                               + ((((RecBuf1.act_buf.address1 & 0xE0) >> 5) & 0x07) - 1) * Floor_Number;
+ 461   2      
+ 462   2              CAN2TXbuffer1.act_buf.command = RecBuf1.act_buf.command;
+ 463   2      //      TEST_COMMAND=RecBuf1.act_buf.command;
+ 464   2              CAN2TXbuffer1.act_buf.index1 = RecBuf1.act_buf.index1;
+ 465   2              CAN2TXbuffer1.act_buf.address1 = RecBuf1.act_buf.address1;
+ 466   2      //    TEST_ADDRESS1=RecBuf1.act_buf.address1;
+ 467   2              CAN2TXbuffer1.act_buf.address2 = RecBuf1.act_buf.address2;
+ 468   2      //    TEST_ADDRESS2=RecBuf1.act_buf.address2;
+ 469   2              CAN2TXbuffer1.act_buf.off_time = RecBuf1.act_buf.off_time;
+ 470   2              CAN2TXbuffer1.act_buf.on_time = RecBuf1.act_buf.on_time;
+ 471   2              CAN2TXbuffer1.act_buf.aim_amount = RecBuf1.act_buf.aim_amount;
+ 472   2      
+ 473   2              sum = 0;
+ 474   2              i = 0;
+ 475   2              do
+ 476   2              {
+ 477   3                  sum += CAN2TXbuffer1.buf[i];
+ 478   3                  i++;
+ 479   3              } while(i < 7);
+ 480   2      
+ 481   2              CAN2TXbuffer1.act_buf.checkout = sum;
+ 482   2              can2_transmit(CAN2TXbuffer1.act_buf.address1, CAN2TXbuffer1.buf);
+ 483   2      
+ 484   2              Set_DCT_Input_State(Number_amout_2, YES);
+ 485   2              Active_Data_Begin_Sign = YES;
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 9   
+
+ 486   2          }
+ 487   1          else
+ 488   1          {
+ 489   2      
+ 490   2          }
+ 491   1      
+ 492   1      
+ 493   1      }
+ 494          
+ 495          //---------------------------------------------------------------------
+ 496          //-----ÏòÉÏÎ»»ú»ã±¨µ×²ãÇı¶¯°åµÄÍ¨Ñ¶¼°¹ÊÕÏĞÅÏ¢--------------------------
+ 497          //-----²»ÂÛÇı¶¯°å¹¤×÷ÊÇ·ñÕı³££¬¶¼ÉÏ±¨----------
+ 498          //¶¼°´ÕÕ±ê×¼µÄÒ»¸ö»ú¼Ü16ÅÅ¼ÆËã£¬ÈôÓĞµÄ»ú¼Ü£¬²»¹»16ÅÅ£¬Í¨¹ıÉÏÎ»»úÔÚ½çÃæÉÏµ÷Õû¡£
+ 499          void Comunication_BITE_to_SWJ(void)
+ 500          {
+ 501   1          static unsigned char  Number_amout = 0;
+ 502   1          unsigned char i, sum, bite_value, address_value;
+ 503   1      
+ 504   1          if( Number_amout >= Driver_Board_Amount ) Number_amout = 0;
+ 505   1          address_value = (Number_amout / Floor_Number) + 1;
+ 506   1          address_value = ((address_value << 5) & 0xE0) + (Number_amout % Floor_Number);
+ 507   1      
+ 508   1          if(SysData.DCT_Bite[Number_amout] >= 200)             //Èô2Ãë»¹Ã»½ÓÊÜµ½´ËÇı¶¯°åµÄÓ¦´ğ£¬ÈÏÎªÆäÓĞ¹ÊÕÏ
+ 509   1              bite_value = 0x01;
+ 510   1          else    bite_value = 0x00;
+ 511   1      
+ 512   1          TransBuf1.amount_buf.command = 0xc0;
+ 513   1          TransBuf1.amount_buf.index1 =  Group_index_DCT;
+ 514   1          TransBuf1.amount_buf.address1 = address_value;        //»ú¼ÜºÅ(´Ó1¿ªÊ¼)&&Ó¡ÖÆ°åµÄÅÅºÅ(´Ó0¿ªÊ¼)
+ 515   1          TransBuf1.amount_buf.address2 = 0x00;
+ 516   1          TransBuf1.amount_buf.bite =  bite_value;
+ 517   1          TransBuf1.amount_buf.blank1 =  0x00;
+ 518   1          TransBuf1.amount_buf.amount =  0x00;
+ 519   1          Uart1Send();
+ 520   1      
+ 521   1          Number_amout++;
+ 522   1      }
+*** WARNING C280 IN LINE 502 OF zk.c: 'i': unreferenced local variable
+*** WARNING C280 IN LINE 502 OF zk.c: 'sum': unreferenced local variable
+ 523          
+ 524          void CAN2_Data_Collect_Process_Programme(void)
+ 525          {
+ 526   1          unsigned char i, sum;
+ 527   1          //-------------------------------------------------------------------------
+ 528   1          //Í¨¹ıCAN2ÍøÂç½ÓÊÜ1ºÅ»ú¹ñµ×²ãÖ÷¿Ø°åËÍ¹ıÀ´µÄ·´À¡Êı¾İ1
+ 529   1          //·ÖÎªÁ½ÖÖÀàĞÍÊı¾İ£¬Ò»ÖÖÊÇ¹ÊÕÏµç´ÅÌúµÄÊµ¼Ê¶¯×÷´ÎÊı£¬Ò»ÖÖÊÇ¹ÊÕÏ×´Ì¬»òÕı³£×´Ì¬ĞÅÏ¢
+ 530   1          //--------------------------------------------------------------------------
+ 531   1          if(Can2NewData1 == YES)
+ 532   1          {
+ 533   2              sum = 0;
+ 534   2              i = 0;
+ 535   2              do
+ 536   2              {
+ 537   3                  sum += CAN2RXbuffer1.buf[i];
+ 538   3                  i++;
+ 539   3              } while(i < 7);
+ 540   2      
+ 541   2              if( ( sum == CAN2RXbuffer1.amount_buf.checkout )
+ 542   2                      && ( CAN2RXbuffer1.amount_buf.command & 0xE0) == 0xA0 ) //µç´ÅÌú¶¯×÷´ÎÊı¼ÆÊı·´À¡Ö¸Áî
+ 543   2              {
+ 544   3                  can_rx_from_DCT_amount_feedback(CAN2RXbuffer1.buf);
+ 545   3              }
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 10  
+
+ 546   2      
+ 547   2              if( ( sum == CAN2RXbuffer1.amount_buf.checkout )
+ 548   2                      && ( CAN2RXbuffer1.bite_buf.command & 0xE0) == 0xE0 ) //µç´ÅÌúBITE¼°OKĞÅºÅ·´À¡Ö¸Áî
+ 549   2              {
+ 550   3                  can_rx_from_DCT_bite_feedback(CAN2RXbuffer1.buf);
+ 551   3              }
+ 552   2      
+ 553   2              Can2NewData1 = NO;
+ 554   2          }
+ 555   1          //-------------------------------------------------------------------
+ 556   1          //Í¨¹ıCAN2ÍøÂç½ÓÊÜ2ºÅ»ú¹ñµ×²ãÖ÷¿Ø°åËÍ¹ıÀ´µÄ·´À¡Êı¾İ1
+ 557   1          //·ÖÎªÁ½ÖÖÀàĞÍÊı¾İ£¬Ò»ÖÖÊÇ¹ÊÕÏµç´ÅÌúµÄÊµ¼Ê¶¯×÷´ÎÊı£¬Ò»ÖÖÊÇ¹ÊÕÏ×´Ì¬»òÕı³£×´Ì¬ĞÅÏ¢
+ 558   1          //-------------------------------------------------------------------
+ 559   1          if(Can2NewData2 == YES)
+ 560   1          {
+ 561   2              sum = 0;
+ 562   2              i = 0;
+ 563   2              do
+ 564   2              {
+ 565   3                  sum += CAN2RXbuffer2.buf[i];
+ 566   3                  i++;
+ 567   3              } while(i < 7);
+ 568   2      
+ 569   2              if( ( sum == CAN2RXbuffer2.amount_buf.checkout )
+ 570   2                      && ( CAN2RXbuffer2.amount_buf.command & 0xE0) == 0xA0 ) //µç´ÅÌú¶¯×÷´ÎÊı¼ÆÊı·´À¡Ö¸Áî
+ 571   2              {
+ 572   3                  can_rx_from_DCT_amount_feedback(CAN2RXbuffer2.buf);
+ 573   3              }
+ 574   2      
+ 575   2              if( ( sum == CAN2RXbuffer2.amount_buf.checkout )
+ 576   2                      && ( CAN2RXbuffer2.bite_buf.command & 0xE0) == 0xE0 ) //µç´ÅÌúBITE¼°OKĞÅºÅ·´À¡Ö¸Áî
+ 577   2              {
+ 578   3                  can_rx_from_DCT_bite_feedback(CAN2RXbuffer2.buf);
+ 579   3              }
+ 580   2      
+ 581   2              Can2NewData2 = NO;
+ 582   2          }
+ 583   1          //------------------------------------------------------------------------------
+ 584   1          //Í¨¹ıCAN2ÍøÂç½ÓÊÜ3ºÅ»ú¹ñµ×²ãÖ÷¿Ø°åËÍ¹ıÀ´µÄ·´À¡Êı¾İ1
+ 585   1          //·ÖÎªÁ½ÖÖÀàĞÍÊı¾İ£¬Ò»ÖÖÊÇ¹ÊÕÏµç´ÅÌúµÄÊµ¼Ê¶¯×÷´ÎÊı£¬Ò»ÖÖÊÇ¹ÊÕÏ×´Ì¬»òÕı³£×´Ì¬ĞÅÏ¢
+ 586   1          //------------------------------------------------------------------------------
+ 587   1          if(Can2NewData3 == YES)
+ 588   1          {
+ 589   2              sum = 0;
+ 590   2              i = 0;
+ 591   2              do
+ 592   2              {
+ 593   3                  sum += CAN2RXbuffer3.buf[i];
+ 594   3                  i++;
+ 595   3              } while(i < 7);
+ 596   2      
+ 597   2              if( ( sum == CAN2RXbuffer3.amount_buf.checkout )
+ 598   2                      && ( CAN2RXbuffer3.amount_buf.command & 0xE0) == 0xA0 ) //µç´ÅÌú´íÎó¶¯×÷´ÎÊı¼ÆÊı·´À¡Ö¸Áî
+ 599   2              {
+ 600   3                  can_rx_from_DCT_amount_feedback(CAN2RXbuffer3.buf);
+ 601   3              }
+ 602   2      
+ 603   2              if( ( sum == CAN2RXbuffer3.amount_buf.checkout )
+ 604   2                      && ( CAN2RXbuffer3.bite_buf.command & 0xE0) == 0xE0 ) //µç´ÅÌúBITE¼°OKĞÅºÅ·´À¡Ö¸Áî
+ 605   2              {
+ 606   3                  can_rx_from_DCT_bite_feedback(CAN2RXbuffer3.buf);
+ 607   3              }
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 11  
+
+ 608   2      
+ 609   2              Can2NewData3 = NO;
+ 610   2          }
+ 611   1      }
+ 612          
+ 613          //-------------------------------Ò©Æ·×Ô¶¯ÊäËÍ×Ó³ÌĞò--------------------------------
+ 614          void init_machine(void)
+ 615          {
+ 616   1          //
+ 617   1          Can_CHECKinfor(2, 0XFC);
+ 618   1          delay_ms(500);
+ 619   1          if((Can3NewData1 == YES) && (Mode_adress2 == 1))
+ 620   1          {
+ 621   2              if((CAN3RXbuffer1.buf[1] == 0xFC) || (CAN3RXbuffer1.buf[1] == 0xC3)) //Ò©Æ·ÌáÉı³õÊ¼»¯×¼±¸¾ÍĞ÷ÅĞ¶Ï
+ 622   2              {
+ 623   3                  if(CAN3RXbuffer1.buf[5] != 0x00) //×Ô¶¯ÔËĞĞÖĞ±¨¾¯
+ 624   3                  {
+ 625   4                      Lan_backalarm(2, 1, 14);
+ 626   4                      Mode_ALARM2 = 1;
+ 627   4                  }
+ 628   3                  if(CAN3RXbuffer1.buf[4] == 0x00) //²»ÔÚÔ­µã±¨¾¯
+ 629   3                  {
+ 630   4                      Lan_backalarm(2, 1, 14);
+ 631   4                      Mode_ALARM2 = 1;
+ 632   4                  }
+ 633   3                  if(CAN3RXbuffer1.buf[6] != 0x00) //±¨¾¯Î»½¨Á¢±¨¾¯
+ 634   3                  {
+ 635   4                      Lan_backalarm(2, 1, 14);
+ 636   4                      Mode_ALARM2 = 1;
+ 637   4                  }
+ 638   3              }
+ 639   2              Can3NewData1 = NO;
+ 640   2              Mode_adress2 = 0;
+ 641   2          }
+ 642   1          //
+ 643   1          Can_CHECKinfor(3, 0XFC);
+ 644   1          delay_ms(500);
+ 645   1          if((Can3NewData1 == YES) && (Mode_adress3 == 1))
+ 646   1          {
+ 647   2              Can3NewData1 = NO;
+ 648   2              Mode_adress3 = 0;
+ 649   2              if((CAN3RXbuffer1.buf[1] == 0xFC) || (CAN3RXbuffer1.buf[1] == 0xC4)) //ÊäËÍÏß
+ 650   2              {
+ 651   3                //ÔİÊ±ÆÁ±Î
+ 652   3      //            if((CAN3RXbuffer1.buf[4] & 0x01) != 0x01)
+ 653   3      //            {
+ 654   3      //                Lan_backalarm(3, 1, 12); //×ó·­°å´«¸ĞÆ÷²»ÔÙÔ­Î»±¨¾¯
+ 655   3      //                Mode_ALARM3 = 1;
+ 656   3      //            }
+ 657   3                  if((CAN3RXbuffer1.buf[4] & 0x04) != 0x04)
+ 658   3                  {
+ 659   4                      Lan_backalarm(3, 2, 13); //ÓÒ·­°å´«¸ĞÆ÷²»ÔÙÔ­Î»±¨¾¯
+ 660   4                      Mode_ALARM3 = 1;
+ 661   4                  }
+ 662   3      //            if(CAN3RXbuffer1.buf[6] == 0x01) //±¨¾¯Î»½¨Á¢±¨¾¯
+ 663   3      //            {
+ 664   3      //                Lan_backalarm(3, CAN3RXbuffer1.buf[2], 16);
+ 665   3      //                Mode_ALARM3 = 1;
+ 666   3      //            }
+ 667   3                  /*if((CAN3RXbuffer1.buf[3]&0x01)==0x00)
+ 668   3                  {
+ 669   3                    Lan_backalarm(3,0,52);//
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 12  
+
+ 670   3                    Mode_ALARM3=1;
+ 671   3                  }*/
+ 672   3              }
+ 673   2          }
+ 674   1          //
+ 675   1          Can_CHECKinfor(4, 0XFC);
+ 676   1          delay_ms(500);
+ 677   1          if((Can3NewData1 == YES) && (Mode_adress4 == 1))
+ 678   1          {
+ 679   2              if((CAN3RXbuffer1.buf[1] == 0xFC) || (CAN3RXbuffer1.buf[1] == 0xC3)) //Ò©Æ·ÌáÉı³õÊ¼»¯×¼±¸¾ÍĞ÷ÅĞ¶Ï
+ 680   2              {
+ 681   3                  if(CAN3RXbuffer1.buf[5] != 0x00) //×Ô¶¯ÔËĞĞÖĞ±¨¾¯
+ 682   3                  {
+ 683   4                      Lan_backalarm(4, 1, 14);
+ 684   4                      Mode_ALARM4 = 1;
+ 685   4                  }
+ 686   3                  if(CAN3RXbuffer1.buf[4] == 0x00) //²»ÔÚÔ­µã±¨¾¯
+ 687   3                  {
+ 688   4                      Lan_backalarm(4, 1, 14);
+ 689   4                      Mode_ALARM4 = 1;
+ 690   4                  }
+ 691   3                  if(CAN3RXbuffer1.buf[6] != 0x00) //±¨¾¯Î»½¨Á¢±¨¾¯
+ 692   3                  {
+ 693   4                      Lan_backalarm(4, 1, 14);
+ 694   4                      Mode_ALARM4 = 1;
+ 695   4                  }
+ 696   3                  //CAN3RXbuffer1.buf[5]=
+ 697   3              }
+ 698   2              Can3NewData1 = NO;
+ 699   2              Mode_adress4 = 0;
+ 700   2          }
+ 701   1      }
+ 702          //---------------------------------------------------------------------------------
+ 703          //----------´«ËÍ´ø×´Ì¬¼ì²é£¬²¢·¢ËÍ×óÓÒ0xCO³ÌĞò¶Î
+ 704          //----------------------------------------------------------------------------------
+ 705          void  Send_CO_Begin_Programme(void)
+ 706          {
+ 707   1      
+ 708   1          if(((SNSORSTATUS1 & 0x01) == 0x01) && ((SNSORSTATUS2 & 0x01) == 0x01))
+ 709   1          {
+ 710   2              if(Run_ALARM1 == 0)
+ 711   2              {
+ 712   3                  Lan_backinfor(0x08, 0x80); //×ó×¼±¸ºÃ
+ 713   3              }
+ 714   2              if(Run_ALARM2 == 0)
+ 715   2              {
+ 716   3                  Lan_backinfor(0x09, 0x80); //ÓÒ×¼±¸ºÃ
+ 717   3              }
+ 718   2      
+ 719   2          }
+ 720   1      
+ 721   1      }
+ 722          
+ 723          
+ 724          //-------------------------------Ò©Æ·×Ô¶¯ÊäËÍ×Ó³ÌĞò--------------------------------
+ 725          void  Medica_Auto_Transportation_Programme(void)
+ 726          {
+ 727   1          if(((SNSORSTATUS1 & 0x01) == 0x01) && ((SNSORSTATUS2 & 0x01) == 0x01))
+ 728   1          {
+ 729   2              if(ONCEFLAG == 0)
+ 730   2              {
+ 731   3                  ONCEFLAG = 1;
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 13  
+
+ 732   3                  /*
+ 733   3                  //delay_ms(500);
+ 734   3                  if(Run_ALARM1==0)
+ 735   3                  {
+ 736   3                    Lan_backinfor(0x08,0x80);//×ó×¼±¸ºÃ
+ 737   3                  }
+ 738   3                  if(Run_ALARM2==0)
+ 739   3                  {
+ 740   3                    //delay_ms(500);
+ 741   3                    Lan_backinfor(0x09,0x80);//ÓÒ×¼±¸ºÃ
+ 742   3                  }
+ 743   3                  */
+ 744   3              }
+ 745   2          }
+ 746   1          ///////////////////
+ 747   1          //ÊäËÍÏßÏÈĞĞµÈ´ıÔ­µã½¨Á¢
+ 748   1          ///////////////////
+ 749   1          if(Run_ALARM1 == 0)
+ 750   1            //    if(1)
+ 751   1          {
+ 752   2              if( (Run_modeFayaoL == 0x01) && (Servo_Begin_Sign == YES) )
+ 753   2              {
+ 754   3                  //ALARM_ONCEFLAGL=YES;
+ 755   3                  //SNSORSTATUS2ÓÒ·­±é½¨Á¢±êÖ¾SNSORSTATUS1×ó·­°å½¨Á¢±êÖ¾MAINRUNSTATUSL1½ûÖ¹ÔËĞĞ±êÖ¾
+ 756   3                  if(((SNSORSTATUS1 & 0x01) == 0x01) && ((SNSORSTATUS2 & 0x01) == 0x01) && ((MAINRUNSTATUSL & 0X
+             -01) == 0X00)) //ÊäËÍÏß×ó¶¨Î»ÔËĞĞ
+ 757   3                  {
+ 758   4                      SNSORSTATUS1 = SNSORSTATUS1 & 0xFE; //Ê§Ğ§×ó·­°å±êÖ¾
+ 759   4                      MAINRUNSTATUSL = MAINRUNSTATUSL | 0X01;
+ 760   4                      //ÔİÊ±×¢ÊÍ
+ 761   4      //                ConveyingLineMovement();//ÊäËÍÏß×ó¶¨Î»ÔËĞĞ
+ 762   4                      AUTO_countimerL = 0;
+ 763   4                      ALARM_ONCEFLAGL = 0;
+ 764   4                  }
+ 765   3                  if((SNSORSTATUS1 & 0X02) == 0x02) //Ò©Æ·ÌáÉıÔ­µã½¨Á¢
+ 766   3                  {
+ 767   4                      Run_modeFayaoL = 0;
+ 768   4                      Run_REAFY1 = 0x01;//·¢Ò©×¼±¸ºÃ
+ 769   4                  }
+ 770   3                  else
+ 771   3                  {
+ 772   4                      AUTO_countimerL = AUTO_countimerL + 1; //µÈ´ıÔ­µã³¬Ê±±¨¾¯
+ 773   4                      if(AUTO_countimerL > MAXZREO_TIME)
+ 774   4                      {
+ 775   5                          Run_ALARM1 = 1;
+ 776   5                      }
+ 777   4                  }
+ 778   3              }
+ 779   2              ////////////////////////////
+ 780   2              /////////////////////////////
+ 781   2              if(Run_REAFY1 == 0x01) //×óÕı³£ÔËĞĞ
+ 782   2              {
+ 783   3                  // (SNSORSTATUS2&0x02)Ò©Æ·ÌáÉıÔ­µã½¨Á¢//¶¨Î»ÔËĞĞ½áÊø
+ 784   3                /*
+ 785   3                Ç°ÃæµÄConveyingrightLineMovementº¯ÊıÖ´ĞĞÒâÒåÎ´Öª£¬ÔİÊ±ÆÁ±Î£¬ËùÒÔ´Ë´¦µÄËÅ·ş¶¨Î»½áÊøĞÅºÅÅĞ¶ÏĞèÒª×¢ÊÍµô£
+             -¬¼´SNSORSTATUS2£ºbit4
+ 786   3                */
+ 787   3                    if(((SNSORSTATUS1 & 0x02) == 0x02) && ((MAINRUNSTATUSL & 0X10) == 0X00)) //ÊäËÍÏßÓÒÍÆÒ©//(SNSORSTAT
+             -US2&0x02)==0x02ÌáÉı»ú¹¹Ô­µã   SNSORSTATUS1&0x10±íÊ¾ÊäËÍÏß¶¨Î»ÔËĞĞ½áÊø
+ 788   3      //            if(((SNSORSTATUS1 & 0x02) == 0x02) && ((SNSORSTATUS1 & 0x10) == 0x10) && ((MAINRUNSTATUSL & 
+             -0X10) == 0X00)) //ÊäËÍÏßÓÒÍÆÒ©//(SNSORSTATUS2&0x02)==0x02ÌáÉı»ú¹¹Ô­µã   SNSORSTATUS1&0x10±íÊ¾ÊäËÍÏß¶¨Î»ÔËĞĞ½áÊø
+ 789   3                  {
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 14  
+
+ 790   4                      Alarm_stepflagL = 1;   //¹ÊÕÏ·´ÏòÔËĞĞ±êÖ¾
+ 791   4                      SNSORSTATUS1 = SNSORSTATUS1 & 0xEF; //Çå¶¨Î»ÔËĞĞ±êÖ¾
+ 792   4                      MAINRUNSTATUSL = MAINRUNSTATUSL | 0X10;
+ 793   4                      Susongxiangtuiyao();//ÍÆÒ©
+ 794   4                  }
+ 795   3                  if(((SNSORSTATUS1 & 0x02) == 0x02) && ((SNSORSTATUS1 & 0x20) == 0x20) && ((MAINRUNSTATUSL & 0X
+             -20) == 0X00)) //ÊäËÍÏßÒ©Æ·ÌáÉı  SNSORSTATUS1&0x20±íÊ¾ÊäËÍÏßÍÆÒ©½áÊø
+ 796   3                  {
+ 797   4                      SNSORSTATUS1 = SNSORSTATUS1 & 0xDF;
+ 798   4                      SNSORSTATUS1 = SNSORSTATUS1 | 0x01; //½¨Á¢×ó·­°å±êÖ¾
+ 799   4                      SNSORSTATUS1 = SNSORSTATUS1 & 0xFD; //Ê§Ğ§Ò©Æ·ÌáÉıÔ­µã±êÖ¾
+ 800   4                      MAINRUNSTATUSL = MAINRUNSTATUSL | 0X20;
+ 801   4                      ONCEFLAG = 0;
+ 802   4                      MAINRUNSTATUSL = MAINRUNSTATUSL & 0XFE; //×óÊäËÍÏß¶¨Î»ÔËĞĞ·Å¿ª
+ 803   4                      Yaopingtishengleft();//
+ 804   4                  }
+ 805   3                  if(Runbiaoji3 == 1)
+ 806   3                  {
+ 807   4                      Runbiaoji3 = 0;
+ 808   4                      Run_REAFY1 = 0x00;
+ 809   4                      Alarm_stepflagL = 0;
+ 810   4                      SNSORSTATUS1 = SNSORSTATUS1 | 0x02; //½¨Á¢Ò©Æ·ÌáÉıÔ­µã±êÖ¾
+ 811   4                      MAINRUNSTATUSL = MAINRUNSTATUSL & 0XEF; //×óÊäËÍÏßÍÆÒ©ÔËĞĞ
+ 812   4                      MAINRUNSTATUSL = MAINRUNSTATUSL & 0XDF; //Ò©Æ·ÌáÉıÔËĞĞ
+ 813   4                  }
+ 814   3              }
+ 815   2          }
+ 816   1          else
+ 817   1          {
+ 818   2              Alarm_stepflagL = 0;
+ 819   2              Runbiaoji3 = 0;
+ 820   2              Run_REAFY1 = 0x00;
+ 821   2              SNSORSTATUS1 = 0x01;
+ 822   2              SNSORSTATUS1 = SNSORSTATUS1 | 0x02; //½¨Á¢Ò©Æ·ÌáÉıÔ­µã±êÖ¾
+ 823   2              MAINRUNSTATUSL = MAINRUNSTATUSL & 0XFE; //×óÊäËÍÏß¶¨Î»ÔËĞĞ·Å¿ª
+ 824   2              MAINRUNSTATUSL = MAINRUNSTATUSL & 0XEF; //×óÊäËÍÏßÍÆÒ©ÔËĞĞ
+ 825   2              MAINRUNSTATUSL = MAINRUNSTATUSL & 0XDF; //Ò©Æ·ÌáÉıÔËĞĞ
+ 826   2              Servo_left_Begin_Sign = 0;
+ 827   2          }
+ 828   1      
+ 829   1          ///////////////////
+ 830   1          //ÊäËÍÏßÏÈĞĞµÈ´ıÔ­µã½¨
+ 831   1          ///////////////////
+ 832   1          if(Run_ALARM2 == 0)
+ 833   1      //    if(1)
+ 834   1          {
+ 835   2              if( (Run_modeFayaoR == 0x02) && (Servo_Begin_Sign == YES) )
+ 836   2              {
+ 837   3                  //ALARM_ONCEFLAGR=YES;
+ 838   3                  //SNSORSTATUS2ÓÒ·­±é½¨Á¢±êÖ¾SNSORSTATUS1×ó·­°å½¨Á¢±êÖ¾MAINRUNSTATUSL1½ûÖ¹ÔËĞĞ±êÖ¾
+ 839   3                  if(((SNSORSTATUS1 & 0x01) == 0x01) && ((SNSORSTATUS2 & 0x01) == 0x01) && ((MAINRUNSTATUSL1 & 0
+             -X01) == 0X00)) //ÊäËÍÏßÓÒ¶¨Î»ÔËĞĞ
+ 840   3                  {
+ 841   4                      SNSORSTATUS2 = SNSORSTATUS2 & 0xFE; //Ê§Ğ§ÓÒ·­°å±êÖ¾
+ 842   4                      MAINRUNSTATUSL1 = MAINRUNSTATUSL1 | 0X01;
+ 843   4                    //ÔİÊ±×¢ÊÍ
+ 844   4      //                ConveyingrightLineMovement();
+ 845   4                      AUTO_countimerR = 0;
+ 846   4                      ALARM_ONCEFLAGR = 0;
+ 847   4                  }
+ 848   3                  if((SNSORSTATUS2 & 0X02) == 0x02) //Ò©Æ·ÌáÉıÔ­µã½¨Á¢
+ 849   3                  {
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 15  
+
+ 850   4                      Run_modeFayaoR = 0;
+ 851   4                      Run_REAFY2 = 0x02;
+ 852   4                  }
+ 853   3                  else
+ 854   3                  {
+ 855   4                      AUTO_countimerR = AUTO_countimerR + 1;
+ 856   4                      if(AUTO_countimerR > MAXZREO_TIME)
+ 857   4                      {
+ 858   5                          Run_ALARM2 = 1;
+ 859   5                      }
+ 860   4                  }
+ 861   3              }
+ 862   2              ////////////////////////////
+ 863   2              /////////////////////////////
+ 864   2              if(Run_REAFY2 == 0x02) //ÓÒÕı³£ÔËĞĞ
+ 865   2              {
+ 866   3                  // (SNSORSTATUS2&0x02)Ò©Æ·ÌáÉıÔ­µã½¨Á¢//¶¨Î»ÔËĞĞ½áÊø
+ 867   3                /*
+ 868   3                Ç°ÃæµÄConveyingrightLineMovementº¯ÊıÖ´ĞĞÒâÒåÎ´Öª£¬ÔİÊ±ÆÁ±Î£¬ËùÒÔ´Ë´¦µÄËÅ·ş¶¨Î»½áÊøĞÅºÅÅĞ¶ÏĞèÒª×¢ÊÍµô£
+             -¬¼´SNSORSTATUS2£ºbit4
+ 869   3                */
+ 870   3                    if(((SNSORSTATUS2 & 0x02) == 0x02) && ((MAINRUNSTATUSL1 & 0X10) == 0X00)) //ÊäËÍÏßÓÒÍÆÒ©//(SNSORSTA
+             -TUS2&0x02)==0x02ÌáÉı»ú¹¹Ô­µã
+ 871   3      //            if(((SNSORSTATUS2 & 0x02) == 0x02) && ((SNSORSTATUS2 & 0x10) == 0x10) && ((MAINRUNSTATUSL1 &
+             - 0X10) == 0X00)) //ÊäËÍÏßÓÒÍÆÒ©//(SNSORSTATUS2&0x02)==0x02ÌáÉı»ú¹¹Ô­µã
+ 872   3                  {
+ 873   4                      Alarm_stepflagR = 1;   //¹ÊÕÏ·´ÏòÔËĞĞ±êÖ¾
+ 874   4                      SNSORSTATUS2 = SNSORSTATUS2 & 0xEF;
+ 875   4                      MAINRUNSTATUSL1 = MAINRUNSTATUSL1 | 0X10;
+ 876   4                      Susongxiangrighttuiyao();
+ 877   4                  }
+ 878   3                  if(((SNSORSTATUS2 & 0x02) == 0x02) && ((SNSORSTATUS2 & 0x20) == 0x20) && ((MAINRUNSTATUSL1 & 0
+             -X20) == 0X00)) //ÊäËÍÏßÒ©Æ·ÌáÉı
+ 879   3                  {
+ 880   4                      SNSORSTATUS2 = SNSORSTATUS2 & 0xDF;
+ 881   4                      SNSORSTATUS2 = SNSORSTATUS2 | 0x01; //½¨Á¢ÓÒ·­°å±êÖ¾
+ 882   4                      SNSORSTATUS2 = SNSORSTATUS2 & 0xFD; //Ê§Ğ§Ò©Æ·ÌáÉıÔ­µã±êÖ¾
+ 883   4                      MAINRUNSTATUSL1 = MAINRUNSTATUSL1 | 0X20;
+ 884   4                      ONCEFLAG = 0;
+ 885   4                      MAINRUNSTATUSL1 = MAINRUNSTATUSL1 & 0XFE; //ÓÒÊäËÍÏß¶¨Î»ÔËĞĞ·Å¿ª
+ 886   4                      Yaopingtisheng();
+ 887   4                  }
+ 888   3                  if(Runbiaoji4 == 1)
+ 889   3                  {
+ 890   4                      Runbiaoji4 = 0;
+ 891   4                      Run_REAFY2 = 0x00;
+ 892   4                      SNSORSTATUS2 = SNSORSTATUS2 | 0x02; //½¨Á¢Ò©Æ·ÌáÉıÔ­µã±êÖ¾
+ 893   4                      AUTO_countimerR = 0;
+ 894   4                      MAINRUNSTATUSL1 = MAINRUNSTATUSL1 & 0XEF; //ÓÒÊäËÍÏßÍÆÒ©ÔËĞĞ
+ 895   4                      MAINRUNSTATUSL1 = MAINRUNSTATUSL1 & 0XDF; //Ò©Æ·ÌáÉıÔËĞĞ
+ 896   4                  }
+ 897   3              }
+ 898   2          }
+ 899   1          else
+ 900   1          {
+ 901   2              AUTO_countimerR = 0;
+ 902   2              Runbiaoji4 = 0;
+ 903   2              Run_REAFY2 = 0x00;
+ 904   2              SNSORSTATUS2 = 0x01;
+ 905   2              SNSORSTATUS2 = SNSORSTATUS2 | 0x02; //½¨Á¢Ò©Æ·ÌáÉıÔ­µã±êÖ¾
+ 906   2              MAINRUNSTATUSL1 = MAINRUNSTATUSL1 & 0XFE; //ÓÒÊäËÍÏß¶¨Î»ÔËĞĞ·Å¿ª
+ 907   2              MAINRUNSTATUSL1 = MAINRUNSTATUSL1 & 0XEF; //ÓÒÊäËÍÏßÍÆÒ©ÔËĞĞ
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 16  
+
+ 908   2              MAINRUNSTATUSL1 = MAINRUNSTATUSL1 & 0XDF; //Ò©Æ·ÌáÉıÔËĞĞ
+ 909   2              Servo_right_Begin_Sign = 0;
+ 910   2          }
+ 911   1      
+ 912   1      
+ 913   1      ///¹ÊÕÏ´¦Àí//
+ 914   1          if((Run_ALARM1 == 1) && (Alarm_stepflagL == 0))
+ 915   1          {
+ 916   2              //¿ÉÒÔ·´ÏòÔËĞĞ
+ 917   2              //ĞŞ¸Ä¶¨Î»ÔËĞĞ²ÎÊı
+ 918   2              Servo_right_Begin_Sign = 1;
+ 919   2              if(ALARM_ONCEFLAGR == NO)
+ 920   2              {
+ 921   3                  ALARM_ONCEFLAGR = !ALARM_ONCEFLAGR;
+ 922   3                  if(Run_ALARM2 == 0)
+ 923   3                  {
+ 924   4                      m_floatServodisplace = 40000.0 * K + 0.5;
+ 925   4                      Servodisplace.displace = (long)m_floatServodisplace;
+ 926   4                      Servodisplace.displace = 0 - Servodisplace.displace;
+ 927   4                      FAYAOinput_pra[0] = Servodisplace.buf[0];
+ 928   4                      FAYAOinput_pra[1] = Servodisplace.buf[1];
+ 929   4                      FAYAOinput_pra[2] = Servodisplace.buf[2];
+ 930   4                      FAYAOinput_pra[3] = Servodisplace.buf[3];
+ 931   4                      Run_modeFayaoR = 0x02;
+ 932   4                  }
+ 933   3                  else
+ 934   3                  {
+ 935   4                      ;
+ 936   4                  }
+ 937   3              }
+ 938   2          }
+ 939   1      
+ 940   1          if((Run_ALARM2 == 1) && (Alarm_stepflagR == 0))
+ 941   1          {
+ 942   2              //¿ÉÒÔ·´ÏòÔËĞĞ
+ 943   2              //ĞŞ¸Ä¶¨Î»ÔËĞĞ²ÎÊı
+ 944   2              Servo_left_Begin_Sign = 1;
+ 945   2              if(ALARM_ONCEFLAGL == NO)
+ 946   2              {
+ 947   3                  ALARM_ONCEFLAGL = !ALARM_ONCEFLAGL;
+ 948   3                  if(Run_ALARM1 == 0)
+ 949   3                  {
+ 950   4                      m_floatServodisplace = 40000.0 * K + 0.5;
+ 951   4                      Servodisplace.displace = (long)m_floatServodisplace;
+ 952   4                      FAYAOinput_pra[0] = Servodisplace.buf[0];
+ 953   4                      FAYAOinput_pra[1] = Servodisplace.buf[1];
+ 954   4                      FAYAOinput_pra[2] = Servodisplace.buf[2];
+ 955   4                      FAYAOinput_pra[3] = Servodisplace.buf[3];
+ 956   4                      Run_modeFayaoL = 0x01;
+ 957   4                  }
+ 958   3                  else
+ 959   3                  {
+ 960   4                      ;
+ 961   4                  }
+ 962   3              }
+ 963   2          }
+ 964   1      } //  Ò©Æ·×Ô¶¯ÊäËÍ¹ı³Ì½áÊø
+ 965          
+ 966          
+ 967          //////////////////////////
+ 968          //³õÊ¼»¯±äÁ¿
+ 969          //////////////////////////
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 17  
+
+ 970          void init_para()
+ 971          {
+ 972   1          unsigned char i;
+ 973   1      
+ 974   1          for(i = 0; i < 8; i++)
+ 975   1          {
+ 976   2              RecBuf1.buf[i] = 0;
+ 977   2              CAN2RXbuffer1.buf[i] = 0;
+ 978   2              CAN3RXbuffer1.buf[i] = 0;
+ 979   2          }
+ 980   1          for(i = 0; i < Driver_Board_Amount; i++)
+ 981   1          {
+ 982   2              SysData.DCT_Bite[i] = 0;        //Í³¼Æµ×²ãÇı¶¯°åµÄÍ¨Ñ¶¼°¹©µçÇé¿öµÄBITE
+ 983   2          }
+ 984   1      
+ 985   1          for(i = 0; i < BYTE_Amount; i++)
+ 986   1          {
+ 987   2              SysData.DCT_Input_Command[i] = 0;
+ 988   2              SysData.DCT_OK_Result[i] = 0;
+ 989   2              SysData.DCT_OK_Action[i] = 0;
+ 990   2          }
+ 991   1      
+ 992   1          Procession1 = 0;
+ 993   1          Proce_Count = 0;
+ 994   1      
+ 995   1          OUTPUT1 = 1;  //¹âñîÊä³ö³õÊ¼»¯
+ 996   1          OUTPUT2 = 1;
+ 997   1          OUTPUT3 = 1;
+ 998   1          OUTPUT4 = 1;
+ 999   1      
+1000   1          RS485_EN = NO;   //Ä¬ÈÏÊÇRS485½ÓÊÕÊı¾İ
+1001   1          NET_CFG = YES;   //Ä¬ÈÏÍøÂç²å×ùÎª¹¤×÷×´Ì¬
+1002   1          NET_RST = YES;   //¸ßµçÆ½¹¤×÷£¬µÍµçÆ½¸´Î»
+1003   1      
+1004   1          LED_BUF = 0xFF;
+1005   1          SFRPAGE = CONFIG_PAGE ;
+1006   1          Board_ID = (P5 & 0x1E) >> 1;
+1007   1      
+1008   1          //·¢Ò©
+1009   1          for(i = 0; i < 4; i++)
+1010   1          {
+1011   2              FAYAOinput_pra[i] = 0;
+1012   2          }
+1013   1      
+1014   1          Board_Address_Number = 0; //×Ô¼ìÓÃ
+1015   1      
+1016   1          //Ä¬ÈÏÁãÎ»ÒÑ¾­Íê³É£¬¿¿±¨¾¯Î»ÊÇ·ñ¿ÉÒÔÔËĞĞ
+1017   1          SNSORSTATUS1 = 0x01 | 0x02;
+1018   1          SNSORSTATUS2 = 0x01 | 0x02;
+1019   1          MAINRUNSTATUSL = 0;
+1020   1          MAINRUNSTATUSL1 = 0;
+1021   1          communication_step = 0;
+1022   1          Run_modeFayaoL = 0;
+1023   1          Run_modeFayaoR = 0;
+1024   1          Run_ALARM1 = 0; //³õÊ¼»¯Îª±¨¾¯×´Ì¬
+1025   1          Run_ALARM2 = 0; //³õÊ¼»¯Îª±¨¾¯×´Ì¬
+1026   1          Basket_stat = 0;
+1027   1          CAN_index = 0;
+1028   1          Alarm_stepflagL = NO;
+1029   1          Alarm_stepflagR = NO;
+1030   1          //Mode_adress=0;
+1031   1      
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 18  
+
+1032   1          FaYao_Prosetion_Sign = NO;
+1033   1          Active_Data_Begin_Sign_last = NO;
+1034   1          Active_Data_Begin_Sign = NO;
+1035   1      
+1036   1      }
+1037          //----------Ò»¸öĞÂµÄÅú´Îµ½À´ºóµÄ²ÎÊı³õÊ¼»¯-----------
+1038          void init_index_para()
+1039          {
+1040   1          unsigned char i;
+1041   1      
+1042   1          ALL_Action_OK_Sign = 0;
+1043   1          ALL_Result_OK_Sign = 0;
+1044   1          ALL_Action_OK_Sign_last = 0;
+1045   1          OK_Sign_TX_Amount = 0;
+1046   1          Servo_Begin_Sign = NO;      //ËÅ·ş´¥·¢±êÖ¾ÇåÁã
+1047   1          Answer_ok = NO;
+1048   1      
+1049   1          FaYao_Prosetion_Sign = NO;
+1050   1          Active_Data_Begin_Sign_last = NO;
+1051   1          Active_Data_Begin_Sign = NO;
+1052   1      
+1053   1          for(i = 0; i < BYTE_Amount; i++)
+1054   1          {
+1055   2              SysData.DCT_Input_Command[i] = 0;
+1056   2              SysData.DCT_OK_Result[i] = 0;
+1057   2              SysData.DCT_OK_Action[i] = 0;
+1058   2          }
+1059   1      }
+1060          
+1061          //////////////////////////
+1062          //³õÊ¼»¯Ó²¼şÅäÖÃ
+1063          //////////////////////////
+1064          void initialize()
+1065          {
+1066   1          config();      //ÅäÖÃ¼Ä´æÆ÷
+1067   1          init_AD();    //³õÊ¼»¯A/D
+1068   1      //  init_can1();   //³õÊ¼»¯c8051f040×Ô´øCAN
+1069   1          init_can2();   //³õÊ¼»¯SJA1000_1
+1070   1          init_can3();   //³õÊ¼»¯SJA1000_2
+1071   1          // init_GM8123(); //³õÊ¼»¯´®¿Ú¿ØÖÆÆ÷
+1072   1          init_para();
+1073   1      }
+1074          
+1075          //////////////////////////
+1076          //12Î»A/D²ÉÑù
+1077          //ÊäÈë£ºchannel:Í¨µÀºÅ
+1078          //·µ»Ø£º0¡«4096 ¶ÔÓ¦ 0¡«2.43V
+1079          //////////////////////////
+1080          int get_ad_value(unsigned char channel)
+1081          {
+1082   1          SFRPAGE = 0x00;
+1083   1          AMX0SL = channel; //channel select
+1084   1          AD0INT = 0; //Çå³ı×ª»»½áÊø±ê¼Ç
+1085   1          AD0BUSY = 1; // ¿ªÊ¼×ª»»
+1086   1          while (AD0INT == 0); // µÈ´ı×ª»»½áÊø
+1087   1          return(ADC0); // ¶ÁADC0Êı¾İ
+1088   1      }
+1089          
+1090          //////////////////////////
+1091          //¶ÁĞ¾Æ¬ÎÂ¶È
+1092          //·µ»Ø£ºÎÂ¶ÈÖµ£¨µ¥Î»£º¶È£©
+1093          //////////////////////////
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 19  
+
+1094          signed char get_temp()
+1095          {
+1096   1          return( (signed char)((get_ad_value(0x0F) * 16 - 20928) / 77) );
+1097   1      }
+1098          
+1099          //////////////////////////
+1100          //³õÊ¼»¯A/D
+1101          //////////////////////////
+1102          void  init_AD()
+1103          {
+1104   1          SFRPAGE = 0x00;
+1105   1          REF0CN = 0x03;  // Reference Control Register
+1106   1          ADC0CN |= 0xC0; // Ê¹ÄÜADC
+1107   1          ADC0CF = (SYSCLK / 2500000) << 3; // ADC conversion clock = 2.5MHz
+1108   1          REF0CN |= 0x04; //Ê¹ÄÜÎÂ¶È´«¸ĞÆ÷
+1109   1      }
+1110          
+1111          //---------------------------------------------------------------------------
+1112          //state=0: Ãğ ;  state=1: ÁÁ ¡£blinkÎªYESÈ¡·´²Ù×÷£¬ÎªNO°´state×´Ì¬²Ù×÷
+1113          //---------------------------------------------------------------------------
+1114          void LedBlink(unsigned char num, unsigned char state, unsigned char blink )
+1115          {
+1116   1          static unsigned char ledbuf1 = 0x00;
+1117   1          if( blink == NO )
+1118   1          {
+1119   2              if(state == 0)
+1120   2              {
+1121   3                  ledbuf1 = ledbuf1 & ( ~(0x01 << (num - 1)) );
+1122   3              }
+1123   2              else
+1124   2              {
+1125   3                  ledbuf1 = ledbuf1 | (0x01 << (num - 1)) ;
+1126   3              }
+1127   2          }
+1128   1          else
+1129   1          {
+1130   2              ledbuf1 = ledbuf1 ^ (0x01 << (num - 1)) ;
+1131   2          }
+1132   1          LED_BUF = ~ledbuf1;
+1133   1      }
+1134          
+1135          //
+1136          void Lan_backalarm(unsigned char ID, unsigned char MUM, unsigned char m_alarm1)
+1137          {
+1138   1          unsigned char i = 0;
+1139   1          unsigned char sum = 0;
+1140   1          TransBuf1.amount_buf.command = 22;
+1141   1          TransBuf1.amount_buf.index1 = 22;
+1142   1          TransBuf1.amount_buf.address1 = ID;
+1143   1          TransBuf1.amount_buf.address2 = MUM;
+1144   1          TransBuf1.amount_buf.bite = 0x00;
+1145   1          TransBuf1.amount_buf.blank1 = m_alarm1;
+1146   1          TransBuf1.amount_buf.amount = 0x00;
+1147   1          sum = 0;
+1148   1          for(i = 0; i < 7; i++)
+1149   1          {
+1150   2              sum = sum + TransBuf1.buf[i];
+1151   2          }
+1152   1          TransBuf1.amount_buf.checkout = sum;
+1153   1          Uart1Send();
+1154   1      }
+1155          
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 20  
+
+1156          //
+1157          void Lan_backinfor(unsigned char m_pra1, unsigned char m_pra2)
+1158          {
+1159   1          unsigned char i = 0;
+1160   1          unsigned char sum = 0;
+1161   1          TransBuf1.amount_buf.command = m_pra1;
+1162   1          TransBuf1.amount_buf.index1 = 0x00;
+1163   1          TransBuf1.amount_buf.address1 = 0xAF;
+1164   1          TransBuf1.amount_buf.address2 = m_pra2;
+1165   1          TransBuf1.amount_buf.bite = 0x00;
+1166   1          TransBuf1.amount_buf.blank1 = 0x00;
+1167   1          TransBuf1.amount_buf.amount = 0x00;
+1168   1          TransBuf1.amount_buf.amount = 0x00;
+1169   1      
+1170   1          sum = 0;
+1171   1          for(i = 0; i < 7; i++)
+1172   1          {
+1173   2              sum = sum + TransBuf1.buf[i];
+1174   2          }
+1175   1          TransBuf1.amount_buf.checkout = sum;
+1176   1          Uart1Send();
+1177   1      }
+1178          
+1179          /*************************************CAN3·¢ËÍº¯Êı¶Î****************************************
+1180          *
+1181          *
+1182          ********************************************************************************************/
+1183          //---------------------- --------------------×Ô¶¯·¢Ò©³ÌĞò
+1184          //·¢ËÍ¶ÔÏó£ºËæID
+1185          void Can_CHECKinfor(unsigned char ID, unsigned char command)
+1186          {
+1187   1          unsigned char i, sum;
+1188   1          //----------------Ïòµ×²ãÇı¶¯°å·¢ËÍ×¼±¸ºÃÖ¸Áî---------------------------------
+1189   1          CAN3TXbuffer1.trans.address1 = 0X01;
+1190   1          CAN3TXbuffer1.trans.command = command;
+1191   1          CAN3TXbuffer1.trans.index = 0x01;
+1192   1          CAN3TXbuffer1.trans.data1 = 0X00;
+1193   1          CAN3TXbuffer1.trans.data2 = 0X00;
+1194   1          CAN3TXbuffer1.trans.data3 = 0X00;
+1195   1          CAN3TXbuffer1.trans.data4 = 0X00;
+1196   1          sum = 0;
+1197   1          i = 0;
+1198   1          do
+1199   1          {
+1200   2              sum += CAN3TXbuffer1.buf[i];
+1201   2              i++;
+1202   2          } while(i < 7);
+1203   1          CAN3TXbuffer1.trans.checkout = sum;
+1204   1          can3_transmit(ID, CAN3TXbuffer1.buf);
+1205   1      }
+1206          
+1207          //µç´ÅÌú¿ØÖÆ
+1208          //·¢ËÍ¶ÔÏó£º1
+1209          void ElectromagnetCRTL(void)
+1210          {
+1211   1          unsigned char i, sum;
+1212   1      
+1213   1          //----------------Ïòµ×²ãÇı¶¯°å·¢ËÍ×¼±¸ºÃÖ¸Áî---------------------------------
+1214   1          CAN3TXbuffer1.trans.address1 = 0X01;
+1215   1          CAN3TXbuffer1.trans.command = 0xFE;
+1216   1          CAN3TXbuffer1.trans.index = 0x01;
+1217   1          CAN3TXbuffer1.trans.data1 = 0X00;
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 21  
+
+1218   1          CAN3TXbuffer1.trans.data2 = 0X00;
+1219   1          CAN3TXbuffer1.trans.data3 = 0X00;
+1220   1          CAN3TXbuffer1.trans.data4 = 0X00;
+1221   1          sum = 0;
+1222   1          i = 0;
+1223   1          do
+1224   1          {
+1225   2              sum += CAN3TXbuffer1.buf[i];
+1226   2              i++;
+1227   2          } while(i < 7);
+1228   1          CAN3TXbuffer1.trans.checkout = sum;
+1229   1          can3_transmit(1, CAN3TXbuffer1.buf);
+1230   1      }
+1231          
+1232          //Ò©Àº²½½øÔËĞĞ
+1233          //·¢ËÍ¶ÔÏó£º1
+1234          void YaolanStepRun(void)
+1235          {
+1236   1          unsigned char i, sum;
+1237   1      
+1238   1          //----------------Ïòµ×²ãÇı¶¯°å·¢ËÍ×¼±¸ºÃÖ¸Áî---------------------------------
+1239   1          CAN3TXbuffer1.trans.address1 = 0X01;
+1240   1          CAN3TXbuffer1.trans.command = 0xFD;
+1241   1          CAN3TXbuffer1.trans.index = 0x01;
+1242   1          CAN3TXbuffer1.trans.data1 = 0X00;
+1243   1          CAN3TXbuffer1.trans.data2 = 0X00;
+1244   1          CAN3TXbuffer1.trans.data3 = 0X00;
+1245   1          CAN3TXbuffer1.trans.data4 = 0X00;
+1246   1          sum = 0;
+1247   1          i = 0;
+1248   1          do
+1249   1          {
+1250   2              sum += CAN3TXbuffer1.buf[i];
+1251   2              i++;
+1252   2          } while(i < 7);
+1253   1          CAN3TXbuffer1.trans.checkout = sum;
+1254   1          can3_transmit(1, CAN3TXbuffer1.buf);
+1255   1      }
+1256          
+1257          //Ò©ÀºÌáÉı
+1258          //·¢ËÍ¶ÔÏó£º2
+1259          void Yaolantisheng(void)
+1260          {
+1261   1          unsigned char i, sum;
+1262   1      
+1263   1          //----------------Ïòµ×²ãÇı¶¯°å·¢ËÍ×¼±¸ºÃÖ¸Áî---------------------------------
+1264   1          CAN3TXbuffer1.trans.address1 = 0X01;
+1265   1          CAN3TXbuffer1.trans.command = 0xFE;
+1266   1          CAN3TXbuffer1.trans.index = 0x00;
+1267   1          CAN3TXbuffer1.trans.data1 = 0X00;
+1268   1          CAN3TXbuffer1.trans.data2 = 0X00;
+1269   1          CAN3TXbuffer1.trans.data3 = 0X00;
+1270   1          CAN3TXbuffer1.trans.data4 = 0X00;
+1271   1          sum = 0;
+1272   1          i = 0;
+1273   1          do
+1274   1          {
+1275   2              sum += CAN3TXbuffer1.buf[i];
+1276   2              i++;
+1277   2          } while(i < 7);
+1278   1          CAN3TXbuffer1.trans.checkout = sum;
+1279   1          can3_transmit(2, CAN3TXbuffer1.buf);
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 22  
+
+1280   1      }
+1281          
+1282          //---------------------- --------------------×Ô¶¯·¢Ò©³ÌĞò
+1283          //ÊäËÍÏßÔË¶¯
+1284          //·¢ËÍ¶ÔÏó£º3
+1285          void ConveyingLineMovement(void)
+1286          {
+1287   1          unsigned char i, sum;
+1288   1      
+1289   1          //----------------Ïòµ×²ãÇı¶¯°å·¢ËÍ×¼±¸ºÃÖ¸Áî---------------------------------
+1290   1          CAN3TXbuffer1.trans.address1 = 0X01;
+1291   1          CAN3TXbuffer1.trans.command = 0xFE;
+1292   1          CAN3TXbuffer1.trans.index = 0x01;
+1293   1          CAN3TXbuffer1.trans.data1 = FAYAOinput_pra[0];
+1294   1          CAN3TXbuffer1.trans.data2 = FAYAOinput_pra[1];
+1295   1          CAN3TXbuffer1.trans.data3 = FAYAOinput_pra[2];
+1296   1          CAN3TXbuffer1.trans.data4 = FAYAOinput_pra[3];
+1297   1          sum = 0;
+1298   1          i = 0;
+1299   1          do
+1300   1          {
+1301   2              sum += CAN3TXbuffer1.buf[i];
+1302   2              i++;
+1303   2          } while(i < 7);
+1304   1          CAN3TXbuffer1.trans.checkout = sum;
+1305   1          can3_transmit(3, CAN3TXbuffer1.buf);
+1306   1      }
+1307          
+1308          //ÊäËÍÏßÔË¶¯
+1309          //·¢ËÍ¶ÔÏó£º3
+1310          void ConveyingrightLineMovement(void)
+1311          {
+1312   1          unsigned char i, sum;
+1313   1      
+1314   1          //----------------Ïòµ×²ãÇı¶¯°å·¢ËÍ×¼±¸ºÃÖ¸Áî---------------------------------
+1315   1          CAN3TXbuffer1.trans.address1 = 0X01;
+1316   1          CAN3TXbuffer1.trans.command = 0xFE;
+1317   1          CAN3TXbuffer1.trans.index = 0x02;
+1318   1      //    CAN3TXbuffer1.trans.data1 = FAYAOinput_pra[0];
+1319   1      //    CAN3TXbuffer1.trans.data2 = FAYAOinput_pra[1];
+1320   1      //    CAN3TXbuffer1.trans.data3 = FAYAOinput_pra[2];
+1321   1      //    CAN3TXbuffer1.trans.data4 = FAYAOinput_pra[3];
+1322   1          CAN3TXbuffer1.trans.data1 = 0;
+1323   1          CAN3TXbuffer1.trans.data2 = 0;
+1324   1          CAN3TXbuffer1.trans.data3 = 3;
+1325   1          CAN3TXbuffer1.trans.data4 = 0xe8;
+1326   1          sum = 0;
+1327   1          i = 0;
+1328   1          do
+1329   1          {
+1330   2              sum += CAN3TXbuffer1.buf[i];
+1331   2              i++;
+1332   2          } while(i < 7);
+1333   1          CAN3TXbuffer1.trans.checkout = sum;
+1334   1          can3_transmit(3, CAN3TXbuffer1.buf);
+1335   1      }
+1336          
+1337          //ÊäËÍÏäÍËÒ©
+1338          //·¢ËÍ¶ÔÏó£º3
+1339          void Susongxiangtuiyao(void)
+1340          {
+1341   1          unsigned char i, sum;
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 23  
+
+1342   1      
+1343   1          //----------------Ïòµ×²ãÇı¶¯°å·¢ËÍ×¼±¸ºÃÖ¸Áî---------------------------------
+1344   1          CAN3TXbuffer1.trans.address1 = 0X01;
+1345   1          CAN3TXbuffer1.trans.command = 0xFD;
+1346   1          CAN3TXbuffer1.trans.index = 0x01;
+1347   1          CAN3TXbuffer1.trans.data1 = 0X00;
+1348   1          CAN3TXbuffer1.trans.data2 = 0X00;
+1349   1          CAN3TXbuffer1.trans.data3 = 0X00;
+1350   1          CAN3TXbuffer1.trans.data4 = 0X00;
+1351   1          sum = 0;
+1352   1          i = 0;
+1353   1          do
+1354   1          {
+1355   2              sum += CAN3TXbuffer1.buf[i];
+1356   2              i++;
+1357   2          } while(i < 7);
+1358   1          CAN3TXbuffer1.trans.checkout = sum;
+1359   1          can3_transmit(3, CAN3TXbuffer1.buf);
+1360   1      }
+1361          
+1362          //
+1363          //·¢ËÍ¶ÔÏó£º3
+1364          void Susongxiangrighttuiyao(void)
+1365          {
+1366   1          unsigned char i, sum;
+1367   1      
+1368   1          //----------------Ïòµ×²ãÇı¶¯°å·¢ËÍ×¼±¸ºÃÖ¸Áî---------------------------------
+1369   1          CAN3TXbuffer1.trans.address1 = 0X01;
+1370   1          CAN3TXbuffer1.trans.command = 0xFD;
+1371   1          CAN3TXbuffer1.trans.index = 0x02;
+1372   1          CAN3TXbuffer1.trans.data1 = 0X00;
+1373   1          CAN3TXbuffer1.trans.data2 = 0X00;
+1374   1          CAN3TXbuffer1.trans.data3 = 0X00;
+1375   1          CAN3TXbuffer1.trans.data4 = 0X00;
+1376   1          sum = 0;
+1377   1          i = 0;
+1378   1          do
+1379   1          {
+1380   2              sum += CAN3TXbuffer1.buf[i];
+1381   2              i++;
+1382   2          } while(i < 7);
+1383   1          CAN3TXbuffer1.trans.checkout = sum;
+1384   1          can3_transmit(3, CAN3TXbuffer1.buf);
+1385   1      }
+1386          
+1387          //×ó²àÒ©Æ·ÌáÉı
+1388          //·¢ËÍ¶ÔÏó£º2
+1389          void Yaopingtishengleft(void)
+1390          {
+1391   1          unsigned char i, sum;
+1392   1      
+1393   1          //----------------Ïòµ×²ãÇı¶¯°å·¢ËÍ×¼±¸ºÃÖ¸Áî---------------------------------
+1394   1          CAN3TXbuffer1.trans.address1 = 0X01;
+1395   1          CAN3TXbuffer1.trans.command = 0xFE;
+1396   1          CAN3TXbuffer1.trans.index = CAN_index;
+1397   1          CAN3TXbuffer1.trans.data1 = 0X00;
+1398   1          CAN3TXbuffer1.trans.data2 = 0X00;
+1399   1          CAN3TXbuffer1.trans.data3 = 0X00;
+1400   1          CAN3TXbuffer1.trans.data4 = 0X00;
+1401   1          sum = 0;
+1402   1          i = 0;
+1403   1          do
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 24  
+
+1404   1          {
+1405   2              sum += CAN3TXbuffer1.buf[i];
+1406   2              i++;
+1407   2          } while(i < 7);
+1408   1          CAN3TXbuffer1.trans.checkout = sum;
+1409   1          can3_transmit(2, CAN3TXbuffer1.buf);
+1410   1      }
+1411          
+1412          //ÓÒ²àÒ©Æ·ÌáÉı
+1413          //·¢ËÍ¶ÔÏó£º4
+1414          void Yaopingtisheng(void)
+1415          {
+1416   1          unsigned char i, sum;
+1417   1      
+1418   1          //----------------Ïòµ×²ãÇı¶¯°å·¢ËÍ×¼±¸ºÃÖ¸Áî---------------------------------
+1419   1          CAN3TXbuffer1.trans.address1 = 0X01;
+1420   1          CAN3TXbuffer1.trans.command = 0xFE;
+1421   1          CAN3TXbuffer1.trans.index = CAN_index;
+1422   1          CAN3TXbuffer1.trans.data1 = 0X00;
+1423   1          CAN3TXbuffer1.trans.data2 = 0X00;
+1424   1          CAN3TXbuffer1.trans.data3 = 0X00;
+1425   1          CAN3TXbuffer1.trans.data4 = 0X00;
+1426   1          sum = 0;
+1427   1          i = 0;
+1428   1          do
+1429   1          {
+1430   2              sum += CAN3TXbuffer1.buf[i];
+1431   2              i++;
+1432   2          } while(i < 7);
+1433   1          CAN3TXbuffer1.trans.checkout = sum;
+1434   1          can3_transmit(4, CAN3TXbuffer1.buf);
+1435   1      }
+1436          
+1437          //added start
+1438          //
+1439          //Æô¶¯µØÃæÊäËÍÏßÎŞÏŞ³¤¡¢ÂıËÙÔËĞĞ
+1440          //·¢ËÍ¶ÔÏó£º3
+1441          //dir:1-ÊäËÍÏß×ó×ª¡¢2-ÊäËÍÏßÓÒ×ª
+1442          void ConveyingLongSlow_Start(unsigned char dir)
+1443          {
+1444   1          unsigned char i, sum;
+1445   1      
+1446   1          CAN3TXbuffer1.trans.address1 = 0x01;
+1447   1          CAN3TXbuffer1.trans.command = 0xB2;
+1448   1          CAN3TXbuffer1.trans.index = dir;
+1449   1          CAN3TXbuffer1.trans.data1 = 0X00;
+1450   1          CAN3TXbuffer1.trans.data2 = 0X00;
+1451   1          CAN3TXbuffer1.trans.data3 = 0X00;
+1452   1          CAN3TXbuffer1.trans.data4 = 0X00;
+1453   1          sum = 0;
+1454   1          i = 0;
+1455   1          do
+1456   1          {
+1457   2              sum += CAN3TXbuffer1.buf[i];
+1458   2              i++;
+1459   2          } while(i < 7);
+1460   1          CAN3TXbuffer1.trans.checkout = sum;
+1461   1          can3_transmit(DM_CANID, CAN3TXbuffer1.buf);
+1462   1      }
+1463          
+1464          //Í£Ö¹µØÃæÊäËÍÏßÎŞÏŞ³¤¡¢ÂıËÙÔËĞĞ
+1465          //·¢ËÍ¶ÔÏó£º3
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 25  
+
+1466          void ConveyingLongSlow_Stop()
+1467          {
+1468   1          unsigned char i, sum;
+1469   1      
+1470   1          CAN3TXbuffer1.trans.address1 = 0x01;
+1471   1          CAN3TXbuffer1.trans.command = 0xB3;
+1472   1          CAN3TXbuffer1.trans.index = 0x00;
+1473   1          CAN3TXbuffer1.trans.data1 = 0X00;
+1474   1          CAN3TXbuffer1.trans.data2 = 0X00;
+1475   1          CAN3TXbuffer1.trans.data3 = 0X00;
+1476   1          CAN3TXbuffer1.trans.data4 = 0X00;
+1477   1          sum = 0;
+1478   1          i = 0;
+1479   1          do
+1480   1          {
+1481   2              sum += CAN3TXbuffer1.buf[i];
+1482   2              i++;
+1483   2          } while(i < 7);
+1484   1          CAN3TXbuffer1.trans.checkout = sum;
+1485   1          can3_transmit(DM_CANID, CAN3TXbuffer1.buf);
+1486   1      }
+1487          
+1488          //ÓÒ²à·­×ªÊäËÍÏß·´×ª
+1489          //·¢ËÍ¶ÔÏó£º2
+1490          //signal:1-start¡¢2-stop
+1491          void FZSSXRightFZ(unsigned char signal)
+1492          {
+1493   1          unsigned char i, sum;
+1494   1      
+1495   1          //----------------Ïòµ×²ãÇı¶¯°å·¢ËÍ×¼±¸ºÃÖ¸Áî---------------------------------
+1496   1          CAN3TXbuffer1.trans.address1 = 0X01;
+1497   1          CAN3TXbuffer1.trans.command = 0xB0;
+1498   1          CAN3TXbuffer1.trans.index = signal;
+1499   1          CAN3TXbuffer1.trans.data1 = 0X00;
+1500   1          CAN3TXbuffer1.trans.data2 = 0X00;
+1501   1          CAN3TXbuffer1.trans.data3 = 0X00;
+1502   1          CAN3TXbuffer1.trans.data4 = 0X00;
+1503   1          sum = 0;
+1504   1          i = 0;
+1505   1          do
+1506   1          {
+1507   2              sum += CAN3TXbuffer1.buf[i];
+1508   2              i++;
+1509   2          } while(i < 7);
+1510   1          CAN3TXbuffer1.trans.checkout = sum;
+1511   1          can3_transmit(YTS_CANID, CAN3TXbuffer1.buf);
+1512   1      }
+1513          
+1514          //×ó²à·­×ªÊäËÍÏß·´×ª
+1515          //·¢ËÍ¶ÔÏó£º4
+1516          //signal:1-start¡¢2-stop
+1517          void FZSSXLeftFZ(unsigned char signal)
+1518          {
+1519   1          unsigned char i, sum;
+1520   1      
+1521   1          //----------------Ïòµ×²ãÇı¶¯°å·¢ËÍ×¼±¸ºÃÖ¸Áî---------------------------------
+1522   1          CAN3TXbuffer1.trans.address1 = 0X01;
+1523   1          CAN3TXbuffer1.trans.command = 0xB0;
+1524   1          CAN3TXbuffer1.trans.index = signal;
+1525   1          CAN3TXbuffer1.trans.data1 = 0X00;
+1526   1          CAN3TXbuffer1.trans.data2 = 0X00;
+1527   1          CAN3TXbuffer1.trans.data3 = 0X00;
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 26  
+
+1528   1          CAN3TXbuffer1.trans.data4 = 0X00;
+1529   1          sum = 0;
+1530   1          i = 0;
+1531   1          do
+1532   1          {
+1533   2              sum += CAN3TXbuffer1.buf[i];
+1534   2              i++;
+1535   2          } while(i < 7);
+1536   1          CAN3TXbuffer1.trans.checkout = sum;
+1537   1          can3_transmit(ZTS_CANID, CAN3TXbuffer1.buf);
+1538   1      }
+1539          
+1540          //added end
+1541          
+1542          
+1543          /*************************************CAN3·¢ËÍº¯Êı¶Î½áÊø************************************
+1544          *
+1545          *
+1546          ********************************************************************************************/
+1547          
+1548          
+1549          //-----------------------------------------------------------------------------
+1550          //×Ô¶¨ÒåÑÓÊ±
+1551          //ÑÓÊ±Ê±¼äÔ¼Îª(us N10)ºÁÃë
+1552          //-----------------------------------------------------------------------------
+1553          void delay1( unsigned int us)
+1554          {
+1555   1          unsigned int i = us;
+1556   1          while(i--) ;
+1557   1      }
+1558          /**************************************************************************/
+1559          void delay_ms(unsigned int ms)
+1560          {
+1561   1          unsigned int us = 1000;
+1562   1          while(ms--)
+1563   1          {
+1564   2              WDTCN = 0xA5;
+1565   2              delay1(us);
+1566   2          }
+1567   1      }
+1568          
+1569          //-----------------------------------------------------------------------
+1570          //////////////////////////
+1571          // Ö÷³ÌĞò
+1572          //////////////////////////
+1573          void main(void)
+1574          {
+1575   1          unsigned char i, sum, Action_OK_Num;
+1576   1          initialize();
+1577   1          delay_ms(2000);          //ÎªÁËµ×²ã»ú¹¹Ë³Àû³õÊ¼»¯£¬½«ÑÓÊ±ÓÉÒÔÇ°µÄ4000ms¸ÄÎª15000ms   20160719
+1578   1          init_machine();
+1579   1      
+1580   1      //  Lan_backinfor(0x08,0x80);//×ó×¼±¸ºÃ     //½ö¹©·¢Ò©ÏµÍ³µ÷ÊÔÓÃ£¬ÕıÊ½ÒªÉ¾³ı
+1581   1      //  Lan_backinfor(0x09,0x80);//ÓÒ×¼±¸ºÃ     //½ö¹©·¢Ò©ÏµÍ³µ÷ÊÔÓÃ£¬ÕıÊ½ÒªÉ¾³ı
+1582   1      
+1583   1          while(1)
+1584   1          {
+1585   2              //³ÌĞòÔËĞĞÖ¸Ê¾µÆ
+1586   2              if(T0Counter1 >= 15)
+1587   2              {
+1588   3                  T0Counter1 = 0 ;
+1589   3                  LedBlink(1, 1, 1 );
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 27  
+
+1590   3              }
+1591   2      
+1592   2              /*****************************************************************
+1593   2              Ò»¡¢CAN1¿Ú»òÍøÂç¿ÚÍ¨Ñ¶
+1594   2              1.Í¨¹ıCAN1Í¨Ñ¶½ÓÊÜÉÏÎ»»úËÍ¹ıÀ´µÄÖ¸ÁîĞÔÊı¾İ
+1595   2              2.Í¨¹ıÍøÂçÍ¨Ñ¶½ÓÊÜÉÏÎ»»úËÍ¹ıÀ´µÄÖ¸ÁîĞÔÊı¾İ
+1596   2              3.Ö÷ÒªÎª1.×Ô¼ìÖ¸Áî£¬2.·¢Ò©µç´ÅÌú¶¯×÷Ö¸Áî£¬3.´«ËÍ´øÕ¢°åÑ¡ÔñÖ¸Áî
+1597   2              *****************************************************************/
+1598   2              //-------------------------------------------------------------------------
+1599   2              //                        ½ÓÊÜÉÏÎ»»úµÄ¿ØÖÆÖ¸Áî
+1600   2              //--------------------------------------------------------------------------
+1601   2              if( UART1_Refresh == YES )
+1602   2              {
+1603   3                  sum = 0;
+1604   3                  i = 0;
+1605   3                  do
+1606   3                  {
+1607   4                      sum += RecBuf1.buf[i];
+1608   4                      i++;
+1609   4                  } while(i < 7); //Ğ£Ñé
+1610   3      
+1611   3                  if( sum == RecBuf1.act_buf.checkout )
+1612   3                  {
+1613   4                      /*****************¸ù¾İÖ¸ÁîÖ´ĞĞ¶¯×÷*******************/
+1614   4                      if( (RecBuf1.act_buf.command & 0x1C) == 0x04 )    //×Ô¼ìÖ¸Áî
+1615   4                      {
+1616   5                          can_rx_from_SWJ_Zijian_Command();
+1617   5                      }
+1618   4                      else  if( (RecBuf1.act_buf.command & 0xF0) == 0x40 ) //0XC0ÇëÇó°ü½ÓÊÕ´¦Àí
+1619   4                      {
+1620   5                          if( (RecBuf1.act_buf.address1 == 0xbe) && (RecBuf1.act_buf.address2 == 0x77) )
+1621   5                          {
+1622   6                              Send_CO_Begin_Programme();
+1623   6                          }
+1624   5                          else
+1625   5                          {
+1626   6                          }
+1627   5                      }
+1628   4      
+1629   4      
+1630   4                      else if( (RecBuf1.act_buf.command & 0xFF) == 0x11 )    //
+1631   4                      {
+1632   5                          Servo_Begin_Sign = YES;
+1633   5                          Run_modeFayaoR = 2;
+1634   5                          Servo_right_Begin_Sign = YES;
+1635   5                      }
+1636   4      //               else if( (RecBuf1.act_buf.command & 0xFF) == 0x22 )    //
+1637   4      //                {
+1638   4      //                    Servo_Begin_Sign = YES;
+1639   4      //                    Run_modeFayaoL = 1;
+1640   4      //                    Servo_left_Begin_Sign = YES;
+1641   4      //                }
+1642   4      
+1643   4                      
+1644   4                      else  if( (RecBuf1.act_buf.command & 0xF0) == 0x20 ) //·¢Ò©Ö¸Áî£¬°üº¬Ê¼·¢°ü£¬½áÊø°ü½ÓÊÕ´¦À
+             -í
+1645   4                      {
+1646   5                          can_rx_from_SWJ_Action_Command();
+1647   5                      }
+1648   4                      else if( (RecBuf1.act_buf.command & 0xF0) == 0x30 ) //»úĞµ¶¯×÷Êı¾İ°ü
+1649   4                      {
+1650   5                          //Lan_backinfor(0x66);
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 28  
+
+1651   5                          switch(RecBuf1.buf[4])
+1652   5                          {
+1653   6                          case 1:
+1654   6                              Run_mode = 1;
+1655   6                              break;
+1656   6                          case 2:
+1657   6                              Run_mode = 2;
+1658   6                              break;
+1659   6                          default:
+1660   6                              break;
+1661   6                          }
+1662   5                          if(Run_mode == 2)
+1663   5                          {
+1664   6                              switch(RecBuf1.buf[5])
+1665   6                              {
+1666   7                              case 1:
+1667   7                                  CAN_index = 0;
+1668   7                                  break;
+1669   7                              case 2:
+1670   7                                  CAN_index = 1;
+1671   7                                  break;
+1672   7                              case 3:
+1673   7                                  CAN_index = 2;
+1674   7                                  break;
+1675   7                              case 4:
+1676   7                                  CAN_index = 3;
+1677   7                                  break;
+1678   7                              case 5:
+1679   7                                  CAN_index = 4;
+1680   7                                  break;
+1681   7                              default:
+1682   7                                  CAN_index = 4;
+1683   7                                  break;
+1684   7                              }
+1685   6                          }
+1686   5                          Servodisplace.buf[0] = 0;
+1687   5                          Servodisplace.buf[1] = 0;
+1688   5                          Servodisplace.buf[2] = 0;
+1689   5                          Servodisplace.buf[3] = 0;
+1690   5      
+1691   5                          m_intServodisplace = RecBuf1.buf[2];
+1692   5                          m_intServodisplace = m_intServodisplace << 8;
+1693   5                          m_intServodisplace = m_intServodisplace + RecBuf1.buf[3];
+1694   5                          m_floatServodisplace = (float)m_intServodisplace * K + 0.5;
+1695   5                          Servodisplace.displace = (long)m_floatServodisplace;
+1696   5      
+1697   5                          switch(Run_mode)
+1698   5                          {
+1699   6                          case 1:
+1700   6                              FAYAOinput_pra[0] = Servodisplace.buf[0];
+1701   6                              FAYAOinput_pra[1] = Servodisplace.buf[1];
+1702   6                              FAYAOinput_pra[2] = Servodisplace.buf[2];
+1703   6                              FAYAOinput_pra[3] = Servodisplace.buf[3];
+1704   6                              break;
+1705   6                          case 2:
+1706   6                              Servodisplace.displace = 0 - Servodisplace.displace;
+1707   6                              FAYAOinput_pra[0] = Servodisplace.buf[0];
+1708   6                              FAYAOinput_pra[1] = Servodisplace.buf[1];
+1709   6                              FAYAOinput_pra[2] = Servodisplace.buf[2];
+1710   6                              FAYAOinput_pra[3] = Servodisplace.buf[3];
+1711   6                              break;
+1712   6                          default:
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 29  
+
+1713   6                              break;
+1714   6                          }
+1715   5                          communication_step = 2;
+1716   5                      }
+1717   4                      else
+1718   4                      {
+1719   5                      }
+1720   4                      /*****************************************************/
+1721   4                  }
+1722   3                  UART1_Refresh = NO;
+1723   3              }
+1724   2      
+1725   2              //-------------------------------------------------------------------------
+1726   2              //  ÏòÉÏÎ»»ú»ã±¨µ×²ãÇı¶¯°åµÄÍ¨Ñ¶¼°¹©µç¹¤×÷×´¿ö
+1727   2              //--------------------------------------------------------------------------
+1728   2      
+1729   2              if(T0Counter3 >= 20)                 //Ã¿¸ô200msÏòÉÏÎ»»ú·¢ËÍÍ¨Ñ¶BITEĞÅÏ¢
+1730   2              {
+1731   3                  T0Counter3 = 0 ;
+1732   3                  if( Zijian_Sign == 0x55 )
+1733   3                  {
+1734   4                      Comunication_BITE_to_SWJ();    //ÏòÉÏÎ»»ú·¢ËÍµ×²ãÇı¶¯°åµÄÍ¨Ñ¶BITEÊı¾İĞÅÏ¢
+1735   4                  }
+1736   3                  else
+1737   3                  {
+1738   4      
+1739   4                  }
+1740   3              }
+1741   2      
+1742   2              //-------------------------------------------------------------------------
+1743   2              //                        ÏòÉÏÎ»»ú»ã±¨µ×²ãÇı¶¯°å·¢Ò©µÄBITE×´Ì¬
+1744   2              //--------------------------------------------------------------------------
+1745   2      
+1746   2              if(T0Counter4 >= 10)  //100ms»ØÂ·¿ØÖÆ£¬¶ÔOKĞÅÏ¢µÄ´¦ÀíºÍÉÏ±¨
+1747   2              {
+1748   3                  T0Counter4 = 0;
+1749   3      
+1750   3                  //-------------------µ×²ãÇı¶¯°åËÍ¹ıÀ´µÄ¶¯×÷OKĞÅÏ¢»ã×Ü´¦Àí----------------------
+1751   3                  //ÔÚÖ¸Áî½áÊøºó£¬²ÅÆô¶¯ÅĞ¶ÏÁ÷³Ì
+1752   3                  //ÔÚ¶¯×÷Ö¸ÁîÏÂ·¢¸øµ×²ãÇı¶¯°åºó,¸Ğ¾õÃ»±ØÒª£¬ËùÒÔÌŞ³ıÁË
+1753   3                  if( Command_Finish_Sign == YES )         //ÏÖÖ§³Ö6¸öÒ©¼Ü£¬¹²96¸öÅÅ
+1754   3                  {
+1755   4                      Action_OK_Num = 0;
+1756   4                      for(i = 0; i < BYTE_Amount; i++)
+1757   4                      {
+1758   5                          if( ( SysData.DCT_Input_Command[i] == SysData.DCT_OK_Result[i] ) )
+1759   5                              Action_OK_Num = Action_OK_Num + 1;
+1760   5                          else   Action_OK_Num = Action_OK_Num + 0;
+1761   5                      }
+1762   4                      if( Action_OK_Num == BYTE_Amount )   ALL_Result_OK_Sign = 0xAA;
+1763   4                      else                                 ALL_Result_OK_Sign = 0x00;
+1764   4      
+1765   4                      //-------------------µ×²ãÇı¶¯°åËÍ¹ıÀ´µÄ¶¯×÷½áÊøĞÅÏ¢»ã×Ü´¦Àí----------------------
+1766   4                      Action_OK_Num = 0;
+1767   4                      for(i = 0; i < BYTE_Amount; i++)
+1768   4                      {
+1769   5                          if( ( SysData.DCT_Input_Command[i] == SysData.DCT_OK_Action[i] ) )
+1770   5                              Action_OK_Num = Action_OK_Num + 1;
+1771   5                          else   Action_OK_Num = Action_OK_Num + 0;
+1772   5                      }
+1773   4                      if( Action_OK_Num == BYTE_Amount )   ALL_Action_OK_Sign = 0xBB;
+1774   4                      else                                 ALL_Action_OK_Sign = 0x00;
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 30  
+
+1775   4                  }
+1776   3      
+1777   3                  if(   (FaYao_Prosetion_Sign == YES)
+1778   3                          && (T0Counter15 >= Bite_Delay_Time)
+1779   3                    )
+1780   3                  {
+1781   4                      T0Counter15 = 0;
+1782   4                      ALL_Result_OK_Sign = 0x55;
+1783   4                      ALL_Action_OK_Sign = 0xBB;
+1784   4                      FaYao_Prosetion_Sign = NO;
+1785   4                  }
+1786   3                  /*######################################################################### */
+1787   3                  if( (ALL_Action_OK_Sign == 0xBB)
+1788   3                          //  &&(T0Counter14>=50)
+1789   3                    )       //µç´ÅÌú·¢Ò©½áÊøºó£¬ÑÓÊ±1Ãë¿ªÊ¼´¥·¢ËÅ·ş¶¯×÷
+1790   3                  {
+1791   4                      //    T0Counter14 =51;
+1792   4                      Servo_Begin_Sign = YES;       //ËÅ·ş¿ªÊ¼±êÖ¾
+1793   4                      FaYao_Prosetion_Sign = NO;
+1794   4                  }
+1795   3                  else {}
+1796   3                  //-------µ±¶¯×÷¶¼½áÊøºó£¬ÏòÉÏÎ»»úÉÏ±¨£¬ÇÒÖ»ÉÏ±¨3´Î½á¹ûĞÅÏ¢------------
+1797   3                  //-------´ËÉÏ±¨ÔÚµç´ÅÌú·¢Ò©½áÊøºó£¬»¹ÊÇÔÚËÅ·ş¶¯×÷Íê³Éºó£¬ĞèÒªÉÌÌÖ
+1798   3                  //ÔİÊ±ÆÁ±Î
+1799   3                  if( (ALL_Action_OK_Sign == 0xBB) && ( OK_Sign_TX_Amount < 3 ) )
+1800   3                  {
+1801   4                      TransBuf1.OK_buf.command = 0xE0;
+1802   4                      TransBuf1.OK_buf.index1 = Group_index_DCT;
+1803   4                      TransBuf1.OK_buf.blank1 = 0x00;
+1804   4                      TransBuf1.OK_buf.blank2 = 0x00;
+1805   4                      TransBuf1.OK_buf.ALL_Result_OK_Sign = ALL_Result_OK_Sign;
+1806   4                      TransBuf1.OK_buf.ALL_Action_OK_Sign = ALL_Action_OK_Sign;
+1807   4                      TransBuf1.OK_buf.blank3 = 0x00;
+1808   4                      Uart1Send();
+1809   4                      OK_Sign_TX_Amount++;
+1810   4                  }
+1811   3              }    //100ms¶¨Ê±³ÌĞò½áÊø
+1812   2      
+1813   2              /*****************************************************************
+1814   2              ¶ş¡¢CAN2¿ÚÍ¨Ñ¶
+1815   2              1.Í¨¹ıCAN1Í¨Ñ¶½ÓÊÜÉÏÎ»»úËÍ¹ıÀ´µÄÖ¸ÁîĞÔÊı¾İ-------------
+1816   2              2.Í¨¹ıÍøÂçÍ¨Ñ¶½ÓÊÜÉÏÎ»»úËÍ¹ıÀ´µÄÖ¸ÁîĞÔÊı¾İ-------------
+1817   2              3.Ö÷ÒªÎª1£¬×Ô¼ìÖ¸Áî£¬2.·¢Ò©µç´ÅÌú¶¯×÷Ö¸Áî£¬3.´«ËÍ´øÕ¢°åÑ¡ÔñÖ¸Áî
+1818   2              *****************************************************************/
+1819   2              CAN2_Data_Collect_Process_Programme();
+1820   2      
+1821   2              /*****************************************************************
+1822   2              Èı¡¢CAN3Í¨µÀÓÃÓÚÇı¶¯¿ØÖÆÒ©Æ·´«Êä»ú¹¹£¬°üÀ¨´«ËÍ´ø¡¢Ò©¿ò¹ÜÀí¡¢Ò©¿òÌáÉıµÈ
+1823   2              ²¢ÊÊÊ±²É¼¯ÉÏ±¨»ú¹¹×´Ì¬ĞÅÏ¢
+1824   2              *****************************************************************/
+1825   2              /*--------------------------------------------------------------------
+1826   2              1¡¢²ÉÓÃCAN3¿ÚÏòÒ©Æ·ÊäËÍ»ú¹¹·¢ËÍ¹¤×÷Ö¸Áî
+1827   2              ----------------------------------------------------------------------*/
+1828   2              // Medica_Auto_Transportation_Programme();   //Ò©Æ·×Ô¶¯ÊäËÍ
+1829   2              /*--------------------------------------------------------------------
+1830   2              2¡¢²ÉÓÃCAN3¿Ú½ÓÊÕÒ©Æ·ÊäËÍ»ú¹¹·´À¡»ØÀ´µÄ×´Ì¬ĞÅÏ¢¼°¹ÊÕÏĞÅÏ¢
+1831   2              ----------------------------------------------------------------------*/
+1832   2              if(Can3NewData1 == YES)
+1833   2              {
+1834   3                  sum = 0;
+1835   3                  i = 0;
+1836   3                  do
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 31  
+
+1837   3                  {
+1838   4                      sum += CAN3RXbuffer1.buf[i];
+1839   4                      i++;
+1840   4                  } while(i < 7);
+1841   3      
+1842   3                  if( ( sum == CAN3RXbuffer1.rec.checkout )
+1843   3                          && ( CAN3RXbuffer1.rec.command == 0x18 )
+1844   3                    )
+1845   3                  {
+1846   4                      Answer_ok = YES;
+1847   4                  }
+1848   3                  //ÔİÊ±ÆÁ±ÎÁËMode_adress2
+1849   3      //            if(Mode_adress2 == 1)
+1850   3      //            {
+1851   3      //                if(CAN3RXbuffer1.buf[1] == 0xC4)
+1852   3      //                {
+1853   3      //                    Lan_backalarm(2, 1, 8);
+1854   3      //                    Mode_ALARM2 = 1;
+1855   3      //                }
+1856   3      //                if(CAN3RXbuffer1.buf[1] == 0xC2)
+1857   3      //                {
+1858   3      //                    if((CAN3RXbuffer1.buf[3] & 0x08) == 0x08)
+1859   3      //                    {
+1860   3      //                        Lan_backalarm(2, 1, 6);
+1861   3      //                        Mode_ALARM2 = 1;
+1862   3      //                    }
+1863   3      //                }
+1864   3      //                if((CAN3RXbuffer1.buf[1] == 0xFC) || (CAN3RXbuffer1.buf[1] == 0xC3)) //Ò©Æ·ÌáÉı³õÊ¼»¯×¼±
+             -¸¾ÍĞ÷ÅĞ¶Ï
+1865   3      //                {
+1866   3      //                    //×¢Òâ±¨¾¯ÇåÁãÌõ¼ş
+1867   3      //                    if(CAN3RXbuffer1.buf[1] == 0xC3) {
+1868   3      //                        ONCEFLAG = 0;
+1869   3      //                    }
+1870   3      //                    if(CAN3RXbuffer1.buf[5] != 0x00) //×Ô¶¯ÔËĞĞÖĞ±¨¾¯
+1871   3      //                    {
+1872   3      //                        Lan_backalarm(2, 1, 14);
+1873   3      //                        Mode_ALARM2 = 1;
+1874   3      //                    }
+1875   3      //                    if(CAN3RXbuffer1.buf[4] == 0x00)   //²»ÔÚÔ­µã±¨¾¯
+1876   3      //                    {
+1877   3      //                        Lan_backalarm(2, 1, 14);
+1878   3      //                        Mode_ALARM2 = 1;
+1879   3      //                    }
+1880   3      //                    if(CAN3RXbuffer1.buf[6] != 0x00) //±¨¾¯Î»½¨Á¢±¨¾¯
+1881   3      //                    {
+1882   3      //                        Lan_backalarm(2, 1, 14);
+1883   3      //                        Mode_ALARM2 = 1;
+1884   3      //                    }
+1885   3      //                    if(((CAN3RXbuffer1.buf[3] & 0x08) != 0x08) && (CAN3RXbuffer1.buf[5] == 0x00) && (CAN
+             -3RXbuffer1.buf[6] == 0x00) && (CAN3RXbuffer1.buf[4] == 0x01))
+1886   3      //                    {
+1887   3      //                        Mode_ALARM2 = 0;
+1888   3      //                        Alarm_stepflagL = 0;
+1889   3      //                    }
+1890   3      
+1891   3      //                    //CAN3RXbuffer1.buf[5]=
+1892   3      //                }
+1893   3      //                if(CAN3RXbuffer1.buf[1] == 0xE0)
+1894   3      //                {
+1895   3      //                    Mode_ALARM2 = 1;
+1896   3      //                }
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 32  
+
+1897   3      
+1898   3      //                Mode_adress2 = 0;
+1899   3      //            }
+1900   3                  if(Mode_adress3 == 1)
+1901   3                  {
+1902   4                      Mode_adress3 = 0;
+1903   4                      if((CAN3RXbuffer1.buf[1] == 0xFC) || (CAN3RXbuffer1.buf[1] == 0xC4)) //Ò©Æ·ÌáÉı³õÊ¼»¯×¼±¸¾
+             -ÍĞ÷ÅĞ¶Ï
+1904   4                      {
+1905   5                          if(CAN3RXbuffer1.buf[1] == 0xC4) {
+1906   6                              ONCEFLAG = 0;
+1907   6                          }
+1908   5      
+1909   5                          if((CAN3RXbuffer1.buf[4] & 0x01) != 0x01)
+1910   5                          {
+1911   6                              Lan_backalarm(3, 1, 12); //×ó·­°å´«¸ĞÆ÷²»ÔÙÔ­Î»±¨¾¯
+1912   6                              Mode_ALARM3 = 1;
+1913   6      
+1914   6                          }
+1915   5                          if((CAN3RXbuffer1.buf[4] & 0x04) != 0x04)
+1916   5                          {
+1917   6                              Lan_backalarm(3, 2, 13); //ÓÒ·­°å´«¸ĞÆ÷²»ÔÙÔ­Î»±¨¾¯
+1918   6                              Mode_ALARM3 = 1;
+1919   6                          }
+1920   5                          if(CAN3RXbuffer1.buf[6] == 0x01) //±¨¾¯Î»½¨Á¢±¨¾¯
+1921   5                          {
+1922   6                              Lan_backalarm(3, CAN3RXbuffer1.buf[2], 16);
+1923   6                              Mode_ALARM3 = 1;
+1924   6                          }
+1925   5                          if(((CAN3RXbuffer1.buf[4] & 0x01) == 0x01) && ((CAN3RXbuffer1.buf[4] & 0x04) == 0x04) 
+             -&& (CAN3RXbuffer1.buf[6] == 0x00))
+1926   5                          {
+1927   6                              Mode_ALARM3 = 0;
+1928   6                          }
+1929   5      
+1930   5                      }
+1931   4                      if(CAN3RXbuffer1.buf[1] == 0xE0)
+1932   4                      {
+1933   5                          Lan_backalarm(3, CAN3RXbuffer1.buf[2], 1); //ÊäËÍÏß×óÉÏ·­±¨´í
+1934   5                          Mode_ALARM3 = 1;
+1935   5                      }
+1936   4                      if(CAN3RXbuffer1.buf[1] == 0xE1)
+1937   4                      {
+1938   5                          Lan_backalarm(3, CAN3RXbuffer1.buf[2], 2); //ÊäËÍÏß×óÏÂ·­±¨´í
+1939   5                          Mode_ALARM3 = 1;
+1940   5                      }
+1941   4                      if(CAN3RXbuffer1.buf[1] == 0xFD)
+1942   4                      {
+1943   5                          if((CAN3RXbuffer1.buf[3] & 0x01) == 0x00)
+1944   5                          {
+1945   6                              Lan_backalarm(3, 1, 3);
+1946   6                          }
+1947   5                          if((CAN3RXbuffer1.buf[3] & 0x02) == 0x00)
+1948   5                          {
+1949   6                              Lan_backalarm(3, 2, 3);
+1950   6                          }
+1951   5                      }
+1952   4                  }
+1953   3                  if(Mode_adress4 == 1)
+1954   3                  {
+1955   4                      if(CAN3RXbuffer1.buf[1] == 0xC4)
+1956   4                      {
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 33  
+
+1957   5                          Lan_backalarm(4, 2, 9);
+1958   5                          Mode_ALARM4 = 1;
+1959   5                      }
+1960   4                      if(CAN3RXbuffer1.buf[1] == 0xC2)
+1961   4                      {
+1962   5                          if((CAN3RXbuffer1.buf[3] & 0x08) == 0x08)
+1963   5                          {
+1964   6                              Lan_backalarm(4, 2, 7);
+1965   6                              Mode_ALARM4 = 1;
+1966   6                          }
+1967   5                      }
+1968   4      
+1969   4                      if((CAN3RXbuffer1.buf[1] == 0xFC) || (CAN3RXbuffer1.buf[1] == 0xC3)) //Ò©Æ·ÌáÉı³õÊ¼»¯×¼±¸¾
+             -ÍĞ÷ÅĞ¶Ï
+1970   4                      {
+1971   5                          //×¢Òâ±¨¾¯ÇåÁãÌõ¼ş
+1972   5                          if(CAN3RXbuffer1.buf[1] == 0xC3) {
+1973   6                              ONCEFLAG = 0;
+1974   6                          }
+1975   5                          if(CAN3RXbuffer1.buf[5] != 0x00) //×Ô¶¯ÔËĞĞÖĞ±¨¾¯
+1976   5                          {
+1977   6                              Lan_backalarm(4, 2, 14);
+1978   6                              Mode_ALARM4 = 1;
+1979   6                          }
+1980   5                          if(CAN3RXbuffer1.buf[4] == 0x00) //²»ÔÚÔ­µã±¨¾¯
+1981   5                          {
+1982   6                              Lan_backalarm(4, 2, 14);
+1983   6                              Mode_ALARM4 = 1;
+1984   6                          }
+1985   5                          if(CAN3RXbuffer1.buf[6] != 0x00) //±¨¾¯Î»½¨Á¢±¨¾¯
+1986   5                          {
+1987   6                              Lan_backalarm(4, 2, 14);
+1988   6                              Mode_ALARM4 = 1;
+1989   6                          }
+1990   5                          if(((CAN3RXbuffer1.buf[3] & 0x08) != 0x08) && (CAN3RXbuffer1.buf[5] == 0x00) && (CAN3R
+             -Xbuffer1.buf[6] == 0x00) && (CAN3RXbuffer1.buf[4] == 0x01))
+1991   5                          {
+1992   6                              Mode_ALARM4 = 0;
+1993   6                              Alarm_stepflagL = 0;
+1994   6                          }
+1995   5      
+1996   5                          //CAN3RXbuffer1.buf[5]=
+1997   5                      }
+1998   4                      if(CAN3RXbuffer1.buf[1] == 0xE0)
+1999   4                      {
+2000   5                          Mode_ALARM4 = 1;
+2001   5                      }
+2002   4      
+2003   4                      Mode_adress4 = 0;
+2004   4                  }
+2005   3                  Can3NewData1 = NO;
+2006   3              }
+2007   2              /*if(Run_modeFayao==1)
+2008   2              {
+2009   2              //Run_modeFayao=0;
+2010   2              Medica_Auto_Transportation_Programme();
+2011   2              }*/
+2012   2              if((Mode_ALARM4 == 1) || (Mode_ALARM3 == 1))
+2013   2              {
+2014   3                  Run_ALARM2 = 1;
+2015   3              }
+2016   2              else
+C51 COMPILER V9.56.0.0   ZK                                                                04/28/2017 16:37:19 PAGE 34  
+
+2017   2              {
+2018   3                  Run_ALARM2 = 0; //Î¬ĞŞºó¹ÊÕÏÇå³ı±¨¾¯×Ô¶¯Çå³ı
+2019   3              }
+2020   2              if((Mode_ALARM1 == 1) || (Mode_ALARM2 == 1) || (Mode_ALARM3 == 1))
+2021   2              {
+2022   3                  Run_ALARM1 = 1;
+2023   3              }
+2024   2              else
+2025   2              {
+2026   3                  Run_ALARM1 = 0;
+2027   3              }
+2028   2      
+2029   2              //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+2030   2              if(Servo_Begin_Sign == YES)     //´¥·¢ËÅ·ş»ú¹¹ÔËĞĞ
+2031   2              {
+2032   3      
+2033   3                  if( Run_modeFayaoL == 1) //×ó·¢Ò©
+2034   3                  {
+2035   4                      Servo_left_Begin_Sign = YES;
+2036   4                  }
+2037   3                  if(Run_modeFayaoR == 2) //ÓÒ·¢Ò©
+2038   3                  {
+2039   4                      Servo_right_Begin_Sign = YES;
+2040   4                  }
+2041   3              }
+2042   2              else
+2043   2              {
+2044   3      
+2045   3              }
+2046   2      
+2047   2              if( (Servo_left_Begin_Sign == YES) || (Servo_right_Begin_Sign == YES))
+2048   2              {
+2049   3                  Medica_Auto_Transportation_Programme();
+2050   3              }
+2051   2      
+2052   2              /*****************************************************************
+2053   2                Èı¸öCANÍ¨µÀ³õÊ¼»¯
+2054   2              *****************************************************************/
+2055   2              CAN_AUTO_RESET();     //CAN½Ó¿Ú×Ô¶¯¸´Î»³ÌĞò
+2056   2          }
+2057   1      
+2058   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   4959    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     88    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     37      11
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =     15       3
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

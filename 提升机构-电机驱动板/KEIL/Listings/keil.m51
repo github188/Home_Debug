@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        04/27/2017  17:07:36  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        04/28/2017  13:56:57  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -59,7 +59,7 @@ LINK MAP OF MODULE:  .\Objects\keil (?C_STARTUP)
             CODE    001CH     0003H     UNIT         ?PR?DIR_FZ?YAOPING
                     001FH     0004H                  *** GAP ***
             CODE    0023H     0003H     ABSOLUTE     
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 2
 
 
                     0026H     0005H                  *** GAP ***
@@ -105,23 +105,24 @@ LINK MAP OF MODULE:  .\Objects\keil (?C_STARTUP)
             CODE    39EDH     0041H     UNIT         ?PR?DATAACQUISITION?YAOPING
             CODE    3A2EH     003FH     UNIT         ?PR?START_CAN?CAN1
             CODE    3A6DH     003DH     UNIT         ?PR?_INIT_MSG_OBJECT_RX?CAN1
-            CODE    3AAAH     0039H     UNIT         ?PR?PORT_INIT?YAOPING
-            CODE    3AE3H     0038H     UNIT         ?PR?INIT_CAN1_1?CAN1
-            CODE    3B1BH     0037H     UNIT         ?PR?READ_FROM_FLASH?YAOPING
-            CODE    3B52H     0035H     UNIT         ?PR?INITIAL?YAOPING
-            CODE    3B87H     002AH     UNIT         ?PR?_DELAY_MS?YAOPING
-            CODE    3BB1H     0027H     UNIT         ?PR?TIMER01_INIT?YAOPING
-            CODE    3BD8H     0023H     UNIT         ?PR?OSCILLATOR_INIT?YAOPING
-            CODE    3BFBH     0023H     UNIT         ?PR?INIT_MACHINE?YAOPING
-            CODE    3C1EH     0020H     UNIT         ?PR?_AUTORUNMODE0?YAOPING
-            CODE    3C3EH     001EH     UNIT         ?PR?MAIN?YAOPING
-            CODE    3C5CH     0019H     UNIT         ?PR?CLEAR_MSG_OBJECTS?CAN1
-            CODE    3C75H     0016H     UNIT         ?PR?RETURNTOPOINT?YAOPING
-            CODE    3C8BH     000BH     UNIT         ?PR?DIR_ZZ?YAOPING
-            CODE    3C96H     000BH     UNIT         ?PR?_DELAY1?YAOPING
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 3
+            CODE    3AAAH     003CH     UNIT         ?PR?_FZSSXRIGHTFZ?YAOPING
+            CODE    3AE6H     0039H     UNIT         ?PR?PORT_INIT?YAOPING
+            CODE    3B1FH     0038H     UNIT         ?PR?INIT_CAN1_1?CAN1
+            CODE    3B57H     0037H     UNIT         ?PR?READ_FROM_FLASH?YAOPING
+            CODE    3B8EH     0035H     UNIT         ?PR?INITIAL?YAOPING
+            CODE    3BC3H     002AH     UNIT         ?PR?_DELAY_MS?YAOPING
+            CODE    3BEDH     0027H     UNIT         ?PR?TIMER01_INIT?YAOPING
+            CODE    3C14H     0023H     UNIT         ?PR?OSCILLATOR_INIT?YAOPING
+            CODE    3C37H     0023H     UNIT         ?PR?INIT_MACHINE?YAOPING
+            CODE    3C5AH     0020H     UNIT         ?PR?_AUTORUNMODE0?YAOPING
+            CODE    3C7AH     001EH     UNIT         ?PR?MAIN?YAOPING
+            CODE    3C98H     0019H     UNIT         ?PR?CLEAR_MSG_OBJECTS?CAN1
+            CODE    3CB1H     0016H     UNIT         ?PR?RETURNTOPOINT?YAOPING
+            CODE    3CC7H     000BH     UNIT         ?PR?DIR_ZZ?YAOPING
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 3
 
 
+            CODE    3CD2H     000BH     UNIT         ?PR?_DELAY1?YAOPING
 
 
 
@@ -178,8 +179,8 @@ SEGMENT                                          DATA_GROUP          XDATA_GROUP
 
 ?PR?STEPPERMOTORCTRL?YAOPING                   -----    -----      -----    -----
   +--> ?PR?SHAFT1_CTL?YAOPING
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 4
 
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 4
 
 
 ?PR?_SERVOMOTORCRTL?YAOPING                    0021H    0001H      -----    -----
@@ -238,8 +239,8 @@ SEGMENT                                          DATA_GROUP          XDATA_GROUP
 
 ?PR?TRANFORSATATIONINFOR?YAOPING               -----    -----      -----    -----
   +--> ?PR?_CAN1_TRANSMIT?CAN1
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 5
 
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 5
 
 
 ?PR?ACTIVECANTRANSFER?YAOPING                  -----    -----      -----    -----
@@ -298,10 +299,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   D:00A0H         SYMBOL        PPAGE_SFR
   D:0084H         SYMBOL        SFRPAGE
   D:0081H         SYMBOL        SP
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 6
+
+
   C:33A6H         SYMBOL        STARTUP1
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 6
-
-
   D:00FFH         SYMBOL        WDTCN
   N:0000H         SYMBOL        XBPSTACK
   N:0000H         SYMBOL        XBPSTACKTOP
@@ -323,7 +324,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   D:0090H         PUBLIC        P1
   D:00FFH         PUBLIC        WDTCN
   D:00A0H         PUBLIC        P2
-  C:3C5CH         PUBLIC        clear_msg_objects
+  C:3C98H         PUBLIC        clear_msg_objects
   D:00B0H         PUBLIC        P3
   D:00C8H         PUBLIC        P4
   D:00D8H         PUBLIC        P5
@@ -331,7 +332,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   D:00E7H         PUBLIC        EIE2
   D:00E8H         PUBLIC        ADC0CN
   D:0084H         PUBLIC        SFRPAGE
-  C:3AE3H         PUBLIC        init_can1_1
+  C:3B1FH         PUBLIC        init_can1_1
   D:00E8H         PUBLIC        ADC2CN
   B:00B0H.4       PUBLIC        LED8
   D:00A8H         PUBLIC        IE
@@ -358,10 +359,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:3964H         PUBLIC        _init_msg_object_TX
   X:0130H         PUBLIC        CANINDEX
   C:1A06H         PUBLIC        CAN1_ISR
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 7
+
+
   D:00DAH         PUBLIC        CAN0ADR
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 7
-
-
   D:00D8H         PUBLIC        CAN0DAT
   C:3A2EH         PUBLIC        start_CAN
   D:0098H         PUBLIC        SCON0
@@ -374,40 +375,40 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   -------         DO            
   D:0021H         SYMBOL        SFRPAGE_SAVE
   -------         ENDDO         
-  C:3AE3H         LINE#         72
-  C:3AE3H         LINE#         73
-  C:3AE3H         LINE#         81
-  C:3AE6H         LINE#         82
-  C:3AE9H         LINE#         83
-  C:3AECH         LINE#         84
-  C:3AEEH         LINE#         86
-  C:3AF1H         LINE#         88
-  C:3B00H         LINE#         90
-  C:3B0CH         LINE#         95
-  C:3B0FH         LINE#         97
-  C:3B12H         LINE#         99
-  C:3B15H         LINE#         101
-  C:3B17H         LINE#         102
-  C:3B1AH         LINE#         103
+  C:3B1FH         LINE#         72
+  C:3B1FH         LINE#         73
+  C:3B1FH         LINE#         81
+  C:3B22H         LINE#         82
+  C:3B25H         LINE#         83
+  C:3B28H         LINE#         84
+  C:3B2AH         LINE#         86
+  C:3B2DH         LINE#         88
+  C:3B3CH         LINE#         90
+  C:3B48H         LINE#         95
+  C:3B4BH         LINE#         97
+  C:3B4EH         LINE#         99
+  C:3B51H         LINE#         101
+  C:3B53H         LINE#         102
+  C:3B56H         LINE#         103
   -------         ENDPROC       INIT_CAN1_1
   -------         PROC          CLEAR_MSG_OBJECTS
   -------         DO            
   D:0006H         SYMBOL        i
   D:0007H         SYMBOL        SFRPAGE_SAVE
   -------         ENDDO         
-  C:3C5CH         LINE#         108
-  C:3C5CH         LINE#         109
-  C:3C5CH         LINE#         111
-  C:3C5EH         LINE#         112
-  C:3C61H         LINE#         113
-  C:3C64H         LINE#         114
-  C:3C67H         LINE#         115
-  C:3C69H         LINE#         116
-  C:3C69H         LINE#         117
-  C:3C6CH         LINE#         118
-  C:3C6EH         LINE#         119
-  C:3C72H         LINE#         120
-  C:3C74H         LINE#         121
+  C:3C98H         LINE#         108
+  C:3C98H         LINE#         109
+  C:3C98H         LINE#         111
+  C:3C9AH         LINE#         112
+  C:3C9DH         LINE#         113
+  C:3CA0H         LINE#         114
+  C:3CA3H         LINE#         115
+  C:3CA5H         LINE#         116
+  C:3CA5H         LINE#         117
+  C:3CA8H         LINE#         118
+  C:3CAAH         LINE#         119
+  C:3CAEH         LINE#         120
+  C:3CB0H         LINE#         121
   -------         ENDPROC       CLEAR_MSG_OBJECTS
   -------         PROC          _INIT_MSG_OBJECT_RX
   D:0003H         SYMBOL        MsgNum
@@ -418,10 +419,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   -------         ENDDO         
   C:3A6DH         LINE#         124
   C:3A6FH         LINE#         125
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 8
+
+
   C:3A6FH         LINE#         127
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 8
-
-
   C:3A71H         LINE#         128
   C:3A74H         LINE#         129
   C:3A77H         LINE#         130
@@ -478,10 +479,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:3A47H         LINE#         225
   C:3A49H         LINE#         226
   C:3A4DH         LINE#         227
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 9
+
+
   C:3A4DH         LINE#         228
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 9
-
-
   C:3A53H         LINE#         229
   C:3A55H         LINE#         230
   C:3A59H         LINE#         231
@@ -538,10 +539,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   D:0006H         SYMBOL        SFRPAGE_SAVE
   -------         ENDDO         
   C:38D5H         LINE#         280
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 10
+
+
   C:38DBH         LINE#         281
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 10
-
-
   C:38DBH         LINE#         283
   C:38DDH         LINE#         284
   C:38E0H         LINE#         285
@@ -598,10 +599,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:1B84H         LINE#         340
   C:1BAAH         LINE#         341
   C:1BAAH         LINE#         342
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 11
+
+
   C:1BAAH         LINE#         343
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 11
-
-
   C:1BADH         LINE#         345
   C:1BADH         LINE#         346
   C:1BB5H         LINE#         347
@@ -658,10 +659,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:1E48H         LINE#         402
   C:1E5FH         LINE#         403
   C:1E76H         LINE#         404
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 12
+
+
   C:1E76H         LINE#         405
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 12
-
-
   C:1E76H         LINE#         406
   C:1E79H         LINE#         408
   C:1E79H         LINE#         409
@@ -718,10 +719,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:1FDFH         LINE#         514
   C:1FDFH         LINE#         521
   C:1FDFH         LINE#         528
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 13
+
+
   C:1FDFH         LINE#         529
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 13
-
-
   C:1FE7H         LINE#         530
   C:1FEFH         LINE#         531
   C:1FF7H         LINE#         532
@@ -778,10 +779,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:20B5H         LINE#         610
   C:20B7H         LINE#         612
   C:20B7H         LINE#         614
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 14
+
+
   C:20BAH         LINE#         615
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 14
-
-
   C:20BDH         LINE#         616
   C:20BDH         LINE#         617
   C:20CDH         LINE#         618
@@ -838,10 +839,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   D:00A0H         PUBLIC        P2
   X:0000H         PUBLIC        Servomotor_original
   D:00B0H         PUBLIC        P3
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 15
+
+
   C:2F04H         PUBLIC        Timer0_ISR
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 15
-
-
   C:3666H         PUBLIC        UnactiveCANtransfer
   X:0001H         PUBLIC        repair_flag
   D:00C8H         PUBLIC        P4
@@ -856,7 +857,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:103EH         PUBLIC        TRANFORSATATIONINFOR
   B:00A0H.6       PUBLIC        LED2
   D:008FH         PUBLIC        PSCTL
-  C:3C1EH         PUBLIC        _AUTORUNMODE0
+  C:3C5AH         PUBLIC        _AUTORUNMODE0
   B:0090H.0       PUBLIC        LED3
   C:2A17H         PUBLIC        _AUTORUNMODE1
   C:3149H         PUBLIC        Motor1_CTL
@@ -877,7 +878,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   X:000BH         PUBLIC        speed_value
   D:00F8H         PUBLIC        CAN0CN
   D:00A3H         PUBLIC        EMI0CF
-  C:3C75H         PUBLIC        Returntopoint
+  C:3CB1H         PUBLIC        Returntopoint
   X:000FH         PUBLIC        Servoparaaddtime
   D:00D8H         PUBLIC        PCA0CN
   D:00B8H         PUBLIC        IP
@@ -898,18 +899,18 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:001CH         PUBLIC        Dir_FZ
   X:001EH         PUBLIC        AUTOCMD_TIME
   X:001FH         PUBLIC        T0Counter8
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 16
+
+
   B:0020H.2       PUBLIC        ONCE_FLAG
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 16
-
-
   D:00CBH         PUBLIC        RCAP2H
   X:0020H         PUBLIC        T0Counter9
   D:00C0H         PUBLIC        SMB0CN
   X:0022H         PUBLIC        Servomotor_subtime
   X:0026H         PUBLIC        GAOKONG_COUT
   D:00CAH         PUBLIC        RCAP2L
-  C:3C3EH         PUBLIC        main
-  C:3B1BH         PUBLIC        read_from_flash
+  C:3C7AH         PUBLIC        main
+  C:3B57H         PUBLIC        read_from_flash
   X:0027H         PUBLIC        Shaft1_Speed_max
   X:0029H         PUBLIC        CANTXBUF_ZKB
   D:0088H         PUBLIC        CPT0CN
@@ -924,7 +925,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:31E9H         PUBLIC        _ServomotorINP
   D:0087H         PUBLIC        PCON
   X:0031H         PUBLIC        RecPointer1
-  C:3C93H         PUBLIC        Dir_ZZ
+  C:3CCFH         PUBLIC        Dir_ZZ
   X:0032H         PUBLIC        ShowTime
   D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
@@ -940,7 +941,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   X:00A6H         PUBLIC        Servomotor_speed
   B:0020H.4       PUBLIC        Receive_command_finished
   C:2FE1H         PUBLIC        init_para
-  C:3AAAH         PUBLIC        PORT_Init
+  C:3AE6H         PUBLIC        PORT_Init
   X:00AAH         PUBLIC        Shaft1_Base_Speed_Value
   X:00ABH         PUBLIC        Pulse1
   X:00ADH         PUBLIC        buf
@@ -948,8 +949,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   D:0097H         PUBLIC        CLKSEL
   X:00CBH         PUBLIC        system_crtl
   C:37C7H         PUBLIC        AUTOTaskassignment0
+  C:3AAAH         PUBLIC        _FZSSXRightFZ
   C:28DEH         PUBLIC        AUTOTaskassignment1
-  C:3C96H         PUBLIC        _delay1
+  C:3CD2H         PUBLIC        _delay1
   X:00CDH         PUBLIC        Pulse1_Cnt
   C:309DH         PUBLIC        CANsteminforback
   B:00D8H.5       PUBLIC        Motor1_Dir
@@ -957,11 +959,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   B:00C8H.1       PUBLIC        RE1
   B:00A8H.4       PUBLIC        ES0
   X:00D1H         PUBLIC        Shaft1_Run_mode
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 17
+
+
   X:00D2H         PUBLIC        CANcomand
   B:00A8H.1       PUBLIC        ET0
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 17
-
-
   B:0088H.5       PUBLIC        TF0
   X:00D3H         PUBLIC        T0Counter10
   B:0098H.0       PUBLIC        RI0
@@ -971,7 +973,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   D:008CH         PUBLIC        TH0
   B:0098H.1       PUBLIC        TI0
   D:008DH         PUBLIC        TH1
-  C:3B52H         PUBLIC        Initial
+  C:3B8EH         PUBLIC        Initial
   X:00F3H         PUBLIC        Servoparaspeed
   B:0020H.6       PUBLIC        CANINFOR_FLAG
   B:0080H.2       PUBLIC        MONITOR_INPUT1
@@ -982,7 +984,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   D:008AH         PUBLIC        TL0
   C:3768H         PUBLIC        _crc_chk
   D:008BH         PUBLIC        TL1
-  C:3B8DH         PUBLIC        _delay_ms
+  C:3BC9H         PUBLIC        _delay_ms
   X:00FCH         PUBLIC        BPSSET
   C:215CH         PUBLIC        SteppermotorCTRL
   B:00B8H.1       PUBLIC        PT0
@@ -993,7 +995,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   B:00C8H.2       PUBLIC        TR2
   X:00FEH         PUBLIC        Vel1
   C:3286H         PUBLIC        _Uart0Send
-  C:3BB1H         PUBLIC        Timer01_Init
+  C:3BEDH         PUBLIC        Timer01_Init
   X:0102H         PUBLIC        Runmode
   B:0020H.7       PUBLIC        Receive485_command_finished
   D:0099H         PUBLIC        SBUF0
@@ -1009,7 +1011,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:36EEH         PUBLIC        Shaft1_CTL
   X:0108H         PUBLIC        Shaft1_Velocity_Subsection_Parameter
   C:002EH         PUBLIC        SystemControl
-  C:3BFBH         PUBLIC        init_machine
+  C:3C37H         PUBLIC        init_machine
   X:010CH         PUBLIC        YAOPINGTISH_COUT
   X:010DH         PUBLIC        Servomotor_displace
   C:3435H         PUBLIC        DCmotorCTRL
@@ -1017,26 +1019,26 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:2C5FH         PUBLIC        _ramp1_1
   D:00B7H         PUBLIC        FLSCL
   C:35DDH         PUBLIC        _ServomotorDataacquisition
-  C:3BD8H         PUBLIC        OSCILLATOR_Init
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 18
+
+
+  C:3C14H         PUBLIC        OSCILLATOR_Init
   X:0112H         PUBLIC        CANTRASTEMINFOR
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 18
-
-
   X:0126H         PUBLIC        Shaft1_ADD_Speed_Time_Base
   C:3312H         PUBLIC        CANsetpraback
   X:0127H         PUBLIC        IDSET
   D:00D0H         PUBLIC        PSW
   C:3826H         PUBLIC        CurrentCollection
   D:0008H         PUBLIC        buffer
-  C:3C8EH         SYMBOL        L?0443
-  -------         PROC          L?0442
-  -------         ENDPROC       L?0442
-  C:3C8EH         SYMBOL        L?0443
+  C:3CCAH         SYMBOL        L?0447
+  -------         PROC          L?0446
+  -------         ENDPROC       L?0446
+  C:3CCAH         SYMBOL        L?0447
   -------         PROC          DIR_ZZ
-  C:3C93H         LINE#         97
-  C:3C93H         LINE#         98
-  C:3C93H         LINE#         99
-  C:3C95H         LINE#         100
+  C:3CCFH         LINE#         97
+  C:3CCFH         LINE#         98
+  C:3CCFH         LINE#         99
+  C:3CD1H         LINE#         100
   -------         ENDPROC       DIR_ZZ
   -------         PROC          DIR_FZ
   C:001CH         LINE#         101
@@ -1044,24 +1046,24 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:001CH         LINE#         103
   C:001EH         LINE#         104
   -------         ENDPROC       DIR_FZ
-  C:3B89H         SYMBOL        L?0441
-  -------         PROC          L?0440
-  -------         ENDPROC       L?0440
-  C:3B89H         SYMBOL        L?0441
+  C:3BC5H         SYMBOL        L?0445
+  -------         PROC          L?0444
+  -------         ENDPROC       L?0444
+  C:3BC5H         SYMBOL        L?0445
   -------         PROC          _DELAY_MS
   D:002CH         SYMBOL        ms
   -------         DO            
   D:002EH         SYMBOL        us
   -------         ENDDO         
-  C:3B8DH         LINE#         107
-  C:3B91H         LINE#         108
-  C:3B91H         LINE#         109
-  C:3B97H         LINE#         110
-  C:3BA4H         LINE#         111
-  C:3BA4H         LINE#         112
-  C:3BA7H         LINE#         113
-  C:3BAEH         LINE#         114
-  C:3BB0H         LINE#         115
+  C:3BC9H         LINE#         107
+  C:3BCDH         LINE#         108
+  C:3BCDH         LINE#         109
+  C:3BD3H         LINE#         110
+  C:3BE0H         LINE#         111
+  C:3BE0H         LINE#         112
+  C:3BE3H         LINE#         113
+  C:3BEAH         LINE#         114
+  C:3BECH         LINE#         115
   -------         ENDPROC       _DELAY_MS
   -------         PROC          WATCHDOG_INIT
   C:0003H         LINE#         117
@@ -1071,49 +1073,49 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:0009H         LINE#         122
   -------         ENDPROC       WATCHDOG_INIT
   -------         PROC          INITIAL
-  C:3B52H         LINE#         127
-  C:3B52H         LINE#         128
-  C:3B52H         LINE#         129
-  C:3B55H         LINE#         130
-  C:3B58H         LINE#         131
-  C:3B5BH         LINE#         132
-  C:3B5EH         LINE#         136
-  C:3B61H         LINE#         138
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 19
+  C:3B8EH         LINE#         127
+  C:3B8EH         LINE#         128
+  C:3B8EH         LINE#         129
+  C:3B91H         LINE#         130
+  C:3B94H         LINE#         131
+  C:3B97H         LINE#         132
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 19
 
 
-  C:3B69H         LINE#         140
-  C:3B71H         LINE#         141
-  C:3B77H         LINE#         142
-  C:3B7CH         LINE#         143
-  C:3B7FH         LINE#         145
-  C:3B81H         LINE#         147
-  C:3B84H         LINE#         148
-  C:3B86H         LINE#         150
+  C:3B9AH         LINE#         136
+  C:3B9DH         LINE#         138
+  C:3BA5H         LINE#         140
+  C:3BADH         LINE#         141
+  C:3BB3H         LINE#         142
+  C:3BB8H         LINE#         143
+  C:3BBBH         LINE#         145
+  C:3BBDH         LINE#         147
+  C:3BC0H         LINE#         148
+  C:3BC2H         LINE#         150
   -------         ENDPROC       INITIAL
   -------         PROC          TIMER01_INIT
   -------         DO            
   D:0007H         SYMBOL        SFRPAGE_SAVE
   -------         ENDDO         
-  C:3BB1H         LINE#         151
-  C:3BB1H         LINE#         152
-  C:3BB1H         LINE#         153
-  C:3BB3H         LINE#         154
-  C:3BB6H         LINE#         155
-  C:3BB9H         LINE#         156
-  C:3BBBH         LINE#         157
-  C:3BBEH         LINE#         158
-  C:3BC1H         LINE#         159
-  C:3BC3H         LINE#         160
-  C:3BC5H         LINE#         161
-  C:3BC8H         LINE#         162
-  C:3BCAH         LINE#         163
-  C:3BCCH         LINE#         164
-  C:3BCEH         LINE#         165
-  C:3BD0H         LINE#         166
-  C:3BD3H         LINE#         169
-  C:3BD5H         LINE#         170
-  C:3BD7H         LINE#         171
+  C:3BEDH         LINE#         151
+  C:3BEDH         LINE#         152
+  C:3BEDH         LINE#         153
+  C:3BEFH         LINE#         154
+  C:3BF2H         LINE#         155
+  C:3BF5H         LINE#         156
+  C:3BF7H         LINE#         157
+  C:3BFAH         LINE#         158
+  C:3BFDH         LINE#         159
+  C:3BFFH         LINE#         160
+  C:3C01H         LINE#         161
+  C:3C04H         LINE#         162
+  C:3C06H         LINE#         163
+  C:3C08H         LINE#         164
+  C:3C0AH         LINE#         165
+  C:3C0CH         LINE#         166
+  C:3C0FH         LINE#         169
+  C:3C11H         LINE#         170
+  C:3C13H         LINE#         171
   -------         ENDPROC       TIMER01_INIT
   -------         PROC          TIMER0_ISR
   -------         DO            
@@ -1137,11 +1139,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:2F6DH         LINE#         199
   C:2F6DH         LINE#         200
   C:2F74H         LINE#         201
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 20
+
+
   C:2F74H         LINE#         202
   C:2F7BH         LINE#         203
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 20
-
-
   C:2F81H         LINE#         204
   C:2F87H         LINE#         205
   C:2F87H         LINE#         206
@@ -1186,49 +1188,49 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   -------         DO            
   D:0007H         SYMBOL        SFRPAGE_SAVE
   -------         ENDDO         
-  C:3AAAH         LINE#         263
-  C:3AAAH         LINE#         264
-  C:3AAAH         LINE#         266
-  C:3AACH         LINE#         267
-  C:3AAFH         LINE#         270
-  C:3AB2H         LINE#         271
-  C:3AB5H         LINE#         272
-  C:3AB8H         LINE#         273
-  C:3ABBH         LINE#         282
-  C:3ABEH         LINE#         283
-  C:3AC1H         LINE#         284
-  C:3AC4H         LINE#         285
-  C:3AC6H         LINE#         286
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 21
+  C:3AE6H         LINE#         263
+  C:3AE6H         LINE#         264
+  C:3AE6H         LINE#         266
+  C:3AE8H         LINE#         267
+  C:3AEBH         LINE#         270
+  C:3AEEH         LINE#         271
+  C:3AF1H         LINE#         272
+  C:3AF4H         LINE#         273
+  C:3AF7H         LINE#         282
+  C:3AFAH         LINE#         283
+  C:3AFDH         LINE#         284
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 21
 
 
-  C:3AC8H         LINE#         288
-  C:3ACBH         LINE#         289
-  C:3ACEH         LINE#         290
-  C:3AD0H         LINE#         291
-  C:3AD2H         LINE#         293
-  C:3AD5H         LINE#         294
-  C:3AD8H         LINE#         295
-  C:3ADBH         LINE#         340
-  C:3ADDH         LINE#         341
-  C:3AE0H         LINE#         342
-  C:3AE2H         LINE#         343
+  C:3B00H         LINE#         285
+  C:3B02H         LINE#         286
+  C:3B04H         LINE#         288
+  C:3B07H         LINE#         289
+  C:3B0AH         LINE#         290
+  C:3B0CH         LINE#         291
+  C:3B0EH         LINE#         293
+  C:3B11H         LINE#         294
+  C:3B14H         LINE#         295
+  C:3B17H         LINE#         340
+  C:3B19H         LINE#         341
+  C:3B1CH         LINE#         342
+  C:3B1EH         LINE#         343
   -------         ENDPROC       PORT_INIT
   -------         PROC          OSCILLATOR_INIT
   -------         DO            
   D:0004H         SYMBOL        i
   D:0007H         SYMBOL        SFRPAGE_SAVE
   -------         ENDDO         
-  C:3BD8H         LINE#         355
-  C:3BD8H         LINE#         356
-  C:3BD8H         LINE#         358
-  C:3BDAH         LINE#         359
-  C:3BDDH         LINE#         360
-  C:3BE0H         LINE#         361
-  C:3BF0H         LINE#         363
-  C:3BF5H         LINE#         365
-  C:3BF8H         LINE#         368
-  C:3BFAH         LINE#         369
+  C:3C14H         LINE#         355
+  C:3C14H         LINE#         356
+  C:3C14H         LINE#         358
+  C:3C16H         LINE#         359
+  C:3C19H         LINE#         360
+  C:3C1CH         LINE#         361
+  C:3C2CH         LINE#         363
+  C:3C31H         LINE#         365
+  C:3C34H         LINE#         368
+  C:3C36H         LINE#         369
   -------         ENDPROC       OSCILLATOR_INIT
   -------         PROC          INIT_PARA
   -------         DO            
@@ -1257,11 +1259,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:3041H         LINE#         398
   C:3046H         LINE#         399
   C:3050H         LINE#         400
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 22
+
+
   C:3052H         LINE#         401
   C:3054H         LINE#         402
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 22
-
-
   C:305EH         LINE#         403
   C:3068H         LINE#         404
   C:3072H         LINE#         405
@@ -1317,21 +1319,21 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:371EH         LINE#         471
   C:3728H         LINE#         472
   C:3732H         LINE#         473
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 23
+
+
   C:3737H         LINE#         474
   C:373EH         LINE#         475
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 23
-
-
   C:3743H         LINE#         477
   C:375AH         LINE#         478
   C:3767H         LINE#         479
   C:3767H         LINE#         481
   C:3767H         LINE#         482
   -------         ENDPROC       SHAFT1_CTL
-  C:2C30H         SYMBOL        L?0436
-  -------         PROC          L?0435
-  -------         ENDPROC       L?0435
-  C:2C30H         SYMBOL        L?0436
+  C:2C30H         SYMBOL        L?0440
+  -------         PROC          L?0439
+  -------         ENDPROC       L?0439
+  C:2C30H         SYMBOL        L?0440
   -------         PROC          _RAMP1_1
   D:003AH         SYMBOL        max
   C:2C5FH         LINE#         488
@@ -1377,11 +1379,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:2B84H         LINE#         545
   C:2B87H         LINE#         546
   C:2B96H         LINE#         547
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 24
+
+
   C:2B99H         LINE#         549
   C:2B9BH         LINE#         550
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 24
-
-
   C:2BABH         LINE#         554
   C:2BB1H         LINE#         573
   C:2BBFH         LINE#         574
@@ -1437,11 +1439,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:2673H         LINE#         760
   C:2673H         LINE#         761
   C:2673H         LINE#         762
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 25
+
+
   C:2676H         LINE#         764
   C:2676H         LINE#         765
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 25
-
-
   C:269BH         LINE#         766
   C:269BH         LINE#         767
   C:269EH         LINE#         768
@@ -1492,16 +1494,16 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:31E8H         LINE#         832
   C:31E8H         LINE#         836
   -------         ENDPROC       MOTOR1_CTL
-  -------         PROC          L?0437
-  -------         ENDPROC       L?0437
+  -------         PROC          L?0441
+  -------         ENDPROC       L?0441
   -------         PROC          _UART0SEND
   D:0024H         SYMBOL        buf
   D:0027H         SYMBOL        bufsize
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 26
+
+
   -------         DO            
   D:0028H         SYMBOL        i
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 26
-
-
   D:0006H         SYMBOL        k
   D:0029H         SYMBOL        crc_z
   D:002BH         SYMBOL        SFRPAGE_SAVE
@@ -1546,22 +1548,22 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   -------         DO            
   D:0006H         SYMBOL        i
   -------         ENDDO         
-  C:3C96H         LINE#         886
-  C:3C96H         LINE#         887
-  C:3C96H         LINE#         888
-  C:3C96H         LINE#         889
-  C:3CA0H         LINE#         890
+  C:3CD2H         LINE#         886
+  C:3CD2H         LINE#         887
+  C:3CD2H         LINE#         888
+  C:3CD2H         LINE#         889
+  C:3CDCH         LINE#         890
   -------         ENDPROC       _DELAY1
   -------         PROC          SEND_TO_MOTOR
   -------         DO            
   D:0007H         SYMBOL        i
   -------         ENDDO         
   C:2E1EH         LINE#         896
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 27
+
+
   C:2E1EH         LINE#         897
   C:2E1EH         LINE#         900
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 27
-
-
   C:2E25H         LINE#         901
   C:2E28H         LINE#         902
   C:2E2AH         LINE#         903
@@ -1610,18 +1612,18 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:2F03H         LINE#         954
   C:2F03H         LINE#         955
   -------         ENDPROC       SEND_TO_MOTOR
-  C:387EH         SYMBOL        L?0439
-  -------         PROC          L?0438
-  -------         ENDPROC       L?0438
-  C:387EH         SYMBOL        L?0439
+  C:387EH         SYMBOL        L?0443
+  -------         PROC          L?0442
+  -------         ENDPROC       L?0442
+  C:387EH         SYMBOL        L?0443
   -------         PROC          _SEND_TO_MOTORDRIVER_CTL
   D:0007H         SYMBOL        command
   -------         DO            
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 28
+
+
   D:0022H         SYMBOL        temp
   D:0007H         SYMBOL        i
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 28
-
-
   -------         ENDDO         
   C:3887H         LINE#         963
   C:3887H         LINE#         964
@@ -1677,11 +1679,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:3452H         LINE#         1021
   C:3457H         LINE#         1022
   C:3459H         LINE#         1023
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 29
+
+
   C:345BH         LINE#         1024
   C:345FH         LINE#         1025
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 29
-
-
   C:3463H         LINE#         1026
   C:3469H         LINE#         1027
   C:346CH         LINE#         1028
@@ -1737,11 +1739,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:216EH         LINE#         1090
   C:218BH         LINE#         1091
   C:21A4H         LINE#         1092
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 30
+
+
   C:21DBH         LINE#         1093
   C:21F4H         LINE#         1094
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 30
-
-
   C:222BH         LINE#         1095
   C:2244H         LINE#         1096
   C:227BH         LINE#         1097
@@ -1797,11 +1799,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   D:0007H         SYMBOL        comand
   -------         DO            
   D:0021H         SYMBOL        CALU_m_pra
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 31
+
+
   -------         ENDDO         
   C:23C0H         LINE#         1153
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 31
-
-
   C:23C0H         LINE#         1154
   C:23C0H         LINE#         1155
   C:23C3H         LINE#         1157
@@ -1857,11 +1859,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:2524H         LINE#         1214
   C:2534H         LINE#         1215
   C:2544H         LINE#         1216
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 32
+
+
   C:2554H         LINE#         1217
   C:2564H         LINE#         1219
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 32
-
-
   C:2564H         LINE#         1220
   C:2564H         LINE#         1221
   C:2567H         LINE#         1222
@@ -1893,35 +1895,35 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   -------         DO            
   D:0021H         SYMBOL        SFRPAGE_SAVE
   -------         ENDDO         
-  C:3C1EH         LINE#         1251
-  C:3C1EH         LINE#         1252
-  C:3C1EH         LINE#         1253
-  C:3C21H         LINE#         1255
-  C:3C29H         LINE#         1256
-  C:3C29H         LINE#         1257
-  C:3C29H         LINE#         1258
-  C:3C2CH         LINE#         1259
-  C:3C2EH         LINE#         1261
-  C:3C2EH         LINE#         1280
-  C:3C31H         LINE#         1281
-  C:3C33H         LINE#         1282
-  C:3C38H         LINE#         1283
-  C:3C3AH         LINE#         1284
-  C:3C3AH         LINE#         1286
-  C:3C3AH         LINE#         1287
-  C:3C3AH         LINE#         1288
-  C:3C3AH         LINE#         1289
-  C:3C3DH         LINE#         1290
+  C:3C5AH         LINE#         1251
+  C:3C5AH         LINE#         1252
+  C:3C5AH         LINE#         1253
+  C:3C5DH         LINE#         1255
+  C:3C65H         LINE#         1256
+  C:3C65H         LINE#         1257
+  C:3C65H         LINE#         1258
+  C:3C68H         LINE#         1259
+  C:3C6AH         LINE#         1261
+  C:3C6AH         LINE#         1280
+  C:3C6DH         LINE#         1281
+  C:3C6FH         LINE#         1282
+  C:3C74H         LINE#         1283
+  C:3C76H         LINE#         1284
+  C:3C76H         LINE#         1286
+  C:3C76H         LINE#         1287
+  C:3C76H         LINE#         1288
+  C:3C76H         LINE#         1289
+  C:3C79H         LINE#         1290
   -------         ENDPROC       _AUTORUNMODE0
   -------         PROC          _AUTORUNMODE1
   D:0007H         SYMBOL        comand
   -------         DO            
   D:0006H         SYMBOL        CALU_m_pra
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 33
+
+
   D:0021H         SYMBOL        SFRPAGE_SAVE
   -------         ENDDO         
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 33
-
-
   C:2A17H         LINE#         1295
   C:2A17H         LINE#         1296
   C:2A17H         LINE#         1297
@@ -1977,11 +1979,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:2ADAH         LINE#         1410
   C:2ADDH         LINE#         1411
   C:2AE2H         LINE#         1412
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 34
+
+
   C:2AE7H         LINE#         1413
   C:2AEEH         LINE#         1414
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 34
-
-
   C:2AF0H         LINE#         1415
   C:2AF7H         LINE#         1416
   C:2AF9H         LINE#         1417
@@ -2037,11 +2039,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:37A0H         LINE#         1472
   C:37A0H         LINE#         1473
   C:37A4H         LINE#         1474
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 35
+
+
   C:37A4H         LINE#         1475
   C:37B3H         LINE#         1476
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 35
-
-
   C:37B5H         LINE#         1478
   C:37B5H         LINE#         1479
   C:37BCH         LINE#         1480
@@ -2051,15 +2053,15 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:37C6H         LINE#         1484
   -------         ENDPROC       _CRC_CHK
   -------         PROC          RETURNTOPOINT
-  C:3C75H         LINE#         1487
-  C:3C75H         LINE#         1488
-  C:3C75H         LINE#         1489
-  C:3C77H         LINE#         1490
-  C:3C7AH         LINE#         1492
-  C:3C7FH         LINE#         1494
-  C:3C81H         LINE#         1495
-  C:3C88H         LINE#         1496
-  C:3C8AH         LINE#         1497
+  C:3CB1H         LINE#         1487
+  C:3CB1H         LINE#         1488
+  C:3CB1H         LINE#         1489
+  C:3CB3H         LINE#         1490
+  C:3CB6H         LINE#         1492
+  C:3CBBH         LINE#         1494
+  C:3CBDH         LINE#         1495
+  C:3CC4H         LINE#         1496
+  C:3CC6H         LINE#         1497
   -------         ENDPROC       RETURNTOPOINT
   -------         PROC          _SERVOMOTORDATAACQUISITION
   D:0012H         SYMBOL        addressID
@@ -2097,11 +2099,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:3663H         LINE#         1534
   C:3663H         LINE#         1535
   C:3665H         LINE#         1536
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 36
+
+
   -------         ENDPROC       _SERVOMOTORDATAACQUISITION
   -------         PROC          CURRENTCOLLECTION
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 36
-
-
   -------         DO            
   D:0007H         SYMBOL        i
   -------         ENDDO         
@@ -2157,11 +2159,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:3A2DH         LINE#         1602
   C:3A2DH         LINE#         1605
   C:3A2DH         LINE#         1606
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 37
+
+
   -------         ENDPROC       DATAACQUISITION
   -------         PROC          _SERVOMOTORINP
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 37
-
-
   D:0023H         SYMBOL        mode
   -------         DO            
   D:0007H         SYMBOL        i
@@ -2217,11 +2219,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:003EH         LINE#         1673
   C:003EH         LINE#         1674
   C:0046H         LINE#         1675
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 38
+
+
   C:0046H         LINE#         1676
   C:0049H         LINE#         1677
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 38
-
-
   C:004CH         LINE#         1678
   C:004FH         LINE#         1679
   C:004FH         LINE#         1680
@@ -2277,11 +2279,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:293CH         LINE#         1742
   C:293FH         LINE#         1743
   C:2946H         LINE#         1744
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 39
+
+
   C:294AH         LINE#         1745
   C:2950H         LINE#         1746
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 39
-
-
   C:2950H         LINE#         1747
   C:2953H         LINE#         1749
   C:2953H         LINE#         1750
@@ -2337,11 +2339,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:29E9H         LINE#         1810
   C:29EFH         LINE#         1811
   C:29F5H         LINE#         1812
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 40
+
+
   C:29FAH         LINE#         1813
   C:29FCH         LINE#         1816
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 40
-
-
   C:29FCH         LINE#         1817
   C:2A07H         LINE#         1818
   C:2A07H         LINE#         1819
@@ -2397,11 +2399,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:3823H         LINE#         1882
   C:3823H         LINE#         1883
   C:3825H         LINE#         1884
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 41
+
+
   -------         ENDPROC       AUTOTASKASSIGNMENT0
   -------         PROC          CANSETPRABACK
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 41
-
-
   -------         DO            
   D:0006H         SYMBOL        i
   D:0007H         SYMBOL        sum
@@ -2457,11 +2459,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:30BFH         LINE#         1939
   C:30D3H         LINE#         1940
   C:30E7H         LINE#         1941
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 42
+
+
   C:30FBH         LINE#         1942
   C:310FH         LINE#         1943
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 42
-
-
   C:3112H         LINE#         1944
   C:3113H         LINE#         1946
   C:3113H         LINE#         1947
@@ -2517,11 +2519,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   -------         PROC          UNACTIVECANTRANSFER
   C:3666H         LINE#         2003
   C:3666H         LINE#         2004
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 43
+
+
   C:3666H         LINE#         2005
   C:36AAH         LINE#         2006
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 43
-
-
   C:36AAH         LINE#         2008
   C:36AAH         LINE#         2009
   C:36AAH         LINE#         2010
@@ -2577,11 +2579,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   -------         PROC          TRANFORSATATIONINFOR
   -------         DO            
   D:0006H         SYMBOL        i
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 44
+
+
   D:0007H         SYMBOL        sum
   -------         ENDDO         
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 44
-
-
   C:103EH         LINE#         2106
   C:103EH         LINE#         2107
   C:103EH         LINE#         2110
@@ -2637,11 +2639,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:117AH         LINE#         2164
   C:1182H         LINE#         2165
   C:118AH         LINE#         2166
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 45
+
+
   C:118CH         LINE#         2167
   C:118DH         LINE#         2169
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 45
-
-
   C:118DH         LINE#         2170
   C:119AH         LINE#         2171
   C:119BH         LINE#         2172
@@ -2697,11 +2699,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:12D6H         LINE#         2231
   C:12DEH         LINE#         2232
   C:12E6H         LINE#         2233
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 46
+
+
   C:12EEH         LINE#         2234
   C:12F6H         LINE#         2235
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 46
-
-
   C:12FEH         LINE#         2236
   C:1300H         LINE#         2237
   C:1301H         LINE#         2239
@@ -2757,11 +2759,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:1431H         LINE#         2296
   C:143CH         LINE#         2297
   C:1444H         LINE#         2298
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 47
+
+
   C:144AH         LINE#         2299
   C:1452H         LINE#         2300
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 47
-
-
   C:145AH         LINE#         2301
   C:1462H         LINE#         2302
   C:146AH         LINE#         2303
@@ -2817,11 +2819,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:1599H         LINE#         2359
   C:159AH         LINE#         2360
   C:15A0H         LINE#         2361
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 48
+
+
   C:15A5H         LINE#         2362
   C:15B0H         LINE#         2363
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 48
-
-
   C:15B8H         LINE#         2364
   C:15BEH         LINE#         2365
   C:15C6H         LINE#         2366
@@ -2877,11 +2879,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:16FFH         LINE#         2421
   C:1700H         LINE#         2423
   C:1700H         LINE#         2424
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 49
+
+
   C:170DH         LINE#         2425
   C:170EH         LINE#         2426
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 49
-
-
   C:1714H         LINE#         2427
   C:1719H         LINE#         2428
   C:1724H         LINE#         2429
@@ -2937,11 +2939,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:1861H         LINE#         2485
   C:1869H         LINE#         2486
   C:1871H         LINE#         2487
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 50
+
+
   C:1873H         LINE#         2488
   C:1874H         LINE#         2490
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 50
-
-
   C:1874H         LINE#         2491
   C:1881H         LINE#         2492
   C:1882H         LINE#         2493
@@ -2997,11 +2999,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   C:19BDH         LINE#         2546
   C:19C5H         LINE#         2547
   C:19CDH         LINE#         2548
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 51
+
+
   C:19D5H         LINE#         2549
   C:19DDH         LINE#         2550
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 51
-
-
   C:19E0H         LINE#         2551
   C:19E1H         LINE#         2552
   C:19E2H         LINE#         2554
@@ -3044,55 +3046,82 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   D:0006H         SYMBOL        i
   D:0007H         SYMBOL        SFRPAGE_SAVE
   -------         ENDDO         
-  C:3B1BH         LINE#         2590
-  C:3B1BH         LINE#         2591
-  C:3B1BH         LINE#         2594
-  C:3B1DH         LINE#         2595
-  C:3B1FH         LINE#         2596
-  C:3B22H         LINE#         2597
-  C:3B25H         LINE#         2598
-  C:3B27H         LINE#         2599
-  C:3B28H         LINE#         2600
-  C:3B28H         LINE#         2601
-  C:3B43H         LINE#         2602
-  C:3B44H         LINE#         2603
-  C:3B4AH         LINE#         2604
-  C:3B4DH         LINE#         2605
-  C:3B4FH         LINE#         2606
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 52
+  C:3B57H         LINE#         2590
+  C:3B57H         LINE#         2591
+  C:3B57H         LINE#         2594
+  C:3B59H         LINE#         2595
+  C:3B5BH         LINE#         2596
+  C:3B5EH         LINE#         2597
+  C:3B61H         LINE#         2598
+  C:3B63H         LINE#         2599
+  C:3B64H         LINE#         2600
+  C:3B64H         LINE#         2601
+  C:3B7FH         LINE#         2602
+  C:3B80H         LINE#         2603
+  C:3B86H         LINE#         2604
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 52
 
 
-  C:3B51H         LINE#         2607
+  C:3B89H         LINE#         2605
+  C:3B8BH         LINE#         2606
+  C:3B8DH         LINE#         2607
   -------         ENDPROC       READ_FROM_FLASH
   -------         PROC          INIT_MACHINE
-  C:3BFBH         LINE#         2618
-  C:3BFBH         LINE#         2619
-  C:3BFBH         LINE#         2620
-  C:3C01H         LINE#         2621
-  C:3C07H         LINE#         2622
-  C:3C0CH         LINE#         2623
-  C:3C11H         LINE#         2624
-  C:3C17H         LINE#         2625
-  C:3C1DH         LINE#         2626
+  C:3C37H         LINE#         2618
+  C:3C37H         LINE#         2619
+  C:3C37H         LINE#         2620
+  C:3C3DH         LINE#         2621
+  C:3C43H         LINE#         2622
+  C:3C48H         LINE#         2623
+  C:3C4DH         LINE#         2624
+  C:3C53H         LINE#         2625
+  C:3C59H         LINE#         2626
   -------         ENDPROC       INIT_MACHINE
+  -------         PROC          _FZSSXRIGHTFZ
+  D:0007H         SYMBOL        signal
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0007H         SYMBOL        sum
+  -------         ENDDO         
+  C:3AAAH         LINE#         2635
+  C:3AAAH         LINE#         2636
+  C:3AAAH         LINE#         2640
+  C:3AB0H         LINE#         2641
+  C:3AB4H         LINE#         2642
+  C:3AB7H         LINE#         2643
+  C:3ABAH         LINE#         2644
+  C:3ABCH         LINE#         2645
+  C:3ABEH         LINE#         2646
+  C:3AC0H         LINE#         2647
+  C:3AC1H         LINE#         2648
+  C:3AC2H         LINE#         2650
+  C:3AC2H         LINE#         2651
+  C:3ACFH         LINE#         2652
+  C:3AD0H         LINE#         2653
+  C:3AD6H         LINE#         2654
+  C:3ADBH         LINE#         2655
+  -------         ENDPROC       _FZSSXRIGHTFZ
   -------         PROC          MAIN
-  C:3C3EH         LINE#         2631
-  C:3C3EH         LINE#         2632
-  C:3C3EH         LINE#         2633
-  C:3C41H         LINE#         2634
-  C:3C44H         LINE#         2635
-  C:3C4BH         LINE#         2636
-  C:3C4EH         LINE#         2638
-  C:3C4EH         LINE#         2639
-  C:3C4EH         LINE#         2641
-  C:3C51H         LINE#         2642
-  C:3C54H         LINE#         2643
-  C:3C57H         LINE#         2653
-  C:3C5AH         LINE#         2654
+  C:3C7AH         LINE#         2658
+  C:3C7AH         LINE#         2659
+  C:3C7AH         LINE#         2660
+  C:3C7DH         LINE#         2661
+  C:3C80H         LINE#         2662
+  C:3C87H         LINE#         2663
+  C:3C8AH         LINE#         2665
+  C:3C8AH         LINE#         2666
+  C:3C8AH         LINE#         2668
+  C:3C8DH         LINE#         2669
+  C:3C90H         LINE#         2670
+  C:3C93H         LINE#         2680
+  C:3C96H         LINE#         2681
   -------         ENDPROC       MAIN
   -------         ENDMOD        YAOPING
 
   -------         MODULE        ?C?CLDPTR
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 53
+
+
   C:2759H         PUBLIC        ?C?CLDPTR
   -------         ENDMOD        ?C?CLDPTR
 
@@ -3119,9 +3148,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
   -------         MODULE        ?C?ULCMP
   C:2838H         PUBLIC        ?C?ULCMP
   -------         ENDMOD        ?C?ULCMP
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/27/2017  17:07:36  PAGE 53
-
-
 
   -------         MODULE        ?C?ULSHR
   C:2849H         PUBLIC        ?C?ULSHR
@@ -3153,5 +3179,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\keil (?C_STARTUP)
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?CANSTEMINFORBACK?YAOPING
 
-Program Size: data=50.0 xdata=310 code=15502
-LINK/LOCATE RUN COMPLETE.  2 WARNING(S),  0 ERROR(S)
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/28/2017  13:56:57  PAGE 54
+
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_FZSSXRIGHTFZ?YAOPING
+
+Program Size: data=50.0 xdata=310 code=15562
+LINK/LOCATE RUN COMPLETE.  3 WARNING(S),  0 ERROR(S)

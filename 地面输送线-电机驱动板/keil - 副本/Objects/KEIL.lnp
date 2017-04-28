@@ -1,0 +1,5 @@
+".\Objects\STARTUP.obj",
+".\Objects\CAN1.obj",
+".\Objects\Susongxian.obj" 
+TO ".\Objects\KEIL" 
+PRINT(".\Listings\KEIL.m51") RAMSIZE(256) 
